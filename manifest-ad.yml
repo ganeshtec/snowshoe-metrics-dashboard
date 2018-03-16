@@ -1,0 +1,8 @@
+inherit: manifest-base.yml
+applications:
+- name: snowshoe-metrics-dashboard
+  hosts:
+    - snowshoe-metrics-dashboard
+  instances: 1
+  env:
+    Node_env: 'AD'

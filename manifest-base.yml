@@ -1,0 +1,8 @@
+---
+  memory: 256m
+  path: .
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  command: npm run dev
+  instances: 1
+  disk_quota: 1G
+  random-route: false
