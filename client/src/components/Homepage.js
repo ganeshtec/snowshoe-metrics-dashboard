@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/homepage.css';
 import axios from 'axios';
+import getActivePromotions from '../service/apiService';
 
 class Homepage extends Component{
 
@@ -8,11 +9,9 @@ class Homepage extends Component{
         data: []
     }
     async componentWillMount(){
-        var response = await axios.get('/discount-maintenance/status');
-       console.log(response);
-        this.setState({
-            data: response.data.filter(el=>el.code===57 || el.code===87 || el.code===9999)
-        })
+       this.setState({
+           data: await getActivePromotions()
+       })
     }
     render(){
     const listItems = this.state.data.map((item) => <p key = {item.code}>{item.description + ": " + item.count }</p>);

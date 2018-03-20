@@ -1,0 +1,5 @@
+{
+    "config": {
+        "discountMaintenanceApi": "http://localhost.homedepot.com:8080"
+    }
+}
