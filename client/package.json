@@ -2,7 +2,7 @@
   "name": "metricsdashboard",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:8090",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.2.0",

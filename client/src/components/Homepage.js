@@ -3,18 +3,27 @@ import '../css/homepage.css';
 import axios from 'axios';
 
 class Homepage extends Component{
+
+    state = {
+        data: []
+    }
     async componentWillMount(){
-        var response = await axios.get('/api/getInfo');
-        console.log(response.data);
+        var response = await axios.get('/discount-maintenance/status');
+       console.log(response);
+        this.setState({
+            data: response.data.filter(el=>el.code===57 || el.code===87 || el.code===9999)
+        })
     }
     render(){
+    const listItems = this.state.data.map((item) => <p key = {item.code}>{item.description + ": " + item.count }</p>);
          return(
             <div className="homePage">
                 <h1>Metrics Dashboard</h1>
                     <h2>Active Promotions</h2>
-                        <p>Online #</p>
-                        <p>Store #</p>
-                        <p>All #</p> 
+                        <div>
+                        {listItems}
+                        </div>
+
                     <h2>Markdown v2 Stats</h2>
                         <p>Calls Received: 0</p>
                         <p>Calls to VPP: 0</p>
