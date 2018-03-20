@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import '../css/homepage.css';
-import axios from 'axios';
-
 
 class MetricSection extends Component {
     render() {

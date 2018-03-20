@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../css/homepage.css';
-import axios from 'axios';
 import getActivePromotions from '../service/apiService';
 import MetricSection from './MetricSection';
 
