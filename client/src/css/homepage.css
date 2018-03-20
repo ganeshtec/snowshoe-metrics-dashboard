@@ -6,6 +6,32 @@ h1{
 h2{
     background-color:#F96302;color:#FFFFFF;
 }
+.homePage{
+    margin: 46px 0px;
+}
+.sectionHeader{
+    margin: 0px 0px;
+    font-size: 20px;
+    padding: 0px 25px;
+}
+
+.row{
+    color: black;
+    background-color: white;
+}
+
+.row:nth-child(even) {
+    background: #FFF4ED;
+}
+
+.col{
+    padding: 0px 25px;
+}
+
+.col1{
+    display: inline-block;
+    width: 250px;
+}
 
 .pcfApps{
     text-align: left;
