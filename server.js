@@ -2,14 +2,12 @@ const express = require('express')
 var bodyParser = require('body-parser')
 var path = require('path')
 const app = express()
-const port = 8080
+const port = 8090
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.get('/api/getInfo', (request, response) => {
-  //REQUEST (body)
-  response.send("add");
-})
+var discountMaintenanceApi = require('./server/controllers/DiscountMaintenanceApi')
+app.use('/discount-maintenance',discountMaintenanceApi)
 
 app.use(express.static(__dirname + '/client/build/'));
 

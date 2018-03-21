@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import '../css/homepage.css';
-import axios from 'axios';
+import getActivePromotions from '../service/apiService';
+import MetricSection from './MetricSection';
 
 class Homepage extends Component{
+
+    state = {
+        data: []
+    }
     async componentWillMount(){
-        var response = await axios.get('/api/getInfo');
-        console.log(response.data);
+        var clonedData = [...this.state]
+        clonedData.push(await getActivePromotions())
+       this.setState({
+           data: clonedData
+       })
     }
     render(){
+    // const listItems = this.state.data.map((item) => <p key = {item.code}>{item.description + ": " + item.count }</p>);
+        const metricsSection = this.state.data.map((section, index) => {
+            return (<MetricSection key={index} section={section}/>)
+        })
          return(
             <div className="homePage">
-                <h1>Metrics Dashboard</h1>
-                    <h2>Active Promotions</h2>
-                        <p>Online #</p>
-                        <p>Store #</p>
-                        <p>All #</p> 
-                    <h2>Markdown v2 Stats</h2>
-                        <p>Calls Received: 0</p>
-                        <p>Calls to VPP: 0</p>
-                        <p>Calls to IVP: 0</p>
-                        <p>Calls to GPAS: 0</p>
-                        <p>Total Calls out: (sum of previous 3)</p>
-                        <p>Error responses from V2</p> 
+                {metricsSection}
             </div>
             )
     }
