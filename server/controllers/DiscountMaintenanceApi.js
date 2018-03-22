@@ -7,15 +7,14 @@ var request = require('request');
 var config;
 
 if (process.env.config) {
-  config = JSON.parse(process.env.config);
+    config = JSON.parse(process.env.config);
 } else {
-  var configJson = require('../../config/config.json');
-  config = configJson.config;
-  console.log(config);
+    var configJson = require('../../config/config.json');
+    config = configJson.config;
 }
 
 /* GET requests listing. */
-router.get('/status/', function (req, res, next) {
+router.get('/fetchData/', function (req, res, next) {
 
     const options = {
         url: config.discountMaintenanceApi + '/v1/promotionStatus/report',
@@ -30,7 +29,9 @@ router.get('/status/', function (req, res, next) {
         });
     }
     catch (err) {
-        console.log("Error fetching data");
-    }});
+        console.log(err)
+        res.status(500).send("Failed to retrieve Markdown Service stats")
+    }
+});
 
 module.exports = router;

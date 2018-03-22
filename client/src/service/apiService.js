@@ -1,13 +1,32 @@
 import axios from 'axios';
 
 let getActivePromotions = async () => {
-    var response = await axios.get('/discount-maintenance/status');
-    var data = response.data.filter(el=>el.code===57 || el.code===87 || el.code===9999)
-    var returnObject = {
-        name: "Active Promotions",
-        data: data
+    try {
+        var response = await axios.get('/discount-maintenance/fetchData');
+        var data = response.data.filter(el => el.code === 57 || el.code === 87 || el.code === 9999)
+        var returnObject = {
+            metrics: data
+        }
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results: ", err)
+        return "Error"
     }
-    return returnObject;
+}
+
+let getMarkDownServiceMetrics = async () => {
+    try {
+        var response = await axios.get('/api/markdown-service/fetchData')
+        var data = response.data;
+        var returnObject = {
+            metrics: data
+        }
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results: ", err)
+        return "Error"
     }
 
-    export default getActivePromotions;
+}
+
+export { getActivePromotions, getMarkDownServiceMetrics };

@@ -2,7 +2,11 @@ inherit: manifest-base.yml
 applications:
 - name: snowshoe-metrics-dashboard
   hosts:
-    - snowshoe-metrics-dashboard
+    - snowshoe-metrics-dashboard-QA
   instances: 1
   env:
-    Node_env: 'QA'
+    config: 
+      '{
+         "markdownServiceSplunkEnv": "QA",
+        "discountMaintenanceApi": "https://promotionsws-ext-qa.apps-np.homedepot.com/"
+      }'

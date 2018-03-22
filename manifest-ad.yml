@@ -2,7 +2,11 @@ inherit: manifest-base.yml
 applications:
 - name: snowshoe-metrics-dashboard
   hosts:
-    - snowshoe-metrics-dashboard
+    - snowshoe-metrics-dashboard-AD
   instances: 1
   env:
-    Node_env: 'AD'
+    config: 
+      '{
+         "markdownServiceSplunkEnv": "AD",
+        "discountMaintenanceApi": "https://promotionsws-ext-ad.apps-np.homedepot.com/"
+      }'

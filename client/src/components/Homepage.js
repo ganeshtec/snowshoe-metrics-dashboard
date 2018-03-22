@@ -1,30 +1,33 @@
 import React, { Component } from 'react';
 import '../css/homepage.css';
-import getActivePromotions from '../service/apiService';
+import { getActivePromotions, getMarkDownServiceMetrics } from '../service/apiService';
 import MetricSection from './MetricSection';
 
-class Homepage extends Component{
+class Homepage extends Component {
 
     state = {
-        data: []
+        fetchDataMethods: [
+            {
+                name: "Active Promotions",
+                method: getActivePromotions()
+            },
+            {
+                name: "Markdown Service V2",
+                method: getMarkDownServiceMetrics()
+            }
+        ]
     }
-    async componentWillMount(){
-        var clonedData = [...this.state]
-        clonedData.push(await getActivePromotions())
-       this.setState({
-           data: clonedData
-       })
-    }
-    render(){
-    // const listItems = this.state.data.map((item) => <p key = {item.code}>{item.description + ": " + item.count }</p>);
-        const metricsSection = this.state.data.map((section, index) => {
-            return (<MetricSection key={index} section={section}/>)
+
+
+    render() {
+        const metricsSection = this.state.fetchDataMethods.map((source, index) => {
+            return (<MetricSection key={index} source={source} />)
         })
-         return(
+        return (
             <div className="homePage">
                 {metricsSection}
             </div>
-            )
+        )
     }
 }
 

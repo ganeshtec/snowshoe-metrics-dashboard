@@ -1,5 +1,6 @@
 {
     "config": {
-        "discountMaintenanceApi": "http://localhost.homedepot.com:8080"
+        "markdownServiceSplunkEnv": "QA",
+        "discountMaintenanceApi": "https://promotionsws-ext-ad.apps-np.homedepot.com/"
     }
 }
