@@ -7,11 +7,22 @@ This project includes both server and client, each of which have their own packa
 - npm run dev (Start the Express server and Development mode for the UI
 - if you get error about npm ERR! 404 Not Found: ux-react-styleguide@1.7.0, run npm config set registry https://npm.artifactory.homedepot.com/artifactory/api/npm/npm and run npm install again
 
-#### To manually deploy
+#### To manually create an artifact and deplot
 - Run "npm run setup" to install dependencies.
 - From the client directory, run "npm run build" to build the project.
 - "cd .." back to the root directory.
 - In AD run "cf push -f manifest-ad.yml
+
+- "npm run setup"  to install dependencies.
+- cd into client, run "npm run build" to build the client project.
+- "cd .." back to the root directory.
+- Run "tar cvf SnowshoeMetricsDashboard.tar ./bin ./client/build ./server ./server.js ./package.json ./client/package.json" to pack build files into a .tar file.
+
+- mkdir SnowshoeMetricsDashboard && tar -xvf SnowshoeMetricsDashboard.tar -C SnowshoeMetricsDashboard/
+
+- Dev: “cf push -f manifest-ad.yml -p SnowshoeMetricsDashboard/“
+
+- Stage: “cf push -f manifest-qa.yml -p SnowshoeMetricsDashboard/“
 
 #### Helpful links
 - React Docs
