@@ -154,16 +154,16 @@ processMarkdownSplunkResponse = (err, results) => {
             uniqueChannels.push(channel)
         }
     })
-    var channelResults = [];
+
     uniqueChannels.forEach((channel) => {
-        channelResults.push({
+        results.push({
             description: `Calls from channel ${channel}`,
             count: channels.filter((item) => { return item === channel }).length
         })
     })
 
 
-    return (results.concat(channelResults))
+    return (results)
 }
 
 module.exports = processMarkdownSplunkResponse

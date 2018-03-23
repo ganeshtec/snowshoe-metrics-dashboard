@@ -1,0 +1,12 @@
+inherit: manifest-base.yml
+applications:
+- name: snowshoe-metrics-dashboard
+  hosts:
+    - snowshoe-metrics-dashboard
+  instances: 1
+  env:
+    config: 
+      '{
+         "markdownServiceSplunkQuery": "index=app_logs sourcetype=app.logs "attributes.cf_app_name"="markdownservice-v2.0" attributes.cf_space_name=PR",
+        "discountMaintenanceApi": "https://promotionsws-ext.apps-zb.homedepot.com/"
+      }'

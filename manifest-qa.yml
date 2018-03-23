@@ -7,6 +7,6 @@ applications:
   env:
     config: 
       '{
-         "markdownServiceSplunkEnv": "QA",
+         "markdownServiceSplunkQuery": "index=qa_app_logs sourcetype=app.logs attributes.cf_app_name=MarkdownServiceV2 attributes.cf_space_name=QA",
         "discountMaintenanceApi": "https://promotionsws-ext-qa.apps-np.homedepot.com/"
       }'

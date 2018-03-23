@@ -35,7 +35,7 @@ router.get('/fetchData', async function (req, res, next) {
         service.login(function (err, success) {
             if (success) {
                 var search = "Markdown"
-                var searchQuery = "search index=qa_app_logs sourcetype=app.logs attributes.cf_app_name=MarkdownServiceV2 attributes.cf_space_name=" + config.markdownServiceSplunkEnv
+                var searchQuery = "search " + config.markdownServiceSplunkQuery
 
 
                 var now = new Date(),

@@ -9,7 +9,7 @@ let getActivePromotions = async () => {
         }
         return returnObject;
     } catch (err) {
-        console.log("Error Fetching Results: ", err)
+        console.log("Error Fetching Results for Discount Maintenance API")
         return "Error"
     }
 }
@@ -23,7 +23,7 @@ let getMarkDownServiceMetrics = async () => {
         }
         return returnObject;
     } catch (err) {
-        console.log("Error Fetching Results: ", err)
+        console.log("Error Fetching Results for Markdown Service")
         return "Error"
     }
 

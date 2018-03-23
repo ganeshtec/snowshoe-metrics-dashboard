@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/homepage.css';
+import Metric from './Metric'
 
 class MetricSection extends Component {
 
@@ -11,7 +12,7 @@ class MetricSection extends Component {
     }
 
     async componentWillMount() {
-        var response = await this.props.source.method
+        var response = await this.props.source.method()
         if (response === "Error") {
             this.setState({ fetchDataStatus: "error" })
         } else {
@@ -38,16 +39,14 @@ class MetricSection extends Component {
         } else {
             sectionResults = this.state.data.metrics.map((metric, index) => {
                 return (
-                    <div className='row' key={index} ><span className='col col1'>{metric.description}</span><span className='col'>{metric.count}</span></div>
+                    <Metric metric={metric} key={index} />
                 )
             })
         }
-
-
         return (
             <div className="MetricSection">
                 <h2 className='sectionHeader'>{this.props.source.name}</h2>
-                <div>
+                <div className='sectionResults'>
                     {sectionResults}
                 </div>
 

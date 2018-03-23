@@ -9,11 +9,11 @@ class Homepage extends Component {
         fetchDataMethods: [
             {
                 name: "Active Promotions",
-                method: getActivePromotions()
+                method: () => getActivePromotions()
             },
             {
                 name: "Markdown Service V2",
-                method: getMarkDownServiceMetrics()
+                method: () => getMarkDownServiceMetrics()
             }
         ]
     }

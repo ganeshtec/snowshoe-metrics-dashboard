@@ -5,14 +5,35 @@
   "proxy": "http://localhost:8090",
   "dependencies": {
     "axios": "^0.18.0",
+    "chai": "^4.1.2",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "jest-config": "^22.4.3",
+    "jest-environment-node": "^22.4.3",
+    "jest-junit": "^3.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "sinon": "^4.4.8"
   },
   "scripts": {
     "start": "PORT=8081 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:coverage": "react-scripts test --env=jsdom --coverage --testResultsProcessor ./node_modules/jest-junit",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest-enzyme": "^4.2.0"
+  },
+  "jest-junit": {
+    "suiteName": "Snowshoe Metrics Dashboard Tests",
+    "output": "./test-results/test-results.xml",
+    "classNameTemplate": "{classname}-{title}",
+    "titleTemplate": "{classname}-{title}",
+    "ancestorSeparator": " › ",
+    "usePathForSuiteName": "true"
   }
 }
