@@ -1,15 +1,18 @@
 const express = require('express')
 var bodyParser = require('body-parser')
 var path = require('path')
-const app = express()
+const app = express();
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-var discountMaintenanceApi = require('./server/controllers/DiscountMaintenanceApi')
-app.use('/discount-maintenance', discountMaintenanceApi)
+var discountMaintenanceApi = require('./server/controllers/DiscountMaintenanceApi');
+app.use('/api/discount-maintenance', discountMaintenanceApi);
 
-var markDownServiceApi = require('./server/controllers/MarkDownServiceApi')
-app.use('/api/markdown-service', markDownServiceApi)
+var markDownServiceApi = require('./server/controllers/MarkDownServiceApi');
+app.use('/api/markdown-service', markDownServiceApi);
+
+var circuitBreakerServiceApi = require('./server/controllers/CircuitBreakerApi');
+app.use('/api/circuit-breaker', circuitBreakerServiceApi);
 
 app.use(express.static(__dirname + '/client/build/'));
 

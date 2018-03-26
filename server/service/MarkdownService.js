@@ -20,7 +20,6 @@ processMarkdownSplunkResponse = (err, results) => {
         return value.includes("- Time taken to get IVP discounts")
     })
 
-
     var totalVPPCalls = rawValues.filter((value) => {
         return value.includes("- Time taken to get VPP discounts")
     })
@@ -89,7 +88,6 @@ processMarkdownSplunkResponse = (err, results) => {
         return jsonCartRequest.cartRequest.channel;
     })
 
-
     var results = [
         {
             description: "Total Calls Received",
@@ -147,24 +145,24 @@ processMarkdownSplunkResponse = (err, results) => {
             description: "Calls without a channel",
             count: channels.filter((channel) => { return channel === undefined }).length
         }
-    ]
+    ];
+
     var uniqueChannels = [];
     channels.forEach(channel => {
         if (uniqueChannels.includes(channel) === false && channel != undefined) {
             uniqueChannels.push(channel)
         }
-    })
+    });
 
     uniqueChannels.forEach((channel) => {
         results.push({
             description: `Calls from channel ${channel}`,
             count: channels.filter((item) => { return item === channel }).length
         })
-    })
-
+    });
 
     return (results)
 }
 
-module.exports = processMarkdownSplunkResponse
+module.exports = processMarkdownSplunkResponse;
 

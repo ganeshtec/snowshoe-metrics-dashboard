@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/homepage.css';
-import Metric from './Metric'
+import Metric from '../components/Metric'
 
 class MetricSection extends Component {
 
@@ -49,7 +49,6 @@ class MetricSection extends Component {
                 <div className='sectionResults'>
                     {sectionResults}
                 </div>
-
             </div>
         )
     }

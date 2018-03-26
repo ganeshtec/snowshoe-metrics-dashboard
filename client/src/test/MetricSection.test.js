@@ -1,14 +1,9 @@
 import React from 'react';
-import { expect } from 'chai';
-import { shallow, mount } from 'enzyme';
+import {expect} from 'chai';
+import Enzyme, {mount, shallow} from 'enzyme';
 import sinon from 'sinon';
-
-import Homepage from '../components/Homepage';
-import MetricSection from '../components/MetricSection';
-import Metric from '../components/Metric';
+import MetricSection from '../containers/MetricSection';
 import 'jest-enzyme';
-
-import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });

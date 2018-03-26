@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import '../css/homepage.css';
-import { getActivePromotions, getMarkDownServiceMetrics } from '../service/apiService';
+import {getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics} from '../service/apiService';
 import MetricSection from './MetricSection';
 
 class Homepage extends Component {
@@ -14,14 +14,17 @@ class Homepage extends Component {
             {
                 name: "Markdown Service V2",
                 method: () => getMarkDownServiceMetrics()
+            },
+            {
+                name: "Circuit Breaker",
+                method: () => getCircuitBreakerServiceMetrics()
             }
         ]
-    }
-
+    };
 
     render() {
         const metricsSection = this.state.fetchDataMethods.map((source, index) => {
-            return (<MetricSection key={index} source={source} />)
+            return (<MetricSection key={index} source={source}/>)
         })
         return (
             <div className="homePage">

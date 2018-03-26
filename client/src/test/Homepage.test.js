@@ -1,10 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-// import sinon from 'sinon';
-
-import Homepage from '../components/Homepage';
-import MetricSection from '../components/MetricSection';
+import Homepage from '../containers/Homepage';
+import MetricSection from '../containers/MetricSection';
 import 'jest-enzyme';
 
 import Enzyme from 'enzyme';

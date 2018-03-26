@@ -1,11 +1,8 @@
 'use strict'
-
 var express = require('express');
 var router = express.Router();
-var request = require('request');
 var splunkjs = require('splunk-sdk')
-var moment = require('moment')
-var processMarkdownSplunkResponse = require('../service/MarkdownService')
+var processCircuitBreakerSplunkResponse = require('../service/CircuitBreakerService')
 
 var config;
 
@@ -32,7 +29,7 @@ router.get('/fetchData', async function (req, res, next) {
 
         service.login(function (err, success) {
             if (success) {
-                var searchQuery = "search " + config.markdownServiceSplunkQuery;
+                var searchQuery = "search " + config.circuitBreakerServiceSplunkQuery;
 
                 var now = new Date(),
                     then = new Date(
@@ -54,7 +51,7 @@ router.get('/fetchData', async function (req, res, next) {
                     searchQuery,
                     searchParams,
                     function (err, results) {
-                        var response = processMarkdownSplunkResponse(err, results)
+                        var response = processCircuitBreakerSplunkResponse(err, results)
                         res.send(response)
                     }
                 );
@@ -65,10 +62,12 @@ router.get('/fetchData', async function (req, res, next) {
             }
         })
 
+
     } catch (err) {
         console.log(err)
         res.status(500).send('Failed to retrieve Markdown Service stats')
     }
+
 });
 
 module.exports = router;
