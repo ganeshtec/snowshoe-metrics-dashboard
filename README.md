@@ -10,9 +10,6 @@ This project includes both server and client, each of which have their own packa
 #### To manually create an artifact and deploy
 - Run "npm run setup" to install dependencies.
 - From the client directory, run "npm run build" to build the project.
-- "cd .." back to the root directory.
-- In AD run "cf push -f manifest-ad.yml
-
 - "npm run setup"  to install dependencies.
 - cd into client, run "npm run build" to build the client project.
 - "cd .." back to the root directory.
