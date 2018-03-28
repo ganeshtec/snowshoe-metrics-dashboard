@@ -24,7 +24,7 @@ processCircuitBreakerSplunkResponse = (error, results) => {
         },
         {
             description: "Percentage of calls meeting SLA: ",
-            count: Math.round((values[4] / values[3]) * 100) + " %"
+            count: Math.round((values[4] / values[3]) * 10000)/100 + " %"
         }
     ]
     return (results)
