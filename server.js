@@ -17,7 +17,7 @@ app.use('/api/circuit-breaker', circuitBreakerServiceApi);
 app.use(express.static(__dirname + '/client/build/'));
 
 app.get("/*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, '/client/build/index.html'));
+  response.sendFile(path.resolve(__dirname, '/client/build'));
 });
 
 
