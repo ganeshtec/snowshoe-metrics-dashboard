@@ -42,7 +42,7 @@ router.get('/fetchData', async function (req, res, next) {
                 var minutesSinceMidnight = Math.round(diff / 60000)
 
                 var searchParams = {
-                    earliest_time: `-5m`,
+                    earliest_time: `-${minutesSinceMidnight}m`,
                     count: 0
                 };
 
