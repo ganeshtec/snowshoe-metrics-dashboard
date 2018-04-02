@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 let getActivePromotions = async () => {
     try {
@@ -14,9 +15,15 @@ let getActivePromotions = async () => {
     }
 }
 
-let getMarkDownServiceMetrics = async () => {
+let getMarkDownServiceMetrics = async (startDate, endDate) => {
+    if (moment(endDate) < moment(startDate)) {
+        return "Error"
+    }
     try {
-        var response = await axios.get('/api/markdown-service/fetchData')
+        var response = await axios.post('/api/markdown-service/fetchData', {
+            startDate: startDate,
+            endDate: endDate
+        })
         var data = response.data;
         var returnObject = {
             metrics: data

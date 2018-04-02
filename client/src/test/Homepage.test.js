@@ -12,9 +12,9 @@ Enzyme.configure({ adapter: new Adapter() });
 
 
 describe('<Homepage />', () => {
-    it('renders two <MetricSection /> components', () => {
+    it('renders three <MetricSection /> components', () => {
         const wrapper = shallow(<Homepage />);
-        expect(wrapper.find(MetricSection)).to.have.length(2);
+        expect(wrapper.find(MetricSection)).to.have.length(3);
     });
 
 });

@@ -9,14 +9,17 @@ class Homepage extends Component {
         fetchDataMethods: [
             {
                 name: "Active Promotions",
+                needsDateRange: false,
                 method: () => getActivePromotions()
             },
             {
                 name: "Markdown Service V2",
-                method: () => getMarkDownServiceMetrics()
+                needsDateRange: true,
+                method: (startDate, endDate) => getMarkDownServiceMetrics(startDate, endDate)
             },
             {
                 name: "Circuit Breaker",
+                needsDateRange: false,
                 method: () => getCircuitBreakerServiceMetrics()
             }
         ]

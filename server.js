@@ -3,7 +3,9 @@ var bodyParser = require('body-parser')
 var path = require('path')
 const app = express();
 
+app.use(bodyParser.json());
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 
 var discountMaintenanceApi = require('./server/controllers/DiscountMaintenanceApi');
 app.use('/api/discount-maintenance', discountMaintenanceApi);

@@ -6,6 +6,12 @@ h1{
 h2{
     background-color:#F96302;color:#FFFFFF;
 }
+
+#headerBack{
+     background-color:#F96302;color:#FFFFFF;
+     width: 100%;
+}
+
 .homePage{
     margin: 46px 0px;
 }
@@ -45,6 +51,7 @@ h2{
     color: black;
     float: right;
 }
+
 
 
 

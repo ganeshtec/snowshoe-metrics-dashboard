@@ -1,0 +1,14 @@
+.date-picker-wrapper {
+    margin:5px 0px !important;
+}
+
+.date-selection{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button .md .refresh{
+    padding: 0px 10px;
+}
+

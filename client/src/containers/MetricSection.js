@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import '../css/homepage.css';
+import moment from 'moment'
+
 import Metric from '../components/Metric'
+import DateSelection from '../components/DateSelection'
+
 
 class MetricSection extends Component {
 
@@ -8,17 +12,49 @@ class MetricSection extends Component {
         data: {
             metrics: []
         },
+        dateRange: {
+            startDate: '',
+            endDate: ''
+        },
         fetchDataStatus: "loading"
     }
 
     async componentWillMount() {
-        var response = await this.props.source.method()
+        var todaysDate = moment().format("YYYY-MM-DD");
+        await this.updateDates(todaysDate, todaysDate)
+        await this.fetchData()
+    }
+
+    updateDates = (startDate, endDate) => {
+        startDate = startDate === null ? this.state.dateRange.startDate : startDate;
+        endDate = endDate === null ? this.state.dateRange.endDate : endDate;
+
+        this.setState({
+            dateRange: {
+                startDate: startDate,
+                endDate: endDate
+            }
+        })
+    }
+
+    fetchData = async () => {
+        if (this.state.fetchDataStatus !== "loading") {
+            this.setState({ fetchDataStatus: "loading" })
+        }
+        var response;
+        if (this.props.source.needsDateRange) {
+            response = await this.props.source.method(this.state.dateRange.startDate, this.state.dateRange.endDate)
+        } else {
+            response = await this.props.source.method()
+        }
+
         if (response === "Error") {
             this.setState({ fetchDataStatus: "error" })
         } else {
             this.setState({ fetchDataStatus: "loaded", data: response })
         }
     }
+
     render() {
 
         var sectionResults;
@@ -45,7 +81,16 @@ class MetricSection extends Component {
         }
         return (
             <div className="MetricSection">
-                <h2 className='sectionHeader'>{this.props.source.name}</h2>
+                <table id="headerBack">
+                    <tbody>
+                        <tr>
+                            <td id="headerName">{this.props.source.name}</td>
+                            <td>{this.props.source.needsDateRange ? <DateSelection loading={this.state.fetchDataStatus === "loading"} 
+                                                                                   dateRange={this.state.dateRange} 
+                                                                                   updateDates={this.updateDates} fetchData={this.fetchData} /> : null}</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div className='sectionResults'>
                     {sectionResults}
                 </div>

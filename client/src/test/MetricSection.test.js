@@ -37,8 +37,8 @@ describe('<MetricSection />', () => {
 
     it('Loads a Metric Section', () => {
         const wrapper = shallow(<MetricSection source={source} />);
-        expect(wrapper.find(".sectionHeader")).to.have.length(1);
-        expect(wrapper.find('.sectionHeader').text()).equal('TEST source');
+        expect(wrapper.find("#headerName")).to.have.length(1);
+        expect(wrapper.find('#headerName').text()).equal('TEST source');
     });
 
     it('dynamically renders proper amount of metrics', () => {
