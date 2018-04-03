@@ -1,11 +1,12 @@
 .date-picker-wrapper {
-    margin:5px 0px !important;
+    margin-right: 100px;
 }
 
 .date-selection{
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
+    margin-right: 100px;
 }
 
 .button .md .refresh{

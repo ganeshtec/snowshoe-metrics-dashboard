@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../css/homepage.css';
-import {getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics} from '../service/apiService';
+import { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics } from '../service/apiService';
 import MetricSection from './MetricSection';
 
 class Homepage extends Component {
@@ -19,15 +19,15 @@ class Homepage extends Component {
             },
             {
                 name: "Circuit Breaker",
-                needsDateRange: false,
-                method: () => getCircuitBreakerServiceMetrics()
+                needsDateRange: true,
+                method: (startDate, endDate) => getCircuitBreakerServiceMetrics(startDate, endDate)
             }
         ]
     };
 
     render() {
         const metricsSection = this.state.fetchDataMethods.map((source, index) => {
-            return (<MetricSection key={index} source={source}/>)
+            return (<MetricSection key={index} source={source} index={index} />)
         })
         return (
             <div className="homePage">

@@ -37,9 +37,15 @@ let getMarkDownServiceMetrics = async (startDate, endDate) => {
 }
 
 
-let getCircuitBreakerServiceMetrics = async () => {
+let getCircuitBreakerServiceMetrics = async (startDate, endDate) => {
+    if (moment(endDate) < moment(startDate)) {
+        return "Error"
+    }
     try {
-        var response = await axios.get('/api/circuit-breaker/fetchData')
+        var response = await axios.post('/api/circuit-breaker/fetchData', {
+            startDate: startDate,
+            endDate: endDate
+        })
         var data = response.data;
         var returnObject = {
             metrics: data

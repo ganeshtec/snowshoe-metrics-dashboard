@@ -85,9 +85,12 @@ class MetricSection extends Component {
                     <tbody>
                         <tr>
                             <td id="headerName">{this.props.source.name}</td>
-                            <td>{this.props.source.needsDateRange ? <DateSelection loading={this.state.fetchDataStatus === "loading"} 
-                                                                                   dateRange={this.state.dateRange} 
-                                                                                   updateDates={this.updateDates} fetchData={this.fetchData} /> : null}</td>
+                            <td>{this.props.source.needsDateRange ? <DateSelection loading={this.state.fetchDataStatus === "loading"}
+                                dateRange={this.state.dateRange}
+                                updateDates={this.updateDates}
+                                fetchData={this.fetchData}
+                                index={this.props.index}
+                                /> : null}</td>
                         </tr>
                     </tbody>
                 </table>

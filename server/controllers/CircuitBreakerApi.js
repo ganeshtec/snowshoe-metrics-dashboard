@@ -14,7 +14,7 @@ if (process.env.config) {
 }
 
 /* GET requests listing. */
-router.get('/fetchData', async function (req, res, next) {
+router.post('/fetchData', async function (req, res, next) {
     try {
         var service = new splunkjs.Service({
             username: "showshoe",
@@ -42,7 +42,8 @@ router.get('/fetchData', async function (req, res, next) {
                 var minutesSinceMidnight = Math.round(diff / 60000)
 
                 var searchParams = {
-                    earliest_time: `-${minutesSinceMidnight}m`,
+                    earliest_time: `${req.body.startDate}T00:00:00.000-07:00`,
+                    latest_time: `${req.body.endDate}T11:59:59.000-07:00`,
                     count: 0
                 };
 
