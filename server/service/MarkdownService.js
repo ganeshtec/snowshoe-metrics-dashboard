@@ -61,22 +61,6 @@ processMarkdownSplunkResponse = (err, results) => {
         return accumulator + number;
     }, 0)
 
-    var IVPErrors = rawValues.filter((value) => {
-        return value.includes("- Error while fetching IVP")
-    })
-
-    var IVPErrors = rawValues.filter((value) => {
-        return value.includes("- Error while fetching IVP")
-    })
-
-    var IVPErrors = rawValues.filter((value) => {
-        return value.includes("- Error while fetching IVP")
-    })
-
-    var IVPErrors = rawValues.filter((value) => {
-        return value.includes("- Error while fetching IVP")
-    })
-
     var cartRequests = rawValues.filter((value) => {
         return value.includes("CART REQUEST")
     })
@@ -123,19 +107,19 @@ processMarkdownSplunkResponse = (err, results) => {
         },
         {
             description: "V2 Errors",
-            count: Math.round(V2Errors.length) + " errors"
+            count: V2Errors.length + " errors"
         },
         {
             description: "IVP Errors",
-            count: Math.round(IVPErrors.length) + " errors"
+            count: IVPErrors.length + " errors"
         },
         {
             description: "VPP Errors",
-            count: Math.round(VPPErrors.length) + " errors"
+            count: VPPErrors.length + " errors"
         },
         {
             description: "GPAS Errors",
-            count: Math.round(GPASErrors.length) + " errors"
+            count: GPASErrors.length + " errors"
         },
         {
             description: "Manual Bids",
