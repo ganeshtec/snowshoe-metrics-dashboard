@@ -5,7 +5,7 @@ processCircuitBreakerSplunkResponse = (error, results) => {
     var rows = results.rows;
     var values = rows[0]
 
-    var results = [
+    var output  = [
         {
             description: "Total Calls Generated",
             count: values[0] + " calls"
@@ -64,7 +64,7 @@ processCircuitBreakerSplunkResponse = (error, results) => {
         // }
 
     ]
-    return (results)
+    return (output)
 }
 
 module.exports = processCircuitBreakerSplunkResponse;
