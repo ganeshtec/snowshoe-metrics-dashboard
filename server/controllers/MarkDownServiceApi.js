@@ -47,6 +47,7 @@ router.post('/fetchData/', async function (req, res, next) {
                 var searchParams = {
                     earliest_time: `${req.body.startDate}T00:00:00.000-07:00`,
                     latest_time: `${req.body.endDate}T11:59:59.000-07:00`,
+
                     count: 0
                 };
 

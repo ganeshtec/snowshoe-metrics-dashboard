@@ -13,14 +13,14 @@ class Homepage extends Component {
                 method: () => getActivePromotions()
             },
             {
-                name: "Markdown Service V2",
-                needsDateRange: true,
-                method: (startDate, endDate) => getMarkDownServiceMetrics(startDate, endDate)
-            },
-            {
                 name: "Circuit Breaker",
                 needsDateRange: true,
                 method: (startDate, endDate) => getCircuitBreakerServiceMetrics(startDate, endDate)
+            },
+            {
+                name: "Markdown Service V2",
+                needsDateRange: true,
+                method: (startDate, endDate) => getMarkDownServiceMetrics(startDate, endDate)
             }
         ]
     };
