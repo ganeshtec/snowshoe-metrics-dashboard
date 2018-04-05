@@ -1,7 +1,7 @@
 {
   "config": {
     "markdownServiceSplunkQuery": "index=qa_app_logs sourcetype=app.logs attributes.cf_app_name=MarkdownServiceV2 attributes.cf_space_name=QA",
-    "circuitBreakerServiceSplunkQuery": "index=app mmpcdiscountengine sourcetype=orangelog context=discount-engine executeCircuitBreaker_time",
+    "circuitBreakerServiceSplunkQuery": "index=app mmpcdiscountengine sourcetype=orangelog context=\"discount-engine\" \"executeCircuitBreaker_time\" | stats count(eval(searchmatch(\"executeCircuitBreaker\"))) as numTotalCalls, avg(executeCircuitBreaker_time), min(executeCircuitBreaker_time), max(executeCircuitBreaker_time), count(eval(executeCircuitBreaker_time < 750)) as slaCount",
     "discountMaintenanceApi": "https://promotionsws-ext-ad.apps-np.homedepot.com/"
   }
 }
