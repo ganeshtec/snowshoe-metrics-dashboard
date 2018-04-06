@@ -1,0 +1,69 @@
+{
+  "projectInfo": {
+    "name": "snowshoe-metrics-dashboard",
+    "versionStrategy": "tracker",
+    "fmsNumber": "IT-08105",
+    "cdTemplate": "CD0001001",s
+    "language": "js"
+  },
+
+
+  "artifact": {
+    "artifactoryDomain": "https://maven.artifactory.homedepot.com/artifactory",
+    "artifactoryRepoKey": "pcf-deploy",
+    "artifactoryRepoKeySnapshot": "pcf-deploy",
+    "artifactoryGroup": "com/homedepot/pricing/discounts",
+    "artifactType": "tar.gz"
+  },
+
+
+  "fortify":{
+    "foldersToScan": "src",
+    "project-name" : "DiscountEngine_snowshoe-metrics-dashboard",
+    "emailList": "e9w3d9v7m8a6f1r3@thdengops.slack.com"
+  },
+
+  "github": {
+    "org": "DiscountEngine",
+    "repo": "snowshoe-metrics-dashboard",
+    "URL": "https://github.homedepot.com/api/v3/repos"
+  },
+
+  "tracker": {
+    "projectId": 1903423
+  },
+
+  "slack": {
+    "channel": "#snowshoe-deploybot",
+    "botName": "snowshoe-metrics-dashboard",
+    "emoji": ":robot_face:"
+  },
+
+
+  "environments": {
+    "development": {
+      "cf": {
+        "apiEndpoint": "api.run-np.homedepot.com",
+        "domain": "apps-np.homedepot.com",
+        "space": "AD",
+        "org": "discounts"
+      },
+      "artifactCategory": "snapshot",
+      "associatedBranchName": "develop",
+      "createChange": "True"
+    },
+
+    "qa": {
+      "cf": {
+        "apiEndpoint": "api.run-np.homedepot.com",
+        "domain": "apps-np.homedepot.com",
+        "space": "QA",
+        "org": "discounts"
+      },
+      "artifactCategory": "release",
+      "manualDeployLink": "https://ln0e9d.homedepot.com:9443/job/CI-HelloWorld/job/CI_Deploy/parambuild/?delay=0sec&ENVIRONMENT=qa&CF_USER=&CF_PWD=",
+      "associatedBranchName": "master"
+    }
+
+  }
+}
