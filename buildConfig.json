@@ -3,7 +3,7 @@
     "name": "snowshoe-metrics-dashboard",
     "versionStrategy": "tracker",
     "fmsNumber": "IT-08105",
-    "cdTemplate": "CD0001001",s
+    "cdTemplate": "CD0001001",
     "language": "js"
   },
 
