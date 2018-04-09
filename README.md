@@ -21,6 +21,9 @@ This project includes both server and client, each of which have their own packa
 
 - Stage: “cf push -f manifest-qa.yml -p SnowshoeMetricsDashboard/“
 
+-to deploy artifact for prod deployment, here is the location: https://maven.artifactory.homedepot.com/artifactory/webapp/#/artifacts/browse/tree/General/libs-release-local/libs-release-local/com/homedepot/discounts/snowshoe-metrics-dashboard/v1.0.2/snowshoe-metrics-dashboard-v1.0.2.tar
+
+
 #### Helpful links
 - React Docs
     - "Thinking in React" https://reactjs.org/docs/thinking-in-react.html
@@ -31,3 +34,4 @@ This project includes both server and client, each of which have their own packa
     - Forms: https://reactjs.org/docs/forms.html
     - Components and Props https://reactjs.org/docs/components-and-props.html
     - Conditional Rendering https://reactjs.org/docs/conditional-rendering.html
+    -Location to deploy artifacts: https://maven.artifactory.homedepot.com/artifactory/webapp/#/artifacts/browse/tree/General/libs-release-local/libs-release-local/com/homedepot/discounts/snowshoe-metrics-dashboard/v1.0.2/snowshoe-metrics-dashboard-v1.0.2.tar

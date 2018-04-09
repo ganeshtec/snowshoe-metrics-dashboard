@@ -4,7 +4,7 @@
   "description": "Dashboard",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd client  && CI=true npm run test:coverage -b --outputFile=test-results.json --json",
     "start": "node ./bin/www",
     "dev": "concurrently \"node ./bin/www\" \"cd ./client && npm start\" ",
     "setup": "npm install cd ./client && npm install"
@@ -12,11 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ajv": "^6.4.0",
     "body-parser": "^1.18.2",
     "cd": "^0.3.3",
     "concurrently": "^3.5.1",
     "create-react-app": "^1.5.2",
     "express": "^4.16.2",
+    "gulp-run-command": "0.0.9",
     "metricsdashboard": "file:client",
     "moment": "^2.21.0",
     "path": "^0.12.7",
@@ -26,5 +28,8 @@
   "engines": {
     "node": "8.8.0",
     "npm": "5.6.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0-alpha.2"
   }
 }
