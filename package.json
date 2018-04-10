@@ -7,7 +7,7 @@
     "test": "cd client  && CI=true npm run test:coverage -b --outputFile=test-results.json --json",
     "start": "node ./bin/www",
     "dev": "concurrently \"node ./bin/www\" \"cd ./client && npm start\" ",
-    "setup": "npm install cd ./client && npm install"
+    "setup": "concurrently \"npm install\" \"cd ./client && npm install\" "
   },
   "author": "",
   "license": "ISC",
