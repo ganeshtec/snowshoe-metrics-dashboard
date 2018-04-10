@@ -1,3 +1,5 @@
+var numberWithCommas = require('../utils/FormatNumbers')
+
 processMarkdownSplunkResponse = (err, results) => {
     var rawValues = [];
     if (err) {
@@ -75,35 +77,35 @@ processMarkdownSplunkResponse = (err, results) => {
     var results = [
         {
             description: "Total Calls Received",
-            count: Math.round(totalCalls.length) + " calls"
+            count: numberWithCommas(Math.round(totalCalls.length)) + " calls"
         },
         {
             description: "Calls to IVP",
-            count: Math.round(totalIVPCalls.length) + " calls"
+            count: numberWithCommas(Math.round(totalIVPCalls.length)) + " calls"
         },
         {
             description: "Calls to VPP",
-            count: Math.round(totalVPPCalls.length) + " calls"
+            count: numberWithCommas(Math.round(totalVPPCalls.length)) + " calls"
         },
         {
             description: "Calls to GPAS",
-            count: Math.round(totalGPASCalls.length) + " calls"
+            count: numberWithCommas(Math.round(totalGPASCalls.length)) + " calls"
         },
         {
             description: "Total Calls Out",
-            count: Math.round((totalIVPCalls.length + totalVPPCalls.length + totalGPASCalls.length)) + " calls"
+            count: numberWithCommas(Math.round((totalIVPCalls.length + totalVPPCalls.length + totalGPASCalls.length))) + " calls"
         },
         {
             description: "Shortest Call Time",
-            count: timesTaken.length > 0 ? Math.min.apply(Math, timesTaken) + " ms" : "No Calls"
+            count: timesTaken.length > 0 ? numberWithCommas(Math.min.apply(Math, timesTaken)) + " ms" : "No Calls"
         },
         {
             description: "Longest Call Time",
-            count: timesTaken.length > 0 ? Math.round(Math.max.apply(Math, timesTaken)) + " ms" : "No Calls"
+            count: timesTaken.length > 0 ? numberWithCommas(Math.round(Math.max.apply(Math, timesTaken))) + " ms" : "No Calls"
         },
         {
             description: "Average Call Time",
-            count: timesTaken.length > 0 ? Math.round(total / timesTaken.length) + " ms" : "No Calls"
+            count: timesTaken.length > 0 ? numberWithCommas(Math.round(total / timesTaken.length)) + " ms" : "No Calls"
         },
         {
             description: "V2 Errors",
