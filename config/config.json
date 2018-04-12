@@ -2,7 +2,7 @@
   "config": {
     "markdownServiceSplunkQuery": "index=qa_app_logs sourcetype=app.logs attributes.cf_app_name=MarkdownServiceV2 attributes.cf_space_name=QA",
     "circuitBreakerServiceSplunkQuery": "index=app mmpcdiscountengine sourcetype=orangelog context=\"discount-engine\" | stats count(eval(searchmatch(\"executeCircuitBreaker\"))) as numTotalCalls, avg(executeCircuitBreaker_time), min(executeCircuitBreaker_time), max(executeCircuitBreaker_time), count(eval(executeCircuitBreaker_time < 750)) AS slaCount, count(eval(searchmatch(\"processCloudCartRequest_time\"))) as numCloudCalls, avg(processCloudCartRequest_time) as avgCloudCallTime, min(processCloudCartRequest_time) as minCloudCallTime, max(processCloudCartRequest_time) as maxCloudCallTime, count(eval(processCloudCartRequest_time <= 750)) AS slaCloudCount, count(eval(searchmatch(\"processStoreCartRequest_time\"))) as numStoreCalls, avg(processStoreCartRequest_time) as avgStoreCallTime, min(processStoreCartRequest_time) as minStoreCallTime, max(processStoreCartRequest_time) as maxStoreCallTime, count(eval(processStoreCartRequest_time <= 750)) AS slaStoreCount, count(eval(searchmatch(\"hasDisc\") and searchmatch(\"true\"))) as numCloudCallsWithDiscount",
-    "discountMaintenanceApi": "http://localhost.homedepot.com:8080/"
+    "discountMaintenanceApi": "https://promotionsws-ext-ad.apps-np.homedepot.com/"
   }
 }
 
