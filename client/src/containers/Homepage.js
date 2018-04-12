@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import '../css/homepage.css';
-import { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics } from '../service/apiService';
+import {getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics} from '../service/apiService';
 import MetricSection from './MetricSection';
 
 class Homepage extends Component {
@@ -9,6 +9,8 @@ class Homepage extends Component {
         fetchDataMethods: [
             {
                 name: "Active Promotions",
+                startingTomorrowSubHeader: "Starting Tomorrow",
+                futurePromotionsSubHeader: "Future Promotions",
                 needsDateRange: false,
                 method: () => getActivePromotions()
             },
@@ -27,13 +29,14 @@ class Homepage extends Component {
 
     render() {
         const metricsSection = this.state.fetchDataMethods.map((source, index) => {
-            return (<MetricSection key={index} source={source} index={index} />)
-        })
+            console.log(source, '*****', index);
+            return (<MetricSection key={index} source={source} index={index}/>)
+        });
         return (
             <div className="homePage">
                 {metricsSection}
             </div>
-        )
+        );
     }
 }
 
