@@ -34,9 +34,14 @@ h2{
     padding: 0px 25px;
 }
 
-.col1{
+.col-1{
     display: inline-block;
-    width: 400px;
+    width: 550px;
+}
+
+.col-2 {
+    display: inline-block;
+    width: 840px;
 }
 
 .pcfApps{
@@ -51,6 +56,15 @@ h2{
     color: black;
     float: right;
 }
+
+td.promotion-breakdown-header {
+    width: 242px;
+}
+
+td.sub-header {
+    width: 300px;
+}
+
 
 
 

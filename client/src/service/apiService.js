@@ -7,7 +7,7 @@ let getActivePromotions = async () => {
         var data = response.data.filter(el => el.code === 57 || el.code === 87 || el.code === 9999)
         var returnObject = {
             metrics: data
-        }
+        };
         return returnObject;
     } catch (err) {
         console.log("Error Fetching Results for Discount Maintenance API")
