@@ -10,9 +10,11 @@ class Homepage extends Component {
         fetchDataMethods: [
             {
                 name: "Promotion Breakdown",
-                today: "Today",
-                tomorrow: "Starting Tomorrow",
-                future: "Future Promotions",
+                subHeader: {
+                    today: "Today",
+                    tomorrow: "Starting Tomorrow",
+                    future: "Future Promotions",
+                },
                 isGrid: true,
                 needsDateRange: false,
                 method: () => getActivePromotions()

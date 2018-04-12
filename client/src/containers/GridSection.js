@@ -86,9 +86,9 @@ class GridSection extends Component {
                 <table id="headerBack">
                     <tr>
                         <td className="promotion-breakdown-header">{this.props.source.name}</td>
-                        <td className="sub-header">{this.props.source.today}</td>
-                        <td className="sub-header">{this.props.source.tomorrow}</td>
-                        <td className="sub-header">{this.props.source.future}</td>
+                        <td className="sub-header">{this.props.source.subHeader.today}</td>
+                        <td className="sub-header">{this.props.source.subHeader.tomorrow}</td>
+                        <td className="sub-header">{this.props.source.subHeader.future}</td>
                     </tr>
                     {sectionResults}
                 </table>
