@@ -4,7 +4,6 @@ import moment from 'moment'
 
 
 class GridSection extends Component {
-
     state = {
         data: {
             metrics: []
@@ -32,7 +31,7 @@ class GridSection extends Component {
                 endDate: endDate
             }
         })
-    }
+    };
 
     fetchData = async () => {
         if (this.state.fetchDataStatus !== "loading") {
@@ -50,7 +49,7 @@ class GridSection extends Component {
         } else {
             this.setState({fetchDataStatus: "loaded", data: response})
         }
-    }
+    };
 
     render() {
 
@@ -73,30 +72,28 @@ class GridSection extends Component {
         } else {
             sectionResults = this.state.data.metrics.map((metric, index) => {
                 return (
-                   <tr className='row text-center'>
-                       <td>{metric.description}</td>
-                       <td>{metric.count}</td>
-                       <td>{metric.tomorrow}</td>
-                       <td>{metric.future}</td>
-                   </tr>
+                    <tr className='row'>
+                        <td>{metric.description}</td>
+                        <td>{metric.count}</td>
+                        <td className="padding-horizontal-3">{metric.tomorrow}</td>
+                        <td className="padding-horizontal-3">{metric.future}</td>
+                    </tr>
                 )
             });
         }
         return (
-                <div className="MetricSection">
-                    <table id="headerBack">
-                        <tr>
-                            <td className="promotion-breakdown-header text-center">{this.props.source.name}</td>
-                            <td className="sub-header text-center">{this.props.source.today}</td>
-                            <td className="sub-header text-center">{this.props.source.tomorrow}</td>
-                            <td className="sub-header text-center">{this.props.source.future}</td>
-                        </tr>
-                        {sectionResults}
-                    </table>
-
-
+            <div className="MetricSection">
+                <table id="headerBack">
+                    <tr>
+                        <td className="promotion-breakdown-header">{this.props.source.name}</td>
+                        <td className="sub-header">{this.props.source.today}</td>
+                        <td className="sub-header">{this.props.source.tomorrow}</td>
+                        <td className="sub-header">{this.props.source.future}</td>
+                    </tr>
+                    {sectionResults}
+                </table>
             </div>
-        )
+        );
     }
 }
 

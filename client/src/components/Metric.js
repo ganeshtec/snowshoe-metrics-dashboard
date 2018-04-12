@@ -1,13 +1,13 @@
-import React from 'react';
-
-const Metric = (props) => {
-    return (
-        <div className='row' >
-            <span className='col col-1'>{props.metric.description}</span>
-            <span className='col-1'>{props.metric.count}</span>
-            <span className='col-2'>{props.metric.tomorrow}</span>
-            <span className='col-1'>{props.metric.future}</span>
-        </div>
-    );
-}
-export default Metric;
+// import React from 'react';
+//
+// const Metric = (props) => {
+//     return (
+//         <tr className='row'>
+//             <td>{this.props.metric.description}</td>
+//             <td>{this.props.metric.count}</td>
+//             <td className="padding-horizontal-3">{this.props.metric.tomorrow}</td>
+//             <td className="padding-horizontal-3">{this.props.metric.future}</td>
+//         </tr>
+//     );
+// }
+// export default Metric;
