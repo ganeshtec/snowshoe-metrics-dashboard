@@ -30,7 +30,7 @@ router.get('/fetchData/', function (req, res, next) {
     }
     catch (err) {
         console.log(err)
-        res.status(500).send("Failed to retrieve Markdown Service stats")
+        res.status(500).send("Failed to retrieve Discount Maintenance Stats!")
     }
 });
 

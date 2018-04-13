@@ -34,9 +34,14 @@ h2{
     padding: 0px 25px;
 }
 
-.col1{
+.col-1{
     display: inline-block;
-    width: 400px;
+    width: 550px;
+}
+
+.col-2 {
+    display: inline-block;
+    width: 840px;
 }
 
 .pcfApps{
@@ -52,6 +57,38 @@ h2{
     float: right;
 }
 
+td.promotion-breakdown-header {
+    width: 242px;
+}
+
+td.sub-header {
+    width: 300px;
+}
+
+td.promotion-breakdown-header {
+    height: 60px;
+}
+
+
+table#headerBack {
+    border-collapse: collapse;
+}
+/*re-usable classes*/
+.padding-horizontal-1 {
+    padding: 0 10px !important;
+}
+
+.padding-horizontal-2 {
+    padding: 0 20px !important;
+}
+
+.padding-horizontal-3 {
+    padding: 0 30px !important;
+}
+
+.padding-horizontal-4 {
+    padding: 0 40px !important;
+}
 
 
 

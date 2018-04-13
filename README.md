@@ -5,7 +5,7 @@ This project includes both server and client, each of which have their own packa
 - npm install concurrently (This is needed to "npm run setup" for the first time)
 - npm run setup (This script will run npm install for both server and client)
 - npm run dev (Start the Express server and Development mode for the UI
-- if you get error about npm ERR! 404 Not Found: ux-react-styleguide@1.7.0, run npm config set registry https://npm.artifactory.homedepot.com/artifactory/api/npm/npm and run npm install again
+- if you get error about npm ERR! 404 Not Found: ux-react-styleguide@1.7.0, run 'npm config set registry https://npm.artifactory.homedepot.com/artifactory/api/npm/npm' and run npm install again
 
 #### To manually create an artifact and deploy
 - Run "npm run setup" to install dependencies.

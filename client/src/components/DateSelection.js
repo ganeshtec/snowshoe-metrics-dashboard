@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/DateSelection.css';
+import '../css/dateselection.css';
 import { Datepicker as DatePicker } from 'ux-react-styleguide'
 
 const DateSelection = (props) => {
