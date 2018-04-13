@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../css/homepage.css';
-import moment from 'moment'
+import moment from 'moment';
+import Spinner from '../components/Spinner';
 
 
 class GridSection extends Component {
@@ -12,13 +13,13 @@ class GridSection extends Component {
             startDate: '',
             endDate: ''
         },
-        fetchDataStatus: "loading"
+        fetchDataStatus: null
     }
 
     async componentWillMount() {
         var todaysDate = moment().format("YYYY-MM-DD");
-        await this.updateDates(todaysDate, todaysDate)
-        await this.fetchData()
+        await this.updateDates(todaysDate, todaysDate);
+        await this.fetchData();
     }
 
     updateDates = (startDate, endDate) => {
@@ -34,16 +35,17 @@ class GridSection extends Component {
     };
 
     fetchData = async () => {
-        if (this.state.fetchDataStatus !== "loading") {
+        let response;
+        if (this.state.fetchDataStatus !== null) {
             this.setState({fetchDataStatus: "loading"})
         }
-        var response;
         if (this.props.source.needsDateRange) {
             response = await this.props.source.method(this.state.dateRange.startDate, this.state.dateRange.endDate)
         } else {
             response = await this.props.source.method()
         }
 
+        //Exception in service call
         if (response === "Error") {
             this.setState({fetchDataStatus: "error"})
         } else {
@@ -55,17 +57,7 @@ class GridSection extends Component {
 
         var sectionResults;
         if (this.state.fetchDataStatus === "loading") {
-            sectionResults = (
-                <div className="col">
-                    Loading data for {this.props.source.name}...
-                    <div className="progress-circular indeterminate md">
-                        <div className="stroke">
-                            <div className="stroke-left"></div>
-                            <div className="stroke-right"></div>
-                        </div>
-                    </div>
-                </div>
-            );
+            sectionResults = (<Spinner/>);
         }
         else if (this.state.fetchDataStatus === "error") {
             sectionResults = "Error fetching data"
