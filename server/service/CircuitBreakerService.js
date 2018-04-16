@@ -4,11 +4,13 @@ processCircuitBreakerSplunkResponse = (error, results) => {
     if (error) {
         console.log("ERROR Fetching Splunk Data", error)
     }
+
     var rows = results.rows;
     var values = rows[0]
 
+
     var output = [
-        {
+         {
             description: "--------CIRCUIT BREAKER METRICS--------"
         },
         {
@@ -73,9 +75,16 @@ processCircuitBreakerSplunkResponse = (error, results) => {
             count: Math.round((values[14] / values[10]) * 10000) / 100 + " %"
         },
         {
+            description: "--------PROMO METRICS--------"
+        },
+        {
+            description: "Cloud count of call w/ Discount Returned: ",
+            count: values[15] + " calls"
+        },
+        {
             description: "Cloud Percentage of Calls w/ Discount Returned: ",
             count: Math.round((values[15] / values[5]) * 10000) / 100 + " %"
-        }
+        },
     ]
     return (output)
 }

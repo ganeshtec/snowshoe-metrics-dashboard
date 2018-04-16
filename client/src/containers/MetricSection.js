@@ -42,7 +42,7 @@ class MetricSection extends Component {
         let response;
 
         if (this.state.fetchDataStatus) {
-            this.setState({ fetchDataStatus: "loading" })
+            this.setState({ fetchDataStatus: null })
         }
         if (this.props.source.needsDateRange) {
             response = await this.props.source.method(this.state.dateRange.startDate, this.state.dateRange.endDate)
@@ -61,7 +61,7 @@ class MetricSection extends Component {
 
         let sectionResults;
         if (this.state.fetchDataStatus === null) {
-            sectionResults = <Spinner/>
+            sectionResults = <Spinner name={this.props.source.name}/>
         }
         else if (this.state.fetchDataStatus === "error") {
             sectionResults = "Error fetching data"

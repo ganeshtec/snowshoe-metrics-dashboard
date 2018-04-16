@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var splunkjs = require('splunk-sdk')
 var processCircuitBreakerSplunkResponse = require('../service/CircuitBreakerService')
+var uniquePromoIdProcessor = require('../service/UniquePromoIdProcessor')
 
 var config;
 
@@ -15,7 +16,9 @@ if (process.env.config) {
 
 /* GET requests listing. */
 router.post('/fetchData', async function (req, res, next) {
+    var start_time = new Date().getTime();
     try {
+
         var service = new splunkjs.Service({
             username: "showshoe",
             password: "showshoe",
@@ -26,37 +29,46 @@ router.post('/fetchData', async function (req, res, next) {
             port: "8089",
             version: "5.0"
         })
-
         service.login(function (err, success) {
             if (success) {
-                var searchQuery = "search " + config.circuitBreakerServiceSplunkQuery;
-
-                var now = new Date(),
-                    then = new Date(
-                        now.getFullYear(),
-                        now.getMonth(),
-                        now.getDate(),
-                        0, 0, 0),
-                    diff = now.getTime() - then.getTime();
-
-                var minutesSinceMidnight = Math.round(diff / 60000)
-
+                var circuitBreakerQuery = "search " + config.circuitBreakerServiceSplunkQuery;
+                var circuitBreakerPromoCountQuery = "search " + config.circuitBreakerPromoCountQuery
                 var searchParams = {
                     earliest_time: `${req.body.startDate}T00:00:00.000-07:00`,
                     latest_time: `${req.body.endDate}T11:59:59.000-07:00`,
                     count: 0
-                    //earliest_time: `-10s`
                 };
 
+            
+
                 // Run a oneshot search that returns the job's results
-                service.oneshotSearch(
-                    searchQuery,
-                    searchParams,
-                    function (err, results) {
-                        var response = processCircuitBreakerSplunkResponse(err, results)
-                        res.send(response)
-                    }
-                );
+                var circuitBreakerData = new Promise(function(resolve, reject) {
+                    service.oneshotSearch(
+                        circuitBreakerQuery,
+                        searchParams,
+                        function (err, results) {
+                            var circuitBreakerResponseData = processCircuitBreakerSplunkResponse(err, results)
+                            resolve(circuitBreakerResponseData)      
+                        }
+                    );
+                  });
+
+                var circuitBreakerPromoData = new Promise(function(resolve, reject){
+                    service.oneshotSearch(
+                        circuitBreakerPromoCountQuery,
+                        searchParams,
+                        function (err, results) {
+                            var circuitBreakerPromoData = uniquePromoIdProcessor(err, results)
+                            resolve(circuitBreakerPromoData)
+                        }
+                    )
+                })
+                Promise.all([circuitBreakerData, circuitBreakerPromoData]).then((response) => {
+                    var resultSet = []
+                    resultSet = resultSet.concat(response[0], response[1])
+                    res.send(resultSet)
+                })
+
             }
             else {
                 console.log("Error connecting to Splunk")

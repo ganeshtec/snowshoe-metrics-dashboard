@@ -3,7 +3,7 @@ import React from 'react';
 const Spinner = (props) => {
     return (
         <div className="col">
-            Crunching the latest data, just for you.
+           Fetching data for {props.name}.
             <div className="progress-circular indeterminate md">
                 <div className="stroke">
                     <div className="stroke-left"></div>

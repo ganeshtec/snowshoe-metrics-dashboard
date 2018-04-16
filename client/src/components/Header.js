@@ -8,7 +8,7 @@ const Header = () => {
                     <i className="icon_homedepot"></i>
                 </div>
                 <div className="header-info">
-                    <label>DASHBOARD</label>
+                    <label>DISCOUNT ENGINE DASHBOARD</label>
                 </div>
             </div>
             <div className="content"></div>
