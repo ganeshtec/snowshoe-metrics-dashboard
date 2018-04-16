@@ -102,7 +102,7 @@ processMarkdownSplunkResponse = (err, results) => {
         },
         {
             description: "98 Percentile Call Time",
-            count: timesTaken.length > 0 ? numberWithCommas(Math.round(percentile(98,timesTaken))) : " No Calls"
+            count: timesTaken.length > 0 ? numberWithCommas(Math.round(percentile(98,timesTaken))) + "ms" : " No Calls"
         },
         {
             description: "Average Call Time",
