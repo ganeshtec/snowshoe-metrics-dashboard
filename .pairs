@@ -1,0 +1,24 @@
+Example:
+# .pairs - configuration for 'git pair'
+# place in project or home directory
+pairs:
+        em: Evan Miller; emiller
+        sl: Spencer Lewis; slewis
+        gt: Ganesan Thangapandian; gthangapandian
+        cb: Clifford Burchfield; cburchfield
+        sk: Sravanthi Kedarisetti; skedarisetti
+        jt: John Tippabattuni; jtippabattuni
+        db: Donald Bailey; dbailey
+        nn: Nikko Neequaye; Nikko
+        ak: Ariram Krishnamoorthy; ariram_krishnamoorthy
+        sa: Spandan Amanaganti; Spandan
+        pw: Patrick Woods; Patrick
+        as: Anmol Sharma; Anmol_Sharma
+        pv: Praveen Valeti; Praveen
+        hr: Hasnain Rangwala;Hasnain
+        ad: Ashok D'costa; Ashok
+        bb: Burns Beaver; Burns
+        ag: Astik Gupta; agupta
+email:
+        prefix: pair
+        domain: pivotallabs.com

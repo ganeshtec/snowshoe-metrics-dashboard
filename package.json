@@ -30,6 +30,7 @@
     "npm": "5.6.0"
   },
   "devDependencies": {
-    "gulp": "^4.0.0"
+    "gulp": "^4.0.0",
+    "sonarqube-scanner": "^2.0.2"
   }
 }

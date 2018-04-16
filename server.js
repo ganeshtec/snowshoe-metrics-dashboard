@@ -16,6 +16,9 @@ app.use('/api/markdown-service', markDownServiceApi);
 var circuitBreakerServiceApi = require('./server/controllers/CircuitBreakerApi');
 app.use('/api/circuit-breaker', circuitBreakerServiceApi);
 
+var sonarCodeCoverageApi = require('./server/controllers/SonarCodeCoverageApi');
+app.use('/api/sonar-code-coverage', sonarCodeCoverageApi);
+
 app.use(express.static(__dirname + '/client/build/'));
 
 app.get("/*", function (request, response) {

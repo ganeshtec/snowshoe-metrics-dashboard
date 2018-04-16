@@ -46,9 +46,8 @@ let getCircuitBreakerServiceMetrics = async (startDate, endDate) => {
             startDate: startDate,
             endDate: endDate
         })
-        var data = response.data;
         var returnObject = {
-            metrics: data
+            metrics: response.data
         }
         return returnObject;
     } catch (err) {
@@ -58,4 +57,17 @@ let getCircuitBreakerServiceMetrics = async (startDate, endDate) => {
 
 }
 
-export { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics };
+let getSonarCodeCoverageMetrics = async () => {
+    try {
+        var response = await axios.get('/api/sonar-code-coverage/fetchData');
+        var returnObject = {
+            metrics: response.data
+        }
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Code Coverage")
+        return "Error"
+    }
+}
+
+export { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics };
