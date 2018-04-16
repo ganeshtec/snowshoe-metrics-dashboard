@@ -26,7 +26,7 @@ processCircuitBreakerSplunkResponse = (error, results) => {
             count: numberWithCommas(values[2]) + " ms"
         },
         {
-            description: "Circuit Breaker Longest Response Time: ",
+            description: "Circuit Breaker 98th Percentile Response Time: ",
             count: numberWithCommas(values[3]) + " ms"
         },
         {
@@ -41,7 +41,7 @@ processCircuitBreakerSplunkResponse = (error, results) => {
             count: numberWithCommas(values[7]) + " ms"
         },
         {
-            description: "Cloud Longest Response Time: ",
+            description: "Cloud 98th Percentile Response Time: ",
             count: numberWithCommas(values[8]) + " ms"
         },
         {
@@ -56,7 +56,7 @@ processCircuitBreakerSplunkResponse = (error, results) => {
             count: numberWithCommas(values[12]) + " ms"
         },
         {
-            description: "Store Longest Response Time: ",
+            description: "Store 98th Percentile Response Time: ",
             count: numberWithCommas(values[13]) + " ms"
         },
         {
