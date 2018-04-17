@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var getPromotionStatusReport = require('../service/DiscountMaintenanceService')
 
 var config;
 
@@ -16,22 +17,15 @@ if (process.env.config) {
 /* GET requests listing. */
 router.get('/fetchData/', function (req, res, next) {
 
-    const options = {
-        url: config.discountMaintenanceApi + '/v1/promotionStatus/report',
-        headers: {
-            'Accept': 'application/json'
-        }
-    }
+    var promise  = getPromotionStatusReport();
 
-    try {
-        request.get(options, function (error, response, body) {
-            res.send(body);
-        });
-    }
-    catch (err) {
-        console.log(err)
-        res.status(500).send("Failed to retrieve Discount Maintenance Stats!")
-    }
+    promise.then(function(data) {
+        res.send(data);
+    },function(err) {
+        console.log(err);
+        res.status(500).send("Failed to retrieve Markdown Service stats");
+    });
+
 });
 
 module.exports = router;
