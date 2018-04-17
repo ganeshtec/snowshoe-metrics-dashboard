@@ -1,4 +1,5 @@
 var numberWithCommas = require('../utils/FormatNumbers')
+var percentile = require('percentile');
 
 processMarkdownSplunkResponse = (err, results) => {
     var rawValues = [];
@@ -100,8 +101,8 @@ processMarkdownSplunkResponse = (err, results) => {
             count: timesTaken.length > 0 ? numberWithCommas(Math.min.apply(Math, timesTaken)) + " ms" : "No Calls"
         },
         {
-            description: "Longest Call Time",
-            count: timesTaken.length > 0 ? numberWithCommas(Math.round(Math.max.apply(Math, timesTaken))) + " ms" : "No Calls"
+            description: "98 Percentile Call Time",
+            count: timesTaken.length > 0 ? numberWithCommas(Math.round(percentile(98,timesTaken))) + "ms" : " No Calls"
         },
         {
             description: "Average Call Time",
