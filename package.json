@@ -19,6 +19,7 @@
     "create-react-app": "^1.5.2",
     "express": "^4.16.2",
     "gulp-run-command": "0.0.9",
+    "ibm_db": "^2.3.0",
     "metricsdashboard": "file:client",
     "moment": "^2.21.0",
     "path": "^0.12.7",
