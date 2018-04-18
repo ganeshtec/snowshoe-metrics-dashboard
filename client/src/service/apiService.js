@@ -4,9 +4,8 @@ import moment from 'moment';
 let getActivePromotions = async () => {
     try {
         var response = await axios.get('/api/discount-maintenance/fetchData');
-        var data = response.data.filter(el => el.code === 57 || el.code === 87 || el.code === 9999)
         var returnObject = {
-            metrics: data
+            metrics: response.data
         };
         return returnObject;
     } catch (err) {
