@@ -25,7 +25,8 @@
     "path": "^0.12.7",
     "percentile": "^1.2.0",
     "request": "^2.85.0",
-    "splunk-sdk": "^1.8.3"
+    "splunk-sdk": "^1.8.3",
+    "sonarqube-scanner": "^2.0.2"
   },
   "engines": {
     "node": "8.8.0",
