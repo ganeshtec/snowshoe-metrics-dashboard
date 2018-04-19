@@ -8,8 +8,6 @@ This project includes both server and client, each of which have their own packa
 - if you get error about npm ERR! 404 Not Found: ux-react-styleguide@1.7.0, run 'npm config set registry https://npm.artifactory.homedepot.com/artifactory/api/npm/npm' and run npm install again
 
 #### To manually create an artifact and deploy
-- Run "npm run setup" to install dependencies.
-- From the client directory, run "npm run build" to build the project.
 - "npm run setup"  to install dependencies.
 - cd into client, run "npm run build" to build the client project.
 - "cd .." back to the root directory.
