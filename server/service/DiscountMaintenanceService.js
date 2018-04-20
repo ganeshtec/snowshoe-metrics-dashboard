@@ -13,10 +13,13 @@ var statusReportQueryPart1 = "select C.CORD_SRC_PRCSS_CD AS CODE," +
 "CASE C.CORD_SRC_PRCSS_CD " +
 "WHEN 57 THEN 'Online' " +
 "WHEN 87 THEN 'Store' " +
-"WHEN 100 THEN 'Order Up' " +
-"WHEN 105 THEN 'Pro Desk' " +
-"WHEN 110 THEN 'Quote Center' " +
-"WHEN 130 THEN 'Pro eCommerce' " +
+"WHEN 9 THEN 'Internet Sales' " +
+"WHEN 14 THEN 'Point Of Sale' " +
+"WHEN 17 THEN 'Pro Desk' " +
+"WHEN 118 THEN 'Order Up' " +
+"WHEN 44 THEN 'Quote Center' " +
+"WHEN 51 THEN 'Pro eCommerce' " +
+"WHEN 28 THEN 'Volume Pricing Program' " +
 "ELSE 'Unknown (' || C.CORD_SRC_PRCSS_CD || ')' " +
 "END AS DESCRIPTION," +
 "COUNT(*) AS COUNT from PRMO_SKU_CHG_RQST R join PRMO_SKU_CHG_SRC_PRCSS C on C.SKU_CHG_RQST_ID = R.SKU_CHG_RQST_ID ";
