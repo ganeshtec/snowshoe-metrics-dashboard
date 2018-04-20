@@ -19,6 +19,10 @@ processMarkdownSplunkResponse = (err, results) => {
             }
         }
     }
+    var callsWithDiscount = rawValues.filter((value) => {
+        return value.includes("CART RESPONSE for Markdown Service") && value.includes("promoType");
+    });
+
     var totalIVPCalls = rawValues.filter((value) => {
         return value.includes("- Time taken to get IVP discounts")
     })
@@ -70,9 +74,17 @@ processMarkdownSplunkResponse = (err, results) => {
 
     var channels = cartRequests.map((request) => {
         var JSONCall = JSON.parse(request)
-        var body = JSONCall.body.split('::')[1]
-        var jsonCartRequest = JSON.parse(body);
-        return jsonCartRequest.cartRequest.channel;
+        var body = JSONCall.body.split('::')[1];
+        if (body.indexOf('<') == 1) {
+            return null;
+        } else {
+            try {
+                var jsonCartRequest = JSON.parse(body);
+                return jsonCartRequest.cartRequest.channel;
+            } catch (e) {
+                console.log('body======', body, e)
+            }
+        }
     })
 
     var results = [
@@ -102,7 +114,7 @@ processMarkdownSplunkResponse = (err, results) => {
         },
         {
             description: "98 Percentile Call Time",
-            count: timesTaken.length > 0 ? numberWithCommas(Math.round(percentile(98,timesTaken))) + "ms" : " No Calls"
+            count: timesTaken.length > 0 ? numberWithCommas(Math.round(percentile(98, timesTaken))) + "ms" : " No Calls"
         },
         {
             description: "Average Call Time",
@@ -148,6 +160,69 @@ processMarkdownSplunkResponse = (err, results) => {
         })
     });
 
+    /**Promo Metrics Section */
+
+    var discountsMap = new Map();
+    var promoIdsWithCount = new Map();
+
+    buildUniquePromoIds = (discountsMap, value, ts) => {
+        var uniquePromoIds = discountsMap.get(ts);
+        if (!uniquePromoIds) {
+            uniquePromoIds = new Set();
+        }
+        var promosArray = value.split("promoId")
+        promosArray.shift()
+        promosArray.map((promo) => {
+            promoId = promo.slice(5, promo.indexOf(',') - 2)
+            if (!isNaN(parseFloat(promoId)) && isFinite(promoId)) {
+                uniquePromoIds.add(promoId);
+            }
+        });
+        discountsMap.set(ts, uniquePromoIds);
+    }
+
+    callsWithDiscount.forEach((value, index) => {
+        var ts = JSON.parse(value).ts
+        buildUniquePromoIds(discountsMap, value, ts);
+    });
+
+    var callsWithPromoType = rawValues.filter((value) => {
+        if (value.includes("promoId") && value.indexOf("CART RESPONSE for Markdown Service") === -1) {
+            var responseTs = JSON.parse(value).ts;
+            if(discountsMap.get(responseTs)) {
+                buildUniquePromoIds(discountsMap, value, responseTs);
+                return true;
+            }
+        }
+        return false;
+    });
+
+    discountsMap.forEach((promoIds, key, mapObj) => {
+        promoIds.forEach((promoId) => {
+            var count = promoIdsWithCount.get(promoId) || 0;
+            promoIdsWithCount.set(promoId, ++count);
+        })
+    })
+
+    results.push(
+        {
+            description: "--------PROMO METRICS--------"
+        }, {
+            description: "Numbers of calls with a discount returned: ",
+            count: Math.round(callsWithDiscount.length) + " calls"
+        }, {
+            description: "Percentage of calls with a discount returned: ",
+            count: Math.round((totalCalls.length ? (callsWithDiscount.length / totalCalls.length) : 0) * 10000) / 100 + " %"
+        }
+    );
+    promoIdsWithCount.forEach((count, promoId, mapObj) => {
+        results.push(
+            {
+                description: "Promo " + promoId,
+                count: count
+            }
+        );
+    })
     return (results)
 }
 

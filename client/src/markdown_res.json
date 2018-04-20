@@ -1,0 +1,707 @@
+[ '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:48.082Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "RTR"
+        },
+        "body": "discounts-wrapper.apps.homedepot.com - [2018-04-16T16:55:45.224+0000] \\"PUT /order/discounts HTTP/1.1\\" 200 950 1078 \\"-\\" \\"PostmanRuntime/6.4.1\\" \\"172.28.126.1: 57805\\" \\"172.28.126.201: 61002\\" x_forwarded_for:\\"151.140.141.244\\" x_forwarded_proto:\\"https\\" vcap_request_id:\\"8dc0ac32-40d2-4828-7f69-023e25ff51ac\\" response_time:2.857329882 app_id:\\"c20f7d9a-c92e-463e-ba80-c7f651c42b7e\\" app_index:\\"1\\" x_b3_traceid:\\"269766896b9aab40\\" x_b3_spanid:\\"269766896b9aab40\\" x_b3_parentspanid:\\"-\\"",
+        "id": "FLW6B27T7QE57D3XKINIZ2ECDNZYRJAT3HDZJOVU3SM7DMIJF3JQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897748082e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:48.072Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-1]  INFO c.h.m.c.MarkdownServiceController - 6788eecd-1b28-4134-86e3-83dc466dc07d - CART RESPONSE for Markdown Service :: {\\"cartResponse\\":{\\"custId\\":\\"49440269\\",\\"orderId\\":\\"464259\\",\\"location\\":\\"0154\\",\\"createUserId\\":\\"KXR2924\\",\\"items\\":[{\\"itemId\\":\\"1001069670\\",\\"refId\\":\\"1\\",\\"qty\\":\\"1\\",\\"price\\":\\"19.55\\",\\"catalogAmt\\":\\"18.38\\",\\"hasDisc\\":false,\\"partNumber\\":\\"01GAERLSL\\",\\"description\\":\\"GAF Royal Sovereign Asphalt3-Tab Roof Shingles (25 Year Limited Warranty Slate0205750 (3 BD/SQ))[HDQC2: 853427: 7164634: 001
+        ] [QC
+        ] |01GAERLSL\\",\\"soSeqRefId\\":\\"1\\",\\"uoiCode\\":\\"10\\",\\"deliveryLocation\\":\\"S\\"}]},\\"status\\":[{\\"type\\":\\"IVP\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"\\",\\"httpStatusCode\\":\\"200\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":1966},{\\"type\\":\\"VPP\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"\\",\\"httpStatusCode\\":\\"200\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":745,\\"bidStatusCode\\":\\"7\\",\\"bidNumber\\":33760415,\\"bidNoteText\\":\\"BID DOES NOT MEET THE $1500 MINIMUM. Also the bid does not have any qualified quantity pricing SKUs.\\"},{\\"type\\":\\"MSB\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"\\",\\"httpStatusCode\\":\\"200\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":71},{\\"type\\":\\"MARKDOWN\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"Markdowns calculated successfully\\",\\"timeMs\\":2798}]}  ",
+        "id": "4LFJLIZDPWVZU7EP76CXS7XDGB2WOA2YDJKD5V7NZOSG7GY7FY5A====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897748072e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:48.069Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-10]  INFO c.h.m.u.MarkdownServiceAspect - 6788eecd-1b28-4134-86e3-83dc466dc07d - Total time taken to get VPP discounts: 831 ms  ",
+        "id": "JMNHMEZ3GUURDFT2HJPOWF2TAQC5RQHPTS3BCHHCYSKZ4KLSU4ZQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897748069e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:48.069Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-10]  INFO c.h.m.u.MarkdownServiceAspect - 6788eecd-1b28-4134-86e3-83dc466dc07d - Time taken to update bid: 47 ms  ",
+        "id": "JHLFPMJ7HFU7OM4LUXYAAYNIVSXDY7WEZYQSGXF2LSYCYM4M5ZXQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897748069e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:47.238Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-10]  INFO c.h.m.u.MarkdownServiceAspect - 6788eecd-1b28-4134-86e3-83dc466dc07d - Time taken to get IVP discounts: 1817 ms  ",
+        "id": "UBQ2B4Q6KLT7X26N6TC3MD5HHXYU74R7F4ZNXY3G3WXURRWWIRCA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897747238e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:47.238Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-10]  INFO c.h.m.u.MarkdownServiceAspect - 6788eecd-1b28-4134-86e3-83dc466dc07d - Total time taken to get IVP discounts: 1966 ms  ",
+        "id": "AC7KER2DHHXQAUNCQYW4YLA6EKHEQWPEAEQOESE2N2B42RS46AIQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897747238e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:45.395Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-10]  INFO c.h.m.u.MarkdownServiceAspect - 6788eecd-1b28-4134-86e3-83dc466dc07d - Time taken to get Market before getting IVP discounts: 85 ms ",
+        "id": "NE5EGRGEOZ2NBCF2M3SZ6GNASW2G6MKUU45IWCNC4QKKAYFTTG2Q====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897745395e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:45.373Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-11]  INFO c.h.m.u.MarkdownServiceAspect - 6788eecd-1b28-4134-86e3-83dc466dc07d - Total time taken to get MSB discounts: 101 ms  ",
+        "id": "YCYZ45GRJSWLIPKC5HVFWJG4VJKWL4CHBTH65EU3HLHRREI7S3UQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897745373e+12
+    }',
+  '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:55:45.271Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-1]  INFO c.h.m.c.MarkdownServiceController - 6788eecd-1b28-4134-86e3-83dc466dc07d - CART REQUEST for Markdown Service :: {\\"cartRequest\\":{\\"createUserId\\":\\"KXR2924\\",\\"customerId\\":\\"49440269\\",\\"orderId\\":\\"464259\\",\\"comOrderId\\":\\"H0154-83036\\",\\"salesAsscFirstName\\":\\"KATELYN\\",\\"salesAsscLastName\\":\\"REYNOLDS\\",\\"salesAsscEmail\\":\\"KATELYN_REYNOLDS@homedepot.com\\",\\"location\\":\\"0154\\",\\"items\\":[{\\"itemId\\":\\"1001069670\\",\\"refId\\":\\"1\\",\\"qty\\":\\"1\\",\\"price\\":\\"19.55\\",\\"catalogAmt\\":\\"18.38\\",\\"hasDisc\\":false,\\"partNumber\\":\\"01GAERLSL\\",\\"description\\":\\"GAF Royal Sovereign Asphalt3-Tab Roof Shingles (25 Year Limited Warranty Slate0205750 (3 BD/SQ))[HDQC2: 853427: 7164634: 001
+        ] [QC
+        ] |01GAERLSL\\",\\"soSeqRefId\\":\\"1\\",\\"uoiCode\\":\\"10\\",\\"cost\\":\\"18.38\\",\\"deliveryLocation\\":\\"S\\"}],\\"channel\\":\\"HDQC\\"},\\"customer\\":{\\"thdId\\":\\"0228044523D75D9D1T\\",\\"phone\\":\\"2173162057\\",\\"name\\":\\" \\",\\"address1\\":\\"220 26TH ST NW\\",\\"state\\":\\"GA\\",\\"proId\\":\\"49440269\\",\\"city\\":\\"ATLANTA\\",\\"zip\\":\\"30309\\"},\\"config\\":{\\"clientId\\":\\"QuoteCenter\\",\\"clientToken\\":\\"MloUfHdYssp2Ofu0KoxT\\",\\"services\\":[{\\"name\\":\\"IVP\\",\\"ignore\\":false},{\\"name\\":\\"VPP\\",\\"ignore\\":false}]}}  ",
+        "id": "673VWECIYAPZCIDIDSA3JKWZ72KMY4URWIAVD5546ZGG75KJFDWA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897745271e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:56.169Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-8]  INFO c.h.m.u.MarkdownServiceAspect - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - Total time taken to get VPP discounts: 1466 ms  ",
+        "id": "QKXG6L5NOWY2ZERGTZEU52CFYWULRBPVNSQWBIKKF6RSKFSOQP3Q====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897216169e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:56.167Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-8]  INFO c.h.m.u.MarkdownServiceAspect - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - Time taken to update bid: 123 ms  ",
+        "id": "MB3ULSJCLCZPPD3GNRHRL7VDKTEDHKF35LYCI5ISZVNQU3DY6JWA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897216167e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:55.945Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-8]  INFO c.h.m.u.MarkdownServiceAspect - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - Time taken to get VPP discounts: 899 ms  ",
+        "id": "O4N5ZP2HSIXOGKSTUQ4QN7H5B32GSXB2YXAV7LIDYYQXG32G2QBQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897215945e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:54.799Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-8]  INFO c.h.m.u.MarkdownServiceAspect - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - Time taken to get VPP Sku details: 66 ms  ",
+        "id": "BBK6L45PJPFNWW3TEXEQQEOLY6WU3PXNMXF2RN7VXV2K2LZ2KRQA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897214799e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:54.702Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-8]  INFO c.h.m.u.MarkdownServiceAspect - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - Total time taken to get IVP discounts: 30756 ms  ",
+        "id": "I7NZTQEDFBZPXVKZ7WQGB566AM7NU7E6JW3JWH62XQKRGFLFFXSQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897214702e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:53.948Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-3]  INFO c.h.m.c.MarkdownServiceController - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - CART RESPONSE for Markdown Service :: {\\"cartResponse\\":{\\"custId\\":\\"49440269\\",\\"orderId\\":\\"464259\\",\\"location\\":\\"0154\\",\\"createUserId\\":\\"KXR2924\\",\\"items\\":[{\\"itemId\\":\\"1001069670\\",\\"refId\\":\\"1\\",\\"qty\\":\\"1\\",\\"price\\":\\"19.55\\",\\"catalogAmt\\":\\"18.38\\",\\"hasDisc\\":false,\\"partNumber\\":\\"01GAERLSL\\",\\"description\\":\\"GAF Royal Sovereign Asphalt3-Tab Roof Shingles (25 Year Limited Warranty Slate0205750 (3 BD/SQ))[HDQC2: 853427: 7164634: 001
+        ] [QC
+        ] |01GAERLSL\\",\\"soSeqRefId\\":\\"1\\",\\"uoiCode\\":\\"10\\",\\"deliveryLocation\\":\\"S\\"}]},\\"status\\":[{\\"type\\":\\"MSB\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"\\",\\"httpStatusCode\\":\\"200\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":64},{\\"type\\":\\"MARKDOWN\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"Markdowns calculated successfully\\",\\"timeMs\\":30001}]}  ",
+        "id": "UDLFM6SQ33SVUCHOHPLPJW77ZUC26OI2MKEDM55MACDPR3E5XFLQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897213948e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:24.053Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-8]  INFO c.h.m.u.MarkdownServiceAspect - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - Time taken to get Market before getting IVP discounts: 64 ms",
+        "id": "XMSO54KZ42WRS62IIIGUJCRM76TP6JKGAYW2QCIBOMBKYAN2HTEQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897184053e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:24.041Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-9]  INFO c.h.m.u.MarkdownServiceAspect - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - Total time taken to get MSB discounts: 88 ms  ",
+        "id": "VHQRRRNXQZMSEZLRV2VBWSF54XGRHJZU7HMHJZKE2ZSDAFUV3OFA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897184041e+12
+    }',
+  '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:23.945Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-3]  INFO c.h.m.c.MarkdownServiceController - f910f9dc-ff9d-478c-9f58-bd3b2c094c19 - CART REQUEST for Markdown Service :: {\\"cartRequest\\":{\\"createUserId\\":\\"KXR2924\\",\\"customerId\\":\\"49440269\\",\\"orderId\\":\\"464259\\",\\"comOrderId\\":\\"H0154-83036\\",\\"salesAsscFirstName\\":\\"KATELYN\\",\\"salesAsscLastName\\":\\"REYNOLDS\\",\\"salesAsscEmail\\":\\"KATELYN_REYNOLDS@homedepot.com\\",\\"location\\":\\"0154\\",\\"items\\":[{\\"itemId\\":\\"1001069670\\",\\"refId\\":\\"1\\",\\"qty\\":\\"1\\",\\"price\\":\\"19.55\\",\\"catalogAmt\\":\\"18.38\\",\\"hasDisc\\":false,\\"partNumber\\":\\"01GAERLSL\\",\\"description\\":\\"GAF Royal Sovereign Asphalt3-Tab Roof Shingles (25 Year Limited Warranty Slate0205750 (3 BD/SQ))[HDQC2: 853427: 7164634: 001
+        ] [QC
+        ] |01GAERLSL\\",\\"soSeqRefId\\":\\"1\\",\\"uoiCode\\":\\"10\\",\\"cost\\":\\"18.38\\",\\"deliveryLocation\\":\\"S\\"}],\\"channel\\":\\"HDQC\\"},\\"customer\\":{\\"thdId\\":\\"0228044523D75D9D1T\\",\\"phone\\":\\"2173162057\\",\\"name\\":\\" \\",\\"address1\\":\\"220 26TH ST NW\\",\\"state\\":\\"GA\\",\\"proId\\":\\"49440269\\",\\"city\\":\\"ATLANTA\\",\\"zip\\":\\"30309\\"},\\"config\\":{\\"clientId\\":\\"QuoteCenter\\",\\"clientToken\\":\\"MloUfHdYssp2Ofu0KoxT\\",\\"services\\":[{\\"name\\":\\"IVP\\",\\"ignore\\":false},{\\"name\\":\\"VPP\\",\\"ignore\\":false}]}}  ",
+        "id": "UIEI6SA4XUJN46BDW2AXIPJ2DDZWDZ7Q6TZ6CK7RXLVL4RHK3H3Q====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897183945e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:06.471Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-6]  INFO c.h.m.c.MarkdownServiceController - fefd8cd1-4fdd-49c6-a8b0-9c937d1e6f6f - CART RESPONSE for Markdown Service :: {\\"cartResponse\\":{\\"custId\\":\\"49440269\\",\\"orderId\\":\\"464259\\",\\"location\\":\\"0154\\",\\"createUserId\\":\\"KXR2924\\",\\"items\\":[{\\"itemId\\":\\"1001069670\\",\\"refId\\":\\"1\\",\\"qty\\":\\"1\\",\\"price\\":\\"19.55\\",\\"catalogAmt\\":\\"18.38\\",\\"hasDisc\\":false,\\"partNumber\\":\\"01GAERLSL\\",\\"description\\":\\"GAF Royal Sovereign Asphalt3-Tab Roof Shingles (25 Year Limited Warranty Slate0205750 (3 BD/SQ))[HDQC2: 853427: 7164634: 001
+        ] [QC
+        ] |01GAERLSL\\",\\"soSeqRefId\\":\\"1\\",\\"uoiCode\\":\\"10\\",\\"deliveryLocation\\":\\"S\\"}]},\\"status\\":[{\\"type\\":\\"MSB\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"\\",\\"httpStatusCode\\":\\"200\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":61},{\\"type\\":\\"IVP\\",\\"status\\":\\"IGNORED\\",\\"description\\":\\"\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":0},{\\"type\\":\\"VPP\\",\\"status\\":\\"IGNORED\\",\\"description\\":\\"\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":0},{\\"type\\":\\"MARKDOWN\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"Markdowns calculated successfully\\",\\"timeMs\\":89}]}  ",
+        "id": "ARWRNLHGNNQZJJ5GRHWJE77SGX7KOWVTRFRTHJVTVHQ7DMROSGIA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897166471e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:06.471Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-6]  INFO c.h.m.u.MarkdownServiceAspect -  - Overall time taken to process the discounts for cart items: 92 ms  ",
+        "id": "OGFYBJQDY3EZMPNGWEIXJXECDXR3T455IZFRHEKS6HVGSG2OLDPA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897166471e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:06.469Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "3",
+            "cf_src_type": "RTR"
+        },
+        "body": "discounts-wrapper.apps.homedepot.com - [2018-04-16T16:46:06.367+0000] \\"PUT /order/discounts HTTP/1.1\\" 200 948 867 \\"-\\" \\"PostmanRuntime/6.4.1\\" \\"172.28.126.1: 19319\\" \\"172.28.126.201: 61002\\" x_forwarded_for:\\"151.140.141.244\\" x_forwarded_proto:\\"https\\" vcap_request_id:\\"cad75c0d-a09b-4b00-71c0-aa451da08313\\" response_time:0.102430232 app_id:\\"c20f7d9a-c92e-463e-ba80-c7f651c42b7e\\" app_index:\\"1\\" x_b3_traceid:\\"da40bcebc4fa93bd\\" x_b3_spanid:\\"da40bcebc4fa93bd\\" x_b3_parentspanid:\\"-\\"",
+        "id": "VTILO6XKLNZKO5RHQ7VLUKLWRAJKPHWZ6KZFQT2B3KCN5J2HS4BA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523897166469e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T16:46:06.38Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-6]  INFO c.h.m.c.MarkdownServiceController - fefd8cd1-4fdd-49c6-a8b0-9c937d1e6f6f - CART REQUEST for Markdown Service :: {\\"cartRequest\\":{\\"createUserId\\":\\"KXR2924\\",\\"customerId\\":\\"49440269\\",\\"orderId\\":\\"464259\\",\\"comOrderId\\":\\"H0154-83036\\",\\"salesAsscFirstName\\":\\"KATELYN\\",\\"salesAsscLastName\\":\\"REYNOLDS\\",\\"salesAsscEmail\\":\\"KATELYN_REYNOLDS@homedepot.com\\",\\"location\\":\\"0154\\",\\"items\\":[{\\"itemId\\":\\"1001069670\\",\\"refId\\":\\"1\\",\\"qty\\":\\"1\\",\\"price\\":\\"19.55\\",\\"catalogAmt\\":\\"18.38\\",\\"hasDisc\\":false,\\"partNumber\\":\\"01GAERLSL\\",\\"description\\":\\"GAF Royal Sovereign Asphalt3-Tab Roof Shingles (25 Year Limited Warranty Slate0205750 (3 BD/SQ))[HDQC2: 853427: 7164634: 001
+        ] [QC
+        ] |01GAERLSL\\",\\"soSeqRefId\\":\\"1\\",\\"uoiCode\\":\\"10\\",\\"cost\\":\\"18.38\\",\\"deliveryLocation\\":\\"S\\"}],\\"channel\\":\\"HDQC\\"},\\"customer\\":{\\"thdId\\":\\"0228044523D75D9D1T\\",\\"phone\\":\\"2173162057\\",\\"name\\":\\" \\",\\"address1\\":\\"220 26TH ST NW\\",\\"state\\":\\"GA\\",\\"proId\\":\\"49440269\\",\\"city\\":\\"ATLANTA\\",\\"zip\\":\\"30309\\"},\\"config\\":{\\"clientId\\":\\"QuoteCenter\\",\\"clientToken\\":\\"MloUfHdYssp2Ofu0KoxT\\",\\"services\\":[{\\"name\\":\\"IVP\\",\\"ignore\\":true},{\\"name\\":\\"VPP\\",\\"ignore\\":true}]}}  ",
+        "id": "KKB6YDNAX6ZV5GUIXGPZPMB3EUDCYZZDXDZCJKUBYQU3NFIMQMJQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.52389716638e+12
+    }',
+  '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T14:08:15.675Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-4]  INFO c.h.m.c.MarkdownServiceController - e07dad1c-b8b8-4b0c-aa87-a332e3c86c09 - CART RESPONSE for Markdown Service :: {\\"cartResponse\\":{\\"custId\\":\\"337199\\",\\"orderId\\":\\"465005\\",\\"location\\":\\"0154\\",\\"createUserId\\":\\"KXR2924\\",\\"items\\":[{\\"itemId\\":\\"774810\\",\\"refId\\":\\"1\\",\\"qty\\":\\"1\\",\\"price\\":\\"50.00\\",\\"hasDisc\\":true,\\"description\\":\\"\\",\\"uoiCode\\":\\"80\\",\\"discounts\\":{\\"discDetails\\":[{\\"reasonCode\\":\\"30\\",\\"discAmt\\":\\"-10.00\\",\\"promoId\\":\\"7961\\",\\"promoType\\":\\"ORDERPROMO\\",\\"promoName\\":\\"Flooring installation providers\\",\\"shortDesc\\":\\"Flooring installation providers\\",\\"longDesc\\":\\"Flooring installation providers\\",\\"perUnitDiscount\\":\\"-10.00\\"}],\\"totalLineItemDiscAmt\\":\\"-10.00\\",\\"displayTotalLineItemDiscAmt\\":\\"-10.00\\"}}]},\\"status\\":[{\\"type\\":\\"MSB\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"\\",\\"httpStatusCode\\":\\"200\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":76},{\\"type\\":\\"IVP\\",\\"status\\":\\"IGNORED\\",\\"description\\":\\"\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":0},{\\"type\\":\\"VPP\\",\\"status\\":\\"IGNORED\\",\\"description\\":\\"\\",\\"errorCode\\":0,\\"errorMessage\\":\\"\\",\\"timeMs\\":0},{\\"type\\":\\"MARKDOWN\\",\\"status\\":\\"SUCCESS\\",\\"description\\":\\"Markdowns calculated successfully\\",\\"timeMs\\":102}]}  ",
+        "id": "KDHJIW7PTLDUFTONHQIJV3XDVQZDGFMPLII4LGBDRGWF3S7VGYFA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523887695675e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T14:08:15.675Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-4]  INFO c.h.m.u.MarkdownServiceAspect -  - Overall time taken to process the discounts for cart items: 106 ms  ",
+        "id": "7UACC7F33VI5TXSWFLMACQOAXN2KJY52HHMUK27JZBHP6KCGPJLA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523887695675e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T14:08:15.673Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[pool-1-thread-6]  INFO c.h.m.u.MarkdownServiceAspect - e07dad1c-b8b8-4b0c-aa87-a332e3c86c09 - Total time taken to get MSB discounts: 100 ms  ",
+        "id": "CSSBOU6KW3EV3AFDQ5ZIV5MVEYIZUDGSH24JKYU4K44KCPLWAVBQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523887695673e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T14:08:15.571Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[http-nio-8080-exec-4]  INFO c.h.m.c.MarkdownServiceController - e07dad1c-b8b8-4b0c-aa87-a332e3c86c09 - CART REQUEST for Markdown Service :: {\\"cartRequest\\":{\\"createUserId\\":\\"KXR2924\\",\\"customerId\\":\\"337199\\",\\"orderId\\":\\"465005\\",\\"comOrderId\\":\\"H0154-83607\\",\\"salesAsscFirstName\\":\\"KATELYN\\",\\"salesAsscLastName\\":\\"REYNOLDS\\",\\"salesAsscEmail\\":\\"KATELYN_REYNOLDS@homedepot.com\\",\\"location\\":\\"0154\\",\\"items\\":[{\\"itemId\\":\\"774810\\",\\"refId\\":\\"1\\",\\"qty\\":\\"1\\",\\"price\\":\\"50.00\\",\\"hasDisc\\":false,\\"description\\":\\"\\",\\"uoiCode\\":\\"80\\",\\"cost\\":\\"6.05\\"}],\\"channel\\":\\"HDQC\\"},\\"customer\\":{\\"thdId\\":\\"02143000000325737C\\",\\"phone\\":\\"2105905155\\",\\"name\\":\\"STEPHANIE COOK\\",\\"address1\\":\\"3100 JONQUIL DRIVE SE\\",\\"address2\\":\\"8648464\\",\\"state\\":\\"GA\\",\\"proId\\":\\"337199\\",\\"city\\":\\"SMYRNA\\",\\"zip\\":\\"30080\\"},\\"config\\":{\\"clientId\\":\\"QuoteCenterTEST\\",\\"clientToken\\":\\"TEST\\",\\"services\\":[{\\"name\\":\\"IVP\\",\\"ignore\\":true},{\\"name\\":\\"VPP\\",\\"ignore\\":true}]}}  ",
+        "id": "SYG3OSBHMCORLP5KLJC57YPY2HQ63W4ZZKCNZGU7K72RTKA4PPBA====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523887695571e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T12:55:59.605Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[file-watcher-/etc/cf-instance-credentials/instance.key]  INFO o.c.s.FileWatchingX509ExtendedKeyManager -  - Updated KeyManager for /etc/cf-instance-credentials/instance.key and /etc/cf-instance-credentials/instance.crt  ",
+        "id": "ZUSMSCXMPRGKPEQBNBDU272WZ4GTMVEA7HHAC2MXF4NCX22USWHQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523883359605e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T12:55:59.605Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[file-watcher-/etc/cf-instance-credentials/instance.crt]  INFO o.c.s.FileWatchingX509ExtendedKeyManager -  - Updated KeyManager for /etc/cf-instance-credentials/instance.key and /etc/cf-instance-credentials/instance.crt  ",
+        "id": "EOVVADMSJNWY72GU3JHE5NCU55AC3WRASOFKVJU5DD25HIPFARUQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523883359605e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T12:55:58.531Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "0",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[file-watcher-/etc/cf-instance-credentials/instance.crt]  INFO o.c.s.FileWatchingX509ExtendedKeyManager -  - Updated KeyManager for /etc/cf-instance-credentials/instance.key and /etc/cf-instance-credentials/instance.crt  ",
+        "id": "6NOQHBJD75P2YOP4NUXU375HXNVM6RAFSTQIAZKJ6Y6U3EWQKO7A====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523883358531e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-zb.homedepot.com",
+        "@timestamp": "2018-04-16T12:55:58.53Z",
+        "attributes": {
+            "cf_app_id": "c20f7d9a-c92e-463e-ba80-c7f651c42b7e",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "8f7193a0-e9c2-4d8c-844c-dfb99788ed8b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "9808b7ac-196f-42d6-af37-5cd3b2ab0fbe",
+            "cf_space_name": "PR",
+            "cf_src_instance": "0",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[file-watcher-/etc/cf-instance-credentials/instance.key]  INFO o.c.s.FileWatchingX509ExtendedKeyManager -  - Updated KeyManager for /etc/cf-instance-credentials/instance.key and /etc/cf-instance-credentials/instance.crt  ",
+        "id": "TKCFA3TAD6LO3ZSXPIKGBHDDHQJA3H3ITTLQW2EUEIDCIAMN54ZQ====",
+        "location": "AUS/PR/ZoneB",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.52388335853e+12
+    }',
+  '{
+        "@host": "api.run-za.homedepot.com",
+        "@timestamp": "2018-04-16T12:42:49.621Z",
+        "attributes": {
+            "cf_app_id": "1d7d44a3-18eb-4a5a-a24c-49d738b998ef",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "7830c869-466a-417e-9637-f19743ebbe6b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "ec6dc0c0-91bd-4e6f-9e5f-1d0a0f5bdd63",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[file-watcher-/etc/cf-instance-credentials/instance.crt]  INFO o.c.s.FileWatchingX509ExtendedKeyManager -  - Updated KeyManager for /etc/cf-instance-credentials/instance.key and /etc/cf-instance-credentials/instance.crt  ",
+        "id": "7H7VIOWQ76SGNLRAJJJYBL636NXVPASIPZF4KWB4H7A4IJGPIZ2Q====",
+        "location": "AUS/PR/ZoneA",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523882569621e+12
+    }',
+    [
+        0
+    ]   '{
+        "@host": "api.run-za.homedepot.com",
+        "@timestamp": "2018-04-16T12:42:49.617Z",
+        "attributes": {
+            "cf_app_id": "1d7d44a3-18eb-4a5a-a24c-49d738b998ef",
+            "cf_app_name": "markdownservice-v2.0",
+            "cf_msg_type": "OUT",
+            "cf_org_id": "7830c869-466a-417e-9637-f19743ebbe6b",
+            "cf_org_name": "discounts",
+            "cf_space_id": "ec6dc0c0-91bd-4e6f-9e5f-1d0a0f5bdd63",
+            "cf_space_name": "PR",
+            "cf_src_instance": "1",
+            "cf_src_type": "APP/PROC/WEB"
+        },
+        "body": "[file-watcher-/etc/cf-instance-credentials/instance.key]  INFO o.c.s.FileWatchingX509ExtendedKeyManager -  - Updated KeyManager for /etc/cf-instance-credentials/instance.key and /etc/cf-instance-credentials/instance.crt  ",
+        "id": "NMKYQKPFZKRQBK4MHL56KWBCUNIKBPD354JPSP2VJE4LPTG3ALYQ====",
+        "location": "AUS/PR/ZoneA",
+        "service": "cloudfoundry/discounts/PR/markdownservice-v2.0",
+        "ts": 1.523882569617e+12
+    }'
+]

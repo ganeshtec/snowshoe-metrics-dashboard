@@ -39,8 +39,6 @@ router.post('/fetchData', async function (req, res, next) {
                     count: 0
                 };
 
-            
-
                 // Run a oneshot search that returns the job's results
                 var circuitBreakerData = new Promise(function(resolve, reject) {
                     service.oneshotSearch(
@@ -51,7 +49,7 @@ router.post('/fetchData', async function (req, res, next) {
                             resolve(circuitBreakerResponseData)      
                         }
                     );
-                  });
+                });
 
                 var circuitBreakerPromoData = new Promise(function(resolve, reject){
                     service.oneshotSearch(
@@ -68,7 +66,6 @@ router.post('/fetchData', async function (req, res, next) {
                     resultSet = resultSet.concat(response[0], response[1])
                     res.send(resultSet)
                 })
-
             }
             else {
                 console.log("Error connecting to Splunk")
