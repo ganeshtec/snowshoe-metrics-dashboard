@@ -69,7 +69,7 @@ processMarkdownSplunkResponse = (err, results) => {
     }, 0)
 
     var cartRequests = rawValues.filter((value) => {
-        return value.includes("CART REQUEST")
+        return value.includes("CART REQUEST for Markdown Service")
     })
 
     var channels = cartRequests.map((request) => {
@@ -82,7 +82,13 @@ processMarkdownSplunkResponse = (err, results) => {
                 var jsonCartRequest = JSON.parse(body);
                 return jsonCartRequest.cartRequest.channel;
             } catch (e) {
-                console.log('body======', body, e)
+
+                if (body.indexOf("channel\":\"") !== -1) {
+                    var channel = body.split("channel\":\"");
+                    return channel[1].slice(0, channel[1].indexOf(',') - 2);
+                } else {
+                    console.log('Invalid Channel Response: ', body, e)
+                }
             }
         }
     })
@@ -189,7 +195,7 @@ processMarkdownSplunkResponse = (err, results) => {
     var callsWithPromoType = rawValues.filter((value) => {
         if (value.includes("promoId") && value.indexOf("CART RESPONSE for Markdown Service") === -1) {
             var responseTs = JSON.parse(value).ts;
-            if(discountsMap.get(responseTs)) {
+            if (discountsMap.get(responseTs)) {
                 buildUniquePromoIds(discountsMap, value, responseTs);
                 return true;
             }
