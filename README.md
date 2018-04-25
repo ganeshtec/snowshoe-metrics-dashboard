@@ -15,12 +15,15 @@ This project includes both server and client, each of which have their own packa
 
 - mkdir SnowshoeMetricsDashboard && tar -xvf SnowshoeMetricsDashboard.tar -C SnowshoeMetricsDashboard/
 
-- Dev: “cf push -f manifest-ad.yml -p SnowshoeMetricsDashboard/“
+-to deploy artifact to Dev/Stage, log into cf and run the following commands:
+    - Dev: “cf push -f manifest-ad.yml -p SnowshoeMetricsDashboard/“
+    - Stage: “cf push -f manifest-qa.yml -p SnowshoeMetricsDashboard/“
 
-- Stage: “cf push -f manifest-qa.yml -p SnowshoeMetricsDashboard/“
-
--to deploy artifact for prod deployment, here is the location: https://maven.artifactory.homedepot.com/artifactory/webapp/#/artifacts/browse/tree/General/libs-release-local/libs-release-local/com/homedepot/discounts/snowshoe-metrics-dashboard/v1.0.2/snowshoe-metrics-dashboard-v1.0.2.tar
-
+-to deploy artifact for prod deployment, here is the location(under the discounts/snowshoe-metrics-dashboard folder): https://maven.artifactory.homedepot.com/artifactory/webapp/#/artifacts/browse/tree/General/libs-release-local/libs-release-local/com/homedepot/discounts/snowshoe-metrics-dashboard
+-click on deploy, insert the .tar file created by previous steps, choose "Deploy According To Layout", and fill the fields listed below:
+    -orgPath: "libs-release-local/libs-release-local/com/homedepot/discounts"
+    -module: "snowshoe-metrics-dashboard"
+    -baseRev: version number (ex: "v1.0.5")
 
 #### Helpful links
 - React Docs
