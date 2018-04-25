@@ -20,7 +20,9 @@ This project includes both server and client, each of which have their own packa
     - Stage: “cf push -f manifest-qa.yml -p SnowshoeMetricsDashboard/“
 
 -to deploy artifact for prod deployment, here is the location(under the discounts/snowshoe-metrics-dashboard folder): https://maven.artifactory.homedepot.com/artifactory/webapp/#/artifacts/browse/tree/General/libs-release-local/libs-release-local/com/homedepot/discounts/snowshoe-metrics-dashboard
+
 -click on deploy, insert the .tar file created by previous steps, choose "Deploy According To Layout", and fill the fields listed below:
+
     -orgPath: "com/homedepot/discounts"
     -module: "snowshoe-metrics-dashboard"
     -baseRev: version number (ex: "v1.0.5")
