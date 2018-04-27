@@ -56,7 +56,7 @@ processMarkdownSplunkResponse = (err, results) => {
     })
 
     var manualBids = rawValues.filter((value) => {
-        return value.includes("- Time taken to update bid")
+        return value.includes("- CART RESPONSE for Markdown Service ::") && value.includes("\\\"bidStatusCode\\\":\\\"9\\\"")
     })
 
     var timesTaken = totalCalls.map((call) => {
