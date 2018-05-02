@@ -1,16 +1,16 @@
-<testsuites name="Snowshoe Metrics Dashboard Tests" tests="4" failures="0" time="0.821">
-  <testsuite name="/src/test/MetricSection.test.js" errors="0" failures="0" skipped="0" timestamp="2018-04-09T15:32:44" time="0.623" tests="2">
-    <testcase classname="&lt;MetricSection /&gt;-Loads a Metric Section" name="&lt;MetricSection /&gt;-Loads a Metric Section" time="0.009">
-    </testcase>
-    <testcase classname="&lt;MetricSection /&gt;-dynamically renders proper amount of metrics" name="&lt;MetricSection /&gt;-dynamically renders proper amount of metrics" time="0.018">
+<testsuites name="Snowshoe Metrics Dashboard Tests" tests="4" failures="0" time="2.1029999999999998">
+  <testsuite name="/src/App.test.js" errors="0" failures="0" skipped="0" timestamp="2018-05-02T12:59:16" time="0.509" tests="1">
+    <testcase classname="-renders without crashing" name="-renders without crashing" time="0.064">
     </testcase>
   </testsuite>
-  <testsuite name="/src/test/Homepage.test.js" errors="0" failures="0" skipped="0" timestamp="2018-04-09T15:32:44" time="0.136" tests="1">
-    <testcase classname="&lt;Homepage /&gt;-renders three &lt;MetricSection /&gt; components" name="&lt;Homepage /&gt;-renders three &lt;MetricSection /&gt; components" time="0.001">
+  <testsuite name="/src/test/Homepage.test.js" errors="0" failures="0" skipped="0" timestamp="2018-05-02T12:59:16" time="0.758" tests="1">
+    <testcase classname="&lt;Homepage /&gt;-renders three &lt;MetricSection /&gt; components" name="&lt;Homepage /&gt;-renders three &lt;MetricSection /&gt; components" time="0.007">
     </testcase>
   </testsuite>
-  <testsuite name="/src/App.test.js" errors="0" failures="0" skipped="0" timestamp="2018-04-09T15:32:44" time="0.062" tests="1">
-    <testcase classname="-renders without crashing" name="-renders without crashing" time="0.023">
+  <testsuite name="/src/test/MetricSection.test.js" errors="0" failures="0" skipped="0" timestamp="2018-05-02T12:59:16" time="0.836" tests="2">
+    <testcase classname="&lt;MetricSection /&gt;-Loads a Metric Section" name="&lt;MetricSection /&gt;-Loads a Metric Section" time="0.013">
+    </testcase>
+    <testcase classname="&lt;MetricSection /&gt;-dynamically renders proper amount of metrics" name="&lt;MetricSection /&gt;-dynamically renders proper amount of metrics" time="0.022">
     </testcase>
   </testsuite>
 </testsuites>
