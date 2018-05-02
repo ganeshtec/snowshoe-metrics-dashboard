@@ -219,6 +219,9 @@ processMarkdownSplunkResponse = (err, results) => {
         }, {
             description: "Percentage of calls with a discount returned: ",
             count: Math.round((totalCalls.length ? (callsWithDiscount.length / totalCalls.length) : 0) * 10000) / 100 + " %"
+        }, {
+            description: "Unique Promos applied: ",
+            count: promoIdsWithCount.size
         }
     );
     promoIdsWithCount.forEach((count, promoId, mapObj) => {

@@ -98,7 +98,12 @@ uniquePromoIdProcessor = (err, results) => {
             return obj
          })
 
-    return (promoIdsWithCount)
+    promoIdsWithCount.unshift({
+        description: "Unique Promos applied: ",
+        count: promoIdsWithCount.length
+    });
+
+    return (promoIdsWithCount);
 
 }
 
