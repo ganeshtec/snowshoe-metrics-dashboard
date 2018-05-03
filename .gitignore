@@ -1,6 +1,9 @@
 
 node_modules
 package-lock.json
-./client/coverage
+client/coverage
 .idea
 *.iml
+client/build
+client/node_modules
+client/test-results
