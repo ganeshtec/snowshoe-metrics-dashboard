@@ -10,9 +10,9 @@
 
   "artifact": {
     "artifactoryDomain": "https://maven.artifactory.homedepot.com/artifactory",
-    "artifactoryRepoKey": "pcf-deploy",
-    "artifactoryRepoKeySnapshot": "pcf-deploy",
-    "artifactoryGroup": "com/homedepot/pricing/discounts",
+    "artifactoryRepoKey": "libs-release-local",
+    "artifactoryRepoKeySnapshot": "libs-snapshot-local",
+    "artifactoryGroup": "com/homedepot/discounts",
     "artifactType": "tar.gz"
   },
 
