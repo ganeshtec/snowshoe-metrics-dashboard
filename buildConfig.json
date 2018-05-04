@@ -12,8 +12,8 @@
     "artifactoryDomain": "https://maven.artifactory.homedepot.com/artifactory",
     "artifactoryRepoKey": "pcf-deploy",
     "artifactoryRepoKeySnapshot": "pcf-deploy",
-    "artifactoryGroup": "com/homedepot/pricing/discounts",
-    "artifactType": "tar.gz"
+    "artifactoryGroup": "com/homedepot/discounts",
+    "artifactType": "tar"
   },
 
 
