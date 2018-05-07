@@ -60,7 +60,7 @@
 			"space": "qa",
 			"org": "ci"
 		},
-      "artifactCategory": "snapshot",
+      "artifactCategory": "release",
       "manualDeployLink": "https://ln0e9d.homedepot.com:9443/job/CI-HelloWorld/job/CI_Deploy/parambuild/?delay=0sec&ENVIRONMENT=qa&CF_USER=&CF_PWD=",
       "associatedBranchName": "develop"
     }
