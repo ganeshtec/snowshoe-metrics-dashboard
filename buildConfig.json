@@ -13,7 +13,7 @@
     "artifactoryRepoKey": "libs-release-local",
     "artifactoryRepoKeySnapshot": "libs-snapshot-local",
     "artifactoryGroup": "com/homedepot/discounts",
-    "artifactType": "tar.gz"
+    "artifactType": "zip"
   },
 
 
