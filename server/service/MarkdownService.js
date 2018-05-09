@@ -44,7 +44,7 @@ processMarkdownSplunkResponse = (err, results) => {
     })
 
     var totalGPASCallsWithDisc = rawValues.filter((value) => {
-        return value.includes("IVPPROMO") & value.includes("VPPPROMO")
+        return value.includes("ITEMPROMO") || value.includes("ORDERPROMO")
     })
 
     var totalCalls = rawValues.filter((value) => {
