@@ -16,7 +16,7 @@ router.post('/fetchData/', function (req, res, next) {
 
     var startDate = new Date(`${req.body.startDate}T00:00:00.000-07:00`);
     var endDate = new Date(`${req.body.endDate}T23:59:59.000-07:00`);
-    var dateDifference = (endDate - startDate)/1000;
+    var dateDifference = (endDate - startDate) / 1000;
 
     console.log(dateDifference, '####');
 

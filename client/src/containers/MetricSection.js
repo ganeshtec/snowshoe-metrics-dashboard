@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import '../css/homepage.css';
 import moment from 'moment'
 
@@ -38,11 +38,11 @@ class MetricSection extends Component {
         })
     };
 
-    fetchData = async () => {
+    fetchData = async() => {
         let response;
 
         if (this.state.fetchDataStatus) {
-            this.setState({ fetchDataStatus: null })
+            this.setState({fetchDataStatus: null})
         }
         if (this.props.source.needsDateRange) {
             response = await this.props.source.method(this.state.dateRange.startDate, this.state.dateRange.endDate)
@@ -51,9 +51,9 @@ class MetricSection extends Component {
         }
 
         if (response === "Error") {
-            this.setState({ fetchDataStatus: "error" })
+            this.setState({fetchDataStatus: "error"})
         } else {
-            this.setState({ fetchDataStatus: "loaded", data: response })
+            this.setState({fetchDataStatus: "loaded", data: response})
         }
     };
 
@@ -68,7 +68,7 @@ class MetricSection extends Component {
         } else {
             sectionResults = this.state.data.metrics.map((metric, index) => {
                 return (
-                    <Metric metric={metric} key={index} />
+                    <Metric metric={metric} key={index}/>
                 )
             })
         }
@@ -77,15 +77,16 @@ class MetricSection extends Component {
             <div className="MetricSection">
                 <table id="headerBack">
                     <tbody>
-                        <tr>
-                            <td id="headerName">{this.props.source.name}</td>
-                            <td>{this.props.source.needsDateRange ? <DateSelection loading={this.state.fetchDataStatus === null}
-                                dateRange={this.state.dateRange}
-                                updateDates={this.updateDates}
-                                fetchData={this.fetchData}
-                                index={this.props.index}
-                                /> : null}</td>
-                        </tr>
+                    <tr>
+                        <td id="headerName">{this.props.source.name}</td>
+                        <td>{this.props.source.needsDateRange ?
+                            <DateSelection loading={this.state.fetchDataStatus === null}
+                                           dateRange={this.state.dateRange}
+                                           updateDates={this.updateDates}
+                                           fetchData={this.fetchData}
+                                           index={this.props.index}
+                            /> : null}</td>
+                    </tr>
                     </tbody>
                 </table>
                 <div className='sectionResults'>
