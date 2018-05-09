@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/homepage.css';
-import { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics } from '../service/apiService';
+import { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics, getProBidRoomServiceMetrics } from '../service/apiService';
 import MetricSection from './MetricSection';
 import GridSection from './GridSection';
 
@@ -29,10 +29,16 @@ class Homepage extends Component {
                 isGrid: false,
                 method: (startDate, endDate) => getMarkDownServiceMetrics(startDate, endDate)
             }, {
+                name: "Pro Bid Room",
+                needsDateRange: true,
+                isGrid: false,
+                method: (startDate, endDate) => getProBidRoomServiceMetrics(startDate, endDate)
+            }, {
                 name: "Sonar Code Coverage",
                 needsDateRange: false,
+                isGrid: false,
                 method: () => getSonarCodeCoverageMetrics()
-        }
+            }
         ]
     };
 

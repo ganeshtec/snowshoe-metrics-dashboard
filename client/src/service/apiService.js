@@ -69,4 +69,24 @@ let getSonarCodeCoverageMetrics = async () => {
     }
 }
 
-export { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics };
+let getProBidRoomServiceMetrics = async (startDate, endDate) => {
+    if (moment(endDate) < moment(startDate)) {
+        return "Error"
+    }
+    try {
+        var response = await axios.post('/api/pro-bid-room/fetchData', {
+            startDate: startDate,
+            endDate: endDate
+        })
+        var returnObject = {
+            metrics: response.data
+        }
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Pro Bid Room Service: ", err)
+        return "Error"
+    }
+
+}
+
+export { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics, getProBidRoomServiceMetrics};

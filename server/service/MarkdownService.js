@@ -27,12 +27,24 @@ processMarkdownSplunkResponse = (err, results) => {
         return value.includes("- Time taken to get IVP discounts")
     })
 
+    var totalIVPCallsWithDisc = rawValues.filter((value) => {
+        return value.includes("IVPPROMO")
+    })
+
     var totalVPPCalls = rawValues.filter((value) => {
         return value.includes("- Time taken to get VPP discounts")
     })
 
+    var totalVPPCallsWithDisc = rawValues.filter((value) => {
+        return value.includes("VPPPROMO")
+    })
+
     var totalGPASCalls = rawValues.filter((value) => {
         return value.includes("- Total time taken to get MSB discounts")
+    })
+
+    var totalGPASCallsWithDisc = rawValues.filter((value) => {
+        return value.includes("IVPPROMO") & value.includes("VPPPROMO")
     })
 
     var totalCalls = rawValues.filter((value) => {
@@ -210,13 +222,41 @@ processMarkdownSplunkResponse = (err, results) => {
         })
     })
 
+    console.log()
+
     results.push(
         {
             description: "--------PROMO METRICS--------"
-        }, {
+        },
+        {
+            description: "Number of calls with an IVP discount returned: ",
+            count: totalIVPCallsWithDisc.length + " calls"
+        },
+        {
+            description: "Percent of calls with an IVP discount returned: ",
+            count: Math.round((totalIVPCallsWithDisc.length / totalIVPCalls.length) * 10000) / 100 + " %"
+        },
+         {
+            description: "Number of calls with an VPP discount returned: ",
+            count: totalVPPCallsWithDisc.length + " calls"
+        },
+        {
+            description: "Percent of calls with an VPP discount returned: ",
+            count: Math.round((totalVPPCallsWithDisc.length / totalVPPCalls.length) * 10000) / 100 + " %"
+        },
+         {
+            description: "Number of calls with an GPAS discount returned: ",
+            count: totalGPASCallsWithDisc.length + " calls"
+        },
+        {
+            description: "Percent of calls with an GPAS discount returned: ",
+            count: Math.round((totalGPASCallsWithDisc.length / totalGPASCalls.length) * 10000) / 100 + " %"
+        },
+        {
             description: "Numbers of calls with a discount returned: ",
             count: Math.round(callsWithDiscount.length) + " calls"
-        }, {
+        }, 
+        {
             description: "Percentage of calls with a discount returned: ",
             count: Math.round((totalCalls.length ? (callsWithDiscount.length / totalCalls.length) : 0) * 10000) / 100 + " %"
         }, {

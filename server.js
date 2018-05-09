@@ -19,6 +19,9 @@ app.use('/api/circuit-breaker', circuitBreakerServiceApi);
 var sonarCodeCoverageApi = require('./server/controllers/SonarCodeCoverageApi');
 app.use('/api/sonar-code-coverage', sonarCodeCoverageApi);
 
+var proBidRoomApi = require('./server/controllers/ProBidRoomApi');
+app.use('/api/pro-bid-room', proBidRoomApi);
+
 app.use(express.static(__dirname + '/client/build/'));
 
 app.get("/*", function (request, response) {
