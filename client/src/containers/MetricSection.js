@@ -72,6 +72,7 @@ class MetricSection extends Component {
                 )
             })
         }
+
         return (
             <div className="MetricSection">
                 <table id="headerBack">

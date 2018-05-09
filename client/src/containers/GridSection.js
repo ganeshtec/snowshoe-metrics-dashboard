@@ -14,7 +14,7 @@ class GridSection extends Component {
             endDate: ''
         },
         fetchDataStatus: null
-    }
+    };
 
     async componentWillMount() {
         var todaysDate = moment().format("YYYY-MM-DD");

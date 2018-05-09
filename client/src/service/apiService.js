@@ -35,6 +35,28 @@ let getMarkDownServiceMetrics = async (startDate, endDate) => {
 
 }
 
+let getPromotionDomainServiceMetrics = async(startDate, endDate) => {
+    if (moment(endDate) < moment(startDate)) {
+        return "Error"
+    }
+
+    console.log(startDate, endDate, '####');
+    try {
+        var response = await axios.post('/api/promotion-domain-service/fetchData', {
+            startDate: startDate,
+            endDate: endDate
+        })
+        var data = response.data;
+        var returnObject = {
+            metrics: data
+        }
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Promotion Domain Service")
+        return "Error"
+    }
+};
+
 
 let getCircuitBreakerServiceMetrics = async (startDate, endDate) => {
     if (moment(endDate) < moment(startDate)) {
@@ -69,4 +91,4 @@ let getSonarCodeCoverageMetrics = async () => {
     }
 }
 
-export { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics };
+export { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics,getPromotionDomainServiceMetrics };

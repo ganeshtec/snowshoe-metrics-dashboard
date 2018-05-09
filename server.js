@@ -16,6 +16,9 @@ app.use('/api/markdown-service', markDownServiceApi);
 var circuitBreakerServiceApi = require('./server/controllers/CircuitBreakerApi');
 app.use('/api/circuit-breaker', circuitBreakerServiceApi);
 
+var promotionDomainServiceApi = require('./server/controllers/PromotionDomainServiceApi');
+app.use('/api/promotion-domain-service', promotionDomainServiceApi);
+
 var sonarCodeCoverageApi = require('./server/controllers/SonarCodeCoverageApi');
 app.use('/api/sonar-code-coverage', sonarCodeCoverageApi);
 

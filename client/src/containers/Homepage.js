@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
 import '../css/homepage.css';
-import { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics } from '../service/apiService';
+import {
+    getActivePromotions,
+    getMarkDownServiceMetrics,
+    getCircuitBreakerServiceMetrics,
+    getSonarCodeCoverageMetrics,
+    getPromotionDomainServiceMetrics
+} from '../service/apiService';
 import MetricSection from './MetricSection';
 import GridSection from './GridSection';
+
 
 class Homepage extends Component {
 
@@ -29,19 +36,24 @@ class Homepage extends Component {
                 isGrid: false,
                 method: (startDate, endDate) => getMarkDownServiceMetrics(startDate, endDate)
             }, {
+                name: "Promotion Domain Service",
+                needsDateRange: true,
+                isGrid: false,
+                method: (startDate, endDate) => getPromotionDomainServiceMetrics(startDate, endDate)
+            }, {
                 name: "Sonar Code Coverage",
                 needsDateRange: false,
                 method: () => getSonarCodeCoverageMetrics()
-        }
+            }
         ]
     };
 
     render() {
         const metricsSection = this.state.fetchDataMethods.map((source, index) => {
-            if(source.isGrid){
-                return  (<GridSection key={index} source={source} index={index} />)
+            if (source.isGrid) {
+                return (<GridSection key={index} source={source} index={index}/>)
             } else {
-                return  (<MetricSection key={index} source={source} index={index}/>)
+                return (<MetricSection key={index} source={source} index={index}/>)
             }
         });
         return (
