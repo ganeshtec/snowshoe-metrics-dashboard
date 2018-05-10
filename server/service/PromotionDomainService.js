@@ -2,7 +2,6 @@
  * Created by sxa6859 on 5/9/18.
  */
 'use strict'
-
 var request = require('request');
 var monitoring = require('@google-cloud/monitoring');
 var BigQuery = require('@google-cloud/bigquery');
@@ -49,7 +48,7 @@ var fetchPromotionDomainServiceMetricsFromBigQuery = (startDate, endDate, descri
                     console.error(error);
                     reject(error);
                 }
-                var innerList=rows[0];
+                var innerList = rows[0];
                 resolve({"description": description, "count": innerList[0].f0_});
             });
         }).catch(err => {
@@ -60,9 +59,7 @@ var fetchPromotionDomainServiceMetricsFromBigQuery = (startDate, endDate, descri
 };
 
 
-
 var fetchAverageResponseTime = (startDate, endDate, options) => {
-
     console.log(options, 'OPTIONS');
     return new Promise((resolve, reject) => {
         bigQuery.createJob(options).then(function (data) {
@@ -84,8 +81,6 @@ var fetchAverageResponseTime = (startDate, endDate, options) => {
                 console.log(sum / innerList.length, 'Avge of Response time');
                 resolve({"description": "Average Response Time", "count": sum / innerList.length});
             });
-
-
         }).catch(err => {
             console.error(err, 'ERROR');
             reject(err);
@@ -111,14 +106,10 @@ function getMetric(startDate, endDate, filter, aggregation, description, extract
                 var resources = responses[0];
                 var value = '0';
                 if (resources.length > 0 && resources[0].points != null) {
-                    var mean = 0;
-                    for (var i = 0; i < resources[0].points.length; i++) {
-                        value = extractMetric(resources[0].points[i].value);
-                        mean = mean + value;
-                    }
-                    mean = mean / resources[0].points.length;
+                    value = extractMetric(resources[0].points[0].value);
+
                 }
-                var result = {"description": description, "count": mean};
+                var result = {"description": description, "count": value};
                 resolve(result);
             })
             .catch(err => {
@@ -127,15 +118,6 @@ function getMetric(startDate, endDate, filter, aggregation, description, extract
             });
     });
 }
-
-var extractInt64Value = function (point) {
-    return point.int64Value;
-};
-
-var extractDoubleValue = function (point) {
-    return point.doubleValue;
-};
-
 
 function getTotalNumberOfCalls(startDate, endDate) {
     var filter = 'metric.type= "logging.googleapis.com/user/enterprise-pricing-promotion-domain-service-calls"';
@@ -199,6 +181,7 @@ function getP99ResponseTime(startDate, endDate) {
 
 
 function getPercentageOfCallsMeetingSLA(startDate, endDate) {
+
     const options = {
         configuration: {
             query: {
@@ -245,7 +228,7 @@ function getPercentageOfCallsMeetingSLA(startDate, endDate) {
                 }
                 var innerList = rowsTwo[0];
                 queryResultsTwo = innerList[0].f0_;
-                resolve({"description": "% Of calls meeting SLA", "count": queryResults/queryResultsTwo*100});
+                resolve({"description": "% Of calls meeting SLA", "count": queryResults / queryResultsTwo * 100});
                 console.log(queryResultsTwo, '$##$#$#$#$#$#$');
             });
         }).catch(err => {
@@ -254,5 +237,13 @@ function getPercentageOfCallsMeetingSLA(startDate, endDate) {
         });
     })
 }
+
+var extractInt64Value = function (point) {
+    return point.int64Value;
+};
+
+var extractDoubleValue = function (point) {
+    return point.doubleValue;
+};
 
 module.exports = fetchPromotionDomainServiceMetrics;
