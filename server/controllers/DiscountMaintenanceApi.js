@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var getPromotionStatusReport = require('../service/DiscountMaintenanceService')
+require('../service/DiscountMaintenanceService')
 
 var config;
 
@@ -15,7 +15,7 @@ if (process.env.config) {
 }
 
 /* GET requests listing. */
-router.get('/fetchData/', function (req, res, next) {
+router.get('/fetchPromotionData/', function (req, res, next) {
 
     var promise  = getPromotionStatusReport();
 
@@ -24,6 +24,45 @@ router.get('/fetchData/', function (req, res, next) {
     },function(err) {
         console.log(err);
         res.status(500).send("Failed to retrieve Markdown Service stats");
+    });
+
+});
+
+router.get('/fetchPromoQualifiers/', function (req, res, next) {
+
+    var promise  = getQualifiersForActivePromotions();
+
+    promise.then(function(data) {
+        res.send(data);
+    },function(err) {
+        console.log(err);
+        res.status(500).send("Failed to retrieve Qualifiers stats");
+    });
+
+});
+
+router.get('/fetchPromoRewards/', function (req, res, next) {
+
+    var promise  = getRewardsForActivePromotions();
+
+    promise.then(function(data) {
+        res.send(data);
+    },function(err) {
+        console.log(err);
+        res.status(500).send("Failed to retrieve Rewards stats");
+    });
+
+});
+
+router.get('/fetchPromoAttributes/', function (req, res, next) {
+
+    var promise  = getAttributesForActivePromotions();
+
+    promise.then(function(data) {
+        res.send(data);
+    },function(err) {
+        console.log(err);
+        res.status(500).send("Failed to retrieve Attributes stats");
     });
 
 });

@@ -28,13 +28,37 @@ var statusReportQueryPart2 = "GROUP BY C.CORD_SRC_PRCSS_CD " +
 "UNION " +
 "SELECT 9999 AS CODE, 'All' AS DESCRIPTION, count(*) AS COUNT FROM PRMO_SKU_CHG_RQST ";
 
-
 var whereActive = " WHERE SKCHG_RQST_STAT_CD = '61' ";
-var wherePending = "WHERE SKCHG_RQST_STAT_CD = '57' ";
+var andActive = " AND SKCHG_RQST_STAT_CD = '61' ";
+var wherePending = " WHERE SKCHG_RQST_STAT_CD = '57' ";
 var startDateClause = "AND EFF_BGN_TS > CURRENT TIMESTAMP ";
 var daysClause = "DAYS ";
 var endDateClause = "AND EFF_BGN_TS < CURRENT TIMESTAMP ";
 var withURClause = "WITH UR ";
+
+//Query for Customer Segments
+var customerSegmentTable = " select 'Customer Segment' AS DESCRIPTION, count(*) as count from PRMO_SKU_CHG_RQST R join PRMO_SKU_CHG_CUST_SEG C on R.SKU_CHG_RQST_ID=C.SKU_CHG_RQST_ID ";
+var hasCustomerSegment = " C.CUST_SEG_ID > 0 "
+var activePromotionsWithCustomerSegmentQuery = customerSegmentTable + whereActive + " AND " + hasCustomerSegment;
+
+// Queries for Qualifiers
+var quantityThresholdQuery = " select 'Quantity Threshold' AS DESCRIPTION, COUNT(*) AS count from PRMO_SKU_CHG_RQST WHERE SKU_CHG_RQST_ID IN (select SKU_CHG_RQST_ID from PRMO_SCRQ_ERUL_TIER where MIN_PURCH_LMT_QTY is not null and MIN_PURCH_LMT_QTY > 0) " + andActive
+var dollarThresholdQuery = " select 'Dollar Spend Threshold' AS DESCRIPTION, COUNT(*) AS count from PRMO_SKU_CHG_RQST WHERE SKU_CHG_RQST_ID IN (select SKU_CHG_RQST_ID from PRMO_SCRQ_ERUL_TIER where MIN_PURCH_LMT_AMT is not null and MIN_PURCH_LMT_AMT > 0) " + andActive
+var basketThresholdQuery =  " select 'Basket Threshold' AS DESCRIPTION, COUNT(*) AS COUNT from PRMO_SKU_CHG_RQST WHERE SKU_CHG_RQST_ID IN (select SKU_CHG_RQST_ID from PRMO_PURCH_COND where BSKT_THRH_AMT is not null and BSKT_THRH_AMT > 0) " + andActive
+var qualifiersQuery = activePromotionsWithCustomerSegmentQuery + " UNION " + quantityThresholdQuery + " UNION " + dollarThresholdQuery + " UNION " +basketThresholdQuery;
+
+// Queries for Rewards
+var amountOffRewardQuery = " select 'Amount off Reward' AS DESCRIPTION, Count(*) As COUNT from PRMO_SKU_CHG_RQST WHERE SKU_CHG_RQST_ID IN (select SKU_CHG_RQST_ID from PRMO_SCRQ_DISC_TIER where ELIG_METH_IND is not null and ELIG_METH_IND = 'AMT') " + andActive;
+var percentOffRewardQuery = " select 'Percent off Reward' AS DESCRIPTION, Count(*) As COUNT from PRMO_SKU_CHG_RQST WHERE SKU_CHG_RQST_ID IN (select SKU_CHG_RQST_ID from PRMO_SCRQ_DISC_TIER where ELIG_METH_IND is not null and ELIG_METH_IND = 'PER') " + andActive;
+var rewardsQuery = amountOffRewardQuery + " UNION " + percentOffRewardQuery
+
+
+// Queries for Attributes
+var labelsQuery = " select 'Promotions with labels' AS DESCRIPTION, Count(*) As COUNT from PRMO_SKU_CHG_RQST WHERE PRT_LBL_FLG = 'Y' " + andActive;
+var itemPromoQuery = " select 'Item level promotion' AS DESCRIPTION, Count(*) As COUNT from PRMO_SKU_CHG_RQST WHERE SKCHG_RQST_TYP_CD = 10 " + andActive;
+var orderPromoQuery = " select 'Order level promotion' AS DESCRIPTION, Count(*) As COUNT from PRMO_SKU_CHG_RQST WHERE SKCHG_RQST_TYP_CD = 20 " + andActive;
+var attributesQuery = labelsQuery + " UNION " + itemPromoQuery + " UNION " + orderPromoQuery;
+
 
 var wherePendingTomorrow = wherePending + startDateClause + "+ 1 " + daysClause + endDateClause + "+ 2 " + daysClause;
 var wherePendingfuture = wherePending + startDateClause + "+ 2 " + daysClause;
@@ -44,29 +68,6 @@ var tomorrowPendingQuery = statusReportQueryPart1 + wherePendingTomorrow + statu
 var futurePendingQuery = statusReportQueryPart1 + wherePendingfuture + statusReportQueryPart2 + wherePendingfuture + withURClause;
 
 var data = [];
-
-function addResult(row,source) {
-
-    var obj = data.find(o => o.code === row.CODE);
-
-    if(undefined === obj){
-        obj = {'code' : row.CODE,  'description' : row.DESCRIPTION, 'count' : 0, 'tomorrow' : 0, 'future' : 0};
-        data.push(obj);
-    }
-
-    if(source === "current") {
-        obj.count = row.COUNT;
-    }
-
-    if(source === "tomorrow") {
-        obj.tomorrow = row.COUNT;
-    }
-
-    if(source === "future") {
-        obj.future = row.COUNT;
-    }
-
-}
 
 getPromotionStatusReport = () => {
     
@@ -105,4 +106,109 @@ getPromotionStatusReport = () => {
     )
 }
 
-module.exports = getPromotionStatusReport
+getQualifiersForActivePromotions = () => {
+    
+    return new Promise(function (resolve, reject) {
+        ibmdb.open(config.db2ConnectInfo, function(err, conn)
+        {
+            if(err) {
+                reject(err.message);
+            } else {
+                var data = []   
+                var qualifiersResults = conn.query(qualifiersQuery);
+                       
+                return qualifiersResults.then(results => { 
+                    var data = mapSqlToReactData(results)
+                    resolve(data);
+                    conn.close();
+
+                }).catch(function(err) {
+                    reject(err);
+                });
+            }
+        })}
+    )
+}
+
+getRewardsForActivePromotions = () => {
+    
+    return new Promise(function (resolve, reject) {
+        ibmdb.open(config.db2ConnectInfo, function(err, conn)
+        {
+            if(err) {
+                reject(err.message);
+            } else {
+                var data = []   
+                var rewardResults = conn.query(rewardsQuery);
+                       
+                return rewardResults.then(results => { 
+                    var data = mapSqlToReactData(results)   
+                    resolve(data);
+                    conn.close();
+
+                }).catch(function(err) {
+                    reject(err);
+                });
+            }
+        })}
+    )
+}
+
+getAttributesForActivePromotions = () => {
+    
+    return new Promise(function (resolve, reject) {
+        ibmdb.open(config.db2ConnectInfo, function(err, conn)
+        {
+            if(err) {
+                reject(err.message);
+            } else {
+                var data = []   
+                var attributeResults = conn.query(attributesQuery);
+                       
+                return attributeResults.then(results => { 
+                    var data = mapSqlToReactData(results)
+                    resolve(data);
+                    conn.close();
+
+                }).catch(function(err) {
+                    reject(err);
+                });
+            }
+        })}
+    )
+}
+
+
+function mapSqlToReactData(SqlResults) {
+    var reactData = []
+    SqlResults.forEach(result => {
+        obj = {'description' : result.DESCRIPTION, 'count' : result.COUNT};
+        reactData.push(obj);  
+    })
+    return reactData
+}
+
+function addResult(row,source) {
+
+    var obj = data.find(o => o.code === row.CODE);
+
+    if(undefined === obj){
+        obj = {'code' : row.CODE,  'description' : row.DESCRIPTION, 'count' : 0, 'tomorrow' : 0, 'future' : 0};
+        data.push(obj);
+    }
+
+    if(source === "current") {
+        obj.count = row.COUNT;
+    }
+
+    if(source === "tomorrow") {
+        obj.tomorrow = row.COUNT;
+    }
+
+    if(source === "future") {
+        obj.future = row.COUNT;
+    }
+
+}
+
+module.exports = {getPromotionStatusReport, getQualifiersForActivePromotions, getRewardsForActivePromotions,getAttributesForActivePromotions}

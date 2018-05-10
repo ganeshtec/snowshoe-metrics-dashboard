@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/homepage.css';
-import { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics, getProBidRoomServiceMetrics } from '../service/apiService';
+import * as apiService from '../service/apiService';
 import MetricSection from './MetricSection';
 import GridSection from './GridSection';
 
@@ -17,28 +17,45 @@ class Homepage extends Component {
                 },
                 isGrid: true,
                 needsDateRange: false,
-                method: () => getActivePromotions()
+                method: () => apiService.getActivePromotions()
             }, {
+                name: "Qualifiers",
+                needsDateRange: false,
+                isGrid: false,
+                method: () => apiService.getQualifiersForActivePromotions()
+            },
+            {
+                name: "Rewards",
+                needsDateRange: false,
+                isGrid: false,
+                method: () => apiService.getRewardsForActivePromotions()
+            },
+            {
+                name: "Attributes",
+                needsDateRange: false,
+                isGrid: false,
+                method: () => apiService.getAttributesForActivePromotions()
+            },{
                 name: "Circuit Breaker",
                 needsDateRange: true,
                 isGrid: false,
-                method: (startDate, endDate) => getCircuitBreakerServiceMetrics(startDate, endDate)
+                method: (startDate, endDate) => apiService.getCircuitBreakerServiceMetrics(startDate, endDate)
             }, {
                 name: "Markdown Service V2",
                 needsDateRange: true,
                 isGrid: false,
-                method: (startDate, endDate) => getMarkDownServiceMetrics(startDate, endDate)
+                method: (startDate, endDate) => apiService.getMarkDownServiceMetrics(startDate, endDate)
             }, {
                 name: "Pro Bid Room",
                 needsDateRange: true,
                 isGrid: false,
-                method: (startDate, endDate) => getProBidRoomServiceMetrics(startDate, endDate)
+                method: (startDate, endDate) => apiService.getProBidRoomServiceMetrics(startDate, endDate)
             }, {
                 name: "Sonar Code Coverage",
                 needsDateRange: false,
                 isGrid: false,
-                method: () => getSonarCodeCoverageMetrics()
-            }
+                method: () => apiService.getSonarCodeCoverageMetrics()
+        }
         ]
     };
 
