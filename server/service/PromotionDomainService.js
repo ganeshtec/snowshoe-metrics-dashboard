@@ -56,7 +56,7 @@ function getMetric(startDate, endDate, filter, aggregation, description, extract
                     value = extractMetric(resources[0].points[0].value);
 
                 }
-                var result = {"description": description, "count": value};
+                var result = {"description": description, "count": value + ' calls'};
                 resolve(result);
             })
             .catch(err => {
@@ -111,7 +111,7 @@ function getAverageResponseTime(startDate, endDate) {
                 for (var i = 0; i < innerList.length; i++) {
                     sum = sum + parseInt(innerList[i].jsonPayload_response_time);
                 }
-                resolve({"description": "Average Response Time", "count": sum / innerList.length});
+                resolve({"description": "Average Response Time", "count": Math.round(sum / innerList.length) + ' ms'});
             });
         }).catch(err => {
             console.error(err, 'ERROR');
@@ -139,7 +139,7 @@ function getShortestResponseTime(startDate, endDate) {
                     reject(error);
                 }
                 var innerList = rows[0];
-                resolve({"description": "Shortest Response Time", "count": innerList[0].f0_});
+                resolve({"description": "Shortest Response Time", "count": innerList[0].f0_ + ' ms'});
             });
         }).catch(err => {
             console.error(err, 'ERROR calling Big Query');
@@ -225,7 +225,11 @@ function getPercentageOfCallsMeetingSLA(startDate, endDate) {
                 }
                 var innerList = rowsTwo[0];
                 queryResultsTwo = innerList[0].f0_;
-                resolve({"description": "% Of calls meeting SLA", "count": queryResults / queryResultsTwo * 100});
+
+                resolve({
+                    "description": "% Of calls meeting SLA",
+                    "count": Math.round((queryResults / queryResultsTwo) * 10000) / 100 + ' %'
+                });
             });
         }).catch(err => {
             reject(err);

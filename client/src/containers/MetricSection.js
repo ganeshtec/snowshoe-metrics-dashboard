@@ -38,19 +38,23 @@ class MetricSection extends Component {
         })
     };
 
-    fetchData = async() => {
-        let response;
-
+    fetchData = async(clickRefresh) => {
+        let response = null;
         if (this.state.fetchDataStatus) {
-            this.setState({fetchDataStatus: null})
-        }
-        if (this.props.source.needsDateRange) {
-            response = await this.props.source.method(this.state.dateRange.startDate, this.state.dateRange.endDate)
-        } else {
-            response = await this.props.source.method()
+            this.setState({fetchDataStatus: null});
         }
 
-        if (response === "Error") {
+        if (this.props.source.fetchDataFromService || clickRefresh) {
+            if (this.props.source.needsDateRange) {
+                response = await this.props.source.method(this.state.dateRange.startDate, this.state.dateRange.endDate);
+            } else {
+                response = await this.props.source.method();
+            }
+        }
+
+        if (response == null) {
+            this.setState({fetchDataStatus: "refresh"})
+        } else if (response === "Error") {
             this.setState({fetchDataStatus: "error"})
         } else {
             this.setState({fetchDataStatus: "loaded", data: response})
@@ -60,12 +64,17 @@ class MetricSection extends Component {
     render() {
 
         let sectionResults;
+        if (!this.props.source.fetchDataFromService) {
+            sectionResults = "Click Refresh to fetch data";
+        }
         if (this.state.fetchDataStatus === null) {
             sectionResults = <Spinner name={this.props.source.name}/>
-        }
-        else if (this.state.fetchDataStatus === "error") {
+        } else if (this.state.fetchDataStatus === "error") {
             sectionResults = "Error fetching data"
-        } else {
+        } else if (this.state.fetchDataStatus === "refresh") {
+            sectionResults = "Click Refresh to fetch data"
+        }
+        else {
             sectionResults = this.state.data.metrics.map((metric, index) => {
                 return (
                     <Metric metric={metric} key={index}/>
@@ -89,7 +98,7 @@ class MetricSection extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <div className='sectionResults'>
+                <div className='sectionResults padding-vertical-10'>
                     {sectionResults}
                 </div>
             </div>

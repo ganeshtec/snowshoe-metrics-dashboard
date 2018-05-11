@@ -39,8 +39,6 @@ let getPromotionDomainServiceMetrics = async(startDate, endDate) => {
     if (moment(endDate) < moment(startDate)) {
         return "Error"
     }
-
-    console.log(startDate, endDate, '####');
     try {
         var response = await axios.post('/api/promotion-domain-service/fetchData', {
             startDate: startDate,

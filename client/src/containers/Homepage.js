@@ -24,25 +24,30 @@ class Homepage extends Component {
                 },
                 isGrid: true,
                 needsDateRange: false,
+                fetchDataFromService: true,
                 method: () => getActivePromotions()
             }, {
                 name: "Circuit Breaker",
                 needsDateRange: true,
                 isGrid: false,
+                fetchDataFromService: true,
                 method: (startDate, endDate) => getCircuitBreakerServiceMetrics(startDate, endDate)
             }, {
                 name: "Markdown Service V2",
                 needsDateRange: true,
                 isGrid: false,
+                fetchDataFromService: true,
                 method: (startDate, endDate) => getMarkDownServiceMetrics(startDate, endDate)
             }, {
                 name: "Promotion Domain Service",
                 needsDateRange: true,
                 isGrid: false,
+                fetchDataFromService: false,
                 method: (startDate, endDate) => getPromotionDomainServiceMetrics(startDate, endDate)
             }, {
                 name: "Sonar Code Coverage",
                 needsDateRange: false,
+                fetchDataFromService: true,
                 method: () => getSonarCodeCoverageMetrics()
             }
         ]
