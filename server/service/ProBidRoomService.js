@@ -11,6 +11,7 @@ processProBidRoomSplunkResponse = (error, results) => {
         console.log("ERROR Fetching Splunk Data", error)
     }
 
+    // console.log('processProBidRoomSplunkResponse', results);
     var fields = results.fields;
     var rows = results.rows;
     for (var i = 0; i < rows.length; i++) {
@@ -60,7 +61,11 @@ processProBidRoomSplunkResponse = (error, results) => {
         if(cartResposeTime > cartLongestResposeTime) {
             cartLongestResposeTime = cartResposeTime;
         }
-        cartTotalResposeTime += cartResposeTime;
+        if(Number.isInteger(cartResposeTime)) {
+            cartTotalResposeTime += cartResposeTime;
+        } else {
+            console.log('cartResposeTime', cartResposeTime, reqTime, responseTimestamps.get(orderId));
+        }
     })
     
     var callsToProBidRoom = rawValues.filter((value) => {

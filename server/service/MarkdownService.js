@@ -24,11 +24,11 @@ processMarkdownSplunkResponse = (err, results) => {
     });
 
     var totalIVPCalls = rawValues.filter((value) => {
-        return value.includes("- Time taken to get IVP discounts")
+        return value.includes("Time taken to get Market before getting IVP discounts")
     })
 
     var totalIVPCallsWithDisc = rawValues.filter((value) => {
-        return value.includes("IVPPROMO")
+        return value.includes("IVPPROMO") && value.includes("\\\"type\\\":\\\"IVP\\\",\\\"status\\\":\\\"SUCCESS\\\"")
     })
 
     var totalVPPCalls = rawValues.filter((value) => {
@@ -234,7 +234,7 @@ processMarkdownSplunkResponse = (err, results) => {
         },
         {
             description: "Percent of calls with an IVP discount returned: ",
-            count: Math.round((totalIVPCallsWithDisc.length / totalIVPCalls.length) * 10000) / 100 + " %"
+            count: Math.round((totalIVPCalls.length ? (totalIVPCallsWithDisc.length / totalIVPCalls.length) : 0) * 10000) / 100 + " %"
         },
          {
             description: "Number of calls with an VPP discount returned: ",
@@ -242,7 +242,7 @@ processMarkdownSplunkResponse = (err, results) => {
         },
         {
             description: "Percent of calls with an VPP discount returned: ",
-            count: Math.round((totalVPPCallsWithDisc.length / totalVPPCalls.length) * 10000) / 100 + " %"
+            count: Math.round((totalVPPCalls.length ? (totalVPPCallsWithDisc.length / totalVPPCalls.length) : 0)* 10000) / 100 + " %"
         },
          {
             description: "Number of calls with an GPAS discount returned: ",
@@ -250,7 +250,7 @@ processMarkdownSplunkResponse = (err, results) => {
         },
         {
             description: "Percent of calls with an GPAS discount returned: ",
-            count: Math.round((totalGPASCallsWithDisc.length / totalGPASCalls.length) * 10000) / 100 + " %"
+            count: Math.round((totalGPASCalls.length ? (totalGPASCallsWithDisc.length / totalGPASCalls.length) : 0) * 10000) / 100 + " %"
         },
         {
             description: "Numbers of calls with a discount returned: ",
@@ -265,12 +265,14 @@ processMarkdownSplunkResponse = (err, results) => {
         }
     );
     promoIdsWithCount.forEach((count, promoId, mapObj) => {
-        results.push(
-            {
-                description: "Promo " + promoId,
-                count: count
-            }
-        );
+        if(promoId.length !== 2 && promoId.length !== 8) {
+            results.push(
+                {
+                    description: "Promo " + promoId,
+                    count: count
+                }
+            );
+        }
     })
     return (results)
 }
