@@ -150,6 +150,10 @@ function getShortestResponseTime(startDate, endDate) {
 
 function getP99ResponseTime(startDate, endDate) {
 
+
+    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
     const options = {
         configuration: {
             query: {
@@ -169,7 +173,7 @@ function getP99ResponseTime(startDate, endDate) {
                 var innerList = rows[0];
                 resolve({
                     "description": "99 Percentile Response Time",
-                    "count": innerList[0].jsonPayload_response_time
+                    "count": innerList[0].jsonPayload_response_time + " ms"
                 });
             });
         }).catch(err => {
@@ -184,26 +188,25 @@ function getPercentageOfCallsMeetingSLA(startDate, endDate) {
     var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
+    var queryResults = 0;
+    var queryResultsTwo = 0;
+
+    var callsMeetingSLAPromises = [];
+    var allCallsPromises = [];
+
+    var numberOfCallsMeetingSLA = 0;
+    var numberOfAllCalls = 0;
+
+    var subString = startDate.toISOString().substring(0, 10);
+    var stringToQuery = subString.replace(/-/g, '');
+
     return new Promise((resolve, reject) => {
-        var queryResults = 0;
-        var queryResultsTwo = 0;
-
-        var promises = [];
-
         for (var i = 0; i < diffDays; i++) {
-            var subString = startDate.toISOString().substring(0, 10);
-            var stringToQuery = subString.replace(/-/g, '');
-
-            var endOfDay = `${subString}T06:59:59.000Z`;
-
-            // console.log(startDate.toISOString(), '******START DAY******');
-            // console.log(endOfDay, '******END OF DAY******');
-            // console.log('****', `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp > '${startDate.toISOString()}' AND timestamp<'${endOfDay}' AND jsonPayload.response_time < '200'`);
 
             const options = {
                 configuration: {
                     query: {
-                        query: `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp > '${startDate.toISOString()}' AND timestamp<'${endOfDay}' AND jsonPayload.response_time < '200'`
+                        query: `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp > '${startDate.toISOString()}' AND jsonPayload.response_time < '200'`
                     }
                 }
             };
@@ -211,62 +214,48 @@ function getPercentageOfCallsMeetingSLA(startDate, endDate) {
             const optionsTwo = {
                 configuration: {
                     query: {
-                        query: `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDate.toISOString()}' AND timestamp<'${endOfDay}' `
+                        query: `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDate.toISOString()}'`
                     }
                 }
             };
 
-            var createJobPromise = bigQuery.createJob(options);
-            createJobPromise.then(function (data) {
-                var job = data[0];
-                var queryResultsPromise = job.getQueryResults();
-                queryResultsPromise.then(function (rows, error) {
-                    if (error) {
-                        console.error(error);
-                        reject(error);
-                    }
-                    var innerList = rows[0];
-                    queryResults = queryResults + innerList[0].f0_;
-                    console.log(queryResults, 'INSIDE PROMISE 2');
-                });
-                promises.push(queryResultsPromise);
-                //console.log(queryResults, 'INSIDE PROMISE 1');
-            }).catch(err => {
-                reject(err);
-            });
-            //promises.push(createJobPromise);
+            var callsMeetingSLA = extractBigQueryDataForCalls(options, queryResults);
+            callsMeetingSLAPromises.push(callsMeetingSLA);
 
-            var createJobPromiseTwo = bigQuery.createJob(optionsTwo);
-            createJobPromiseTwo.then(function (data) {
-                var job = data[0];
-                var queryResultsPromiseTwo = job.getQueryResults();
-                queryResultsPromiseTwo.then(function (rowsTwo, error) {
-                    if (error) {
-                        console.error(error);
-                        reject(error);
-                    }
-                    var innerList = rowsTwo[0];
-                    queryResultsTwo = queryResultsTwo + innerList[0].f0_;
-                });
-                promises.push(queryResultsPromiseTwo);
-            }).catch(err => {
-                reject(err);
-            });
-            //promises.push(createJobPromiseTwo);
+            var totalNumberOfCalls = extractBigQueryDataForCalls(optionsTwo, queryResultsTwo);
+            allCallsPromises.push(totalNumberOfCalls);
+
             startDate.setDate(startDate.getDate() + 1);
-
         }
-        console.log(promises, promises.length, '****');
-        Promise.all(promises).then(function (data) {
-            console.log(data.statistics, 'RESOLVED PROMISES');
-            // resolve({
-            //     "description": "% Of calls meeting SLA",
-            //     "count": (queryResults == 0) ? 100 + ' %' : Math.round((queryResults / queryResultsTwo) * 10000) / 100 + ' %'
-            // });
-
+        var numberOfCallsMeetingSLAPromise = Promise.all(callsMeetingSLAPromises).then(function (values) {
+            for (var i = 0; i < values.length; i++) {
+                numberOfCallsMeetingSLA = numberOfCallsMeetingSLA + values[i]
+            }
+            return numberOfCallsMeetingSLA;
+        }).catch(function (error) {
+            reject(error);
         });
+
+        var numberOfAllCallsPromise = Promise.all(allCallsPromises).then(function (values) {
+            for (var i = 0; i < values.length; i++) {
+                numberOfAllCalls = numberOfAllCalls + values[i]
+            }
+            return numberOfAllCalls;
+        }).catch(function (error) {
+            reject(error);
+        });
+
+        Promise.all([numberOfCallsMeetingSLAPromise, numberOfAllCallsPromise]).then(function (data) {
+            resolve({
+                "description": "% Of calls meeting SLA",
+                "count": Math.round((data[0] / data[1] * 10000) / 100) + ' %'
+            });
+        }).catch(function (error) {
+            reject(error);
+        })
     });
 }
+
 
 var extractInt64Value = function (point) {
     return point.int64Value;
@@ -275,5 +264,16 @@ var extractInt64Value = function (point) {
 var extractDoubleValue = function (point) {
     return point.doubleValue;
 };
+
+async function extractBigQueryDataForCalls(options, queryResults) {
+    console.log(options.configuration.query.query, '****OPTIONS****')
+    var createJob = await bigQuery.createJob(options);
+    var job = createJob[0];
+    var rows = await job.getQueryResults();
+    var innerList = rows[0];
+    queryResults = queryResults + innerList[0].f0_;
+
+    return queryResults;
+}
 
 module.exports = fetchPromotionDomainServiceMetrics;
