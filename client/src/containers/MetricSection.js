@@ -17,8 +17,8 @@ class MetricSection extends Component {
             startDate: '',
             endDate: ''
         },
-        fetchDataStatus: null
-    }
+        fetchDataStatus: "refresh"
+    };
 
     async componentWillMount() {
         var todaysDate = moment().format("YYYY-MM-DD");
