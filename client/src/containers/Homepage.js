@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
 import '../css/homepage.css';
-import {
-    getActivePromotions,
-    getMarkDownServiceMetrics,
-    getCircuitBreakerServiceMetrics,
-    getSonarCodeCoverageMetrics,
-    getPromotionDomainServiceMetrics
-} from '../service/apiService';
+import * as apiService from '../service/apiService';
 import MetricSection from './MetricSection';
 import GridSection from './GridSection';
 
@@ -25,40 +19,67 @@ class Homepage extends Component {
                 isGrid: true,
                 needsDateRange: false,
                 fetchDataFromService: true,
-                method: () => getActivePromotions()
+                method: () => apiService.getActivePromotions()
             }, {
+                name: "Qualifiers",
+                needsDateRange: false,
+                isGrid: false,
+                fetchDataFromService: true,
+                method: () => apiService.getQualifiersForActivePromotions()
+            },
+            {
+                name: "Rewards",
+                needsDateRange: false,
+                isGrid: false,
+                fetchDataFromService: true,
+                method: () => apiService.getRewardsForActivePromotions()
+            },
+            {
+                name: "Attributes",
+                needsDateRange: false,
+                isGrid: false,
+                fetchDataFromService: true,
+                method: () => apiService.getAttributesForActivePromotions()
+            },{
                 name: "Circuit Breaker",
                 needsDateRange: true,
                 isGrid: false,
                 fetchDataFromService: true,
-                method: (startDate, endDate) => getCircuitBreakerServiceMetrics(startDate, endDate)
+                method: (startDate, endDate) => apiService.getCircuitBreakerServiceMetrics(startDate, endDate)
             }, {
                 name: "Markdown Service V2",
                 needsDateRange: true,
                 isGrid: false,
                 fetchDataFromService: true,
-                method: (startDate, endDate) => getMarkDownServiceMetrics(startDate, endDate)
+                method: (startDate, endDate) => apiService.getMarkDownServiceMetrics(startDate, endDate)
+            }, {
+                name: "Pro Bid Room",
+                needsDateRange: true,
+                isGrid: false,
+                fetchDataFromService: true,
+                method: (startDate, endDate) => apiService.getProBidRoomServiceMetrics(startDate, endDate)
             }, {
                 name: "Promotion Domain Service",
                 needsDateRange: true,
                 isGrid: false,
                 fetchDataFromService: false,
-                method: (startDate, endDate) => getPromotionDomainServiceMetrics(startDate, endDate)
+                method: (startDate, endDate) => apiService.getPromotionDomainServiceMetrics(startDate, endDate)
             }, {
                 name: "Sonar Code Coverage",
                 needsDateRange: false,
+                isGrid: false,
                 fetchDataFromService: true,
-                method: () => getSonarCodeCoverageMetrics()
-            }
+                method: () => apiService.getSonarCodeCoverageMetrics()
+        }
         ]
     };
 
     render() {
         const metricsSection = this.state.fetchDataMethods.map((source, index) => {
-            if (source.isGrid) {
-                return (<GridSection key={index} source={source} index={index}/>)
+            if(source.isGrid){
+                return  (<GridSection key={index} source={source} index={index} />)
             } else {
-                return (<MetricSection key={index} source={source} index={index}/>)
+                return  (<MetricSection key={index} source={source} index={index}/>)
             }
         });
         return (

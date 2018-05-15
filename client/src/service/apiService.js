@@ -1,9 +1,9 @@
 import axios from 'axios';
 import moment from 'moment';
 
-let getActivePromotions = async () => {
+export let getActivePromotions = async () => {
     try {
-        var response = await axios.get('/api/discount-maintenance/fetchData');
+        var response = await axios.get('/api/discount-maintenance/fetchPromotionData');
         var returnObject = {
             metrics: response.data
         };
@@ -14,7 +14,46 @@ let getActivePromotions = async () => {
     }
 }
 
-let getMarkDownServiceMetrics = async (startDate, endDate) => {
+export let getQualifiersForActivePromotions = async () => {
+    try {
+        var response = await axios.get('/api/discount-maintenance/fetchPromoQualifiers');
+        var returnObject = {
+            metrics: response.data
+        };
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Qualifiers")
+        return "Error"
+    }
+}
+
+export let getRewardsForActivePromotions = async () => {
+    try {
+        var response = await axios.get('/api/discount-maintenance/fetchPromoRewards');
+        var returnObject = {
+            metrics: response.data
+        };
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Qualifiers")
+        return "Error"
+    }
+}
+
+export let getAttributesForActivePromotions = async () => {
+    try {
+        var response = await axios.get('/api/discount-maintenance/fetchPromoAttributes');
+        var returnObject = {
+            metrics: response.data
+        };
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Attributes")
+        return "Error"
+    }
+}
+
+export let getMarkDownServiceMetrics = async (startDate, endDate) => {
     if (moment(endDate) < moment(startDate)) {
         return "Error"
     }
@@ -35,7 +74,7 @@ let getMarkDownServiceMetrics = async (startDate, endDate) => {
 
 }
 
-let getPromotionDomainServiceMetrics = async(startDate, endDate) => {
+export let getPromotionDomainServiceMetrics = async(startDate, endDate) => {
     if (moment(endDate) < moment(startDate)) {
         return "Error"
     }
@@ -56,7 +95,7 @@ let getPromotionDomainServiceMetrics = async(startDate, endDate) => {
 };
 
 
-let getCircuitBreakerServiceMetrics = async (startDate, endDate) => {
+export let getCircuitBreakerServiceMetrics = async (startDate, endDate) => {
     if (moment(endDate) < moment(startDate)) {
         return "Error"
     }
@@ -76,7 +115,7 @@ let getCircuitBreakerServiceMetrics = async (startDate, endDate) => {
 
 }
 
-let getSonarCodeCoverageMetrics = async () => {
+export let getSonarCodeCoverageMetrics = async () => {
     try {
         var response = await axios.get('/api/sonar-code-coverage/fetchData');
         var returnObject = {
@@ -89,4 +128,23 @@ let getSonarCodeCoverageMetrics = async () => {
     }
 }
 
-export { getActivePromotions, getMarkDownServiceMetrics, getCircuitBreakerServiceMetrics, getSonarCodeCoverageMetrics,getPromotionDomainServiceMetrics };
+export let getProBidRoomServiceMetrics = async (startDate, endDate) => {
+    if (moment(endDate) < moment(startDate)) {
+        return "Error"
+    }
+    try {
+        var response = await axios.post('/api/pro-bid-room/fetchData', {
+            startDate: startDate,
+            endDate: endDate
+        })
+        var returnObject = {
+            metrics: response.data
+        }
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Pro Bid Room Service: ", err)
+        return "Error"
+    }
+
+}
+
