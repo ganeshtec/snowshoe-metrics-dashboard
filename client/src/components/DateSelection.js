@@ -36,7 +36,7 @@ const DateSelection = (props) => {
                 }
 
             </div>
-            <button onClick={()=>props.fetchData(true)} className="button md refresh" disabled={props.loading}> Refresh </button>
+            <button onClick={props.fetchData} className="button md refresh" disabled={props.loading}> Refresh </button>
         </span>
     )
 };

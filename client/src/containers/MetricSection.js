@@ -22,8 +22,10 @@ class MetricSection extends Component {
 
     async componentWillMount() {
         var todaysDate = moment().format("YYYY-MM-DD");
-        await this.updateDates(todaysDate, todaysDate)
-        await this.fetchData()
+        await this.updateDates(todaysDate, todaysDate);
+        if (this.props.source.fetchOnLoad) {
+            await this.fetchData();
+        }
     }
 
     updateDates = (startDate, endDate) => {
@@ -38,18 +40,17 @@ class MetricSection extends Component {
         })
     };
 
-    fetchData = async(clickRefresh) => {
+    fetchData = async() => {
         let response = null;
         if (this.state.fetchDataStatus) {
             this.setState({fetchDataStatus: null});
         }
 
-        if (this.props.source.fetchDataFromService || clickRefresh) {
-            if (this.props.source.needsDateRange) {
-                response = await this.props.source.method(this.state.dateRange.startDate, this.state.dateRange.endDate);
-            } else {
-                response = await this.props.source.method();
-            }
+
+        if (this.props.source.needsDateRange) {
+            response = await this.props.source.method(this.state.dateRange.startDate, this.state.dateRange.endDate);
+        } else {
+            response = await this.props.source.method();
         }
 
         if (response == null) {
@@ -64,7 +65,7 @@ class MetricSection extends Component {
     render() {
 
         let sectionResults;
-        if (!this.props.source.fetchDataFromService) {
+        if (!this.props.source.fetchOnLoad) {
             sectionResults = "Click Refresh to fetch data";
         }
         if (this.state.fetchDataStatus === null) {

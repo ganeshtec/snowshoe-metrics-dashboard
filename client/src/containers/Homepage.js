@@ -18,57 +18,57 @@ class Homepage extends Component {
                 },
                 isGrid: true,
                 needsDateRange: false,
-                fetchDataFromService: true,
+                fetchOnLoad: true,
                 method: () => apiService.getActivePromotions()
             }, {
                 name: "Qualifiers",
                 needsDateRange: false,
                 isGrid: false,
-                fetchDataFromService: true,
+                fetchOnLoad: true,
                 method: () => apiService.getQualifiersForActivePromotions()
             },
             {
                 name: "Rewards",
                 needsDateRange: false,
                 isGrid: false,
-                fetchDataFromService: true,
+                fetchOnLoad: true,
                 method: () => apiService.getRewardsForActivePromotions()
             },
             {
                 name: "Attributes",
                 needsDateRange: false,
                 isGrid: false,
-                fetchDataFromService: true,
+                fetchOnLoad: true,
                 method: () => apiService.getAttributesForActivePromotions()
             },{
                 name: "Circuit Breaker",
                 needsDateRange: true,
                 isGrid: false,
-                fetchDataFromService: true,
+                fetchOnLoad: true,
                 method: (startDate, endDate) => apiService.getCircuitBreakerServiceMetrics(startDate, endDate)
             }, {
                 name: "Markdown Service V2",
                 needsDateRange: true,
                 isGrid: false,
-                fetchDataFromService: true,
+                fetchOnLoad: true,
                 method: (startDate, endDate) => apiService.getMarkDownServiceMetrics(startDate, endDate)
             }, {
                 name: "Pro Bid Room",
                 needsDateRange: true,
                 isGrid: false,
-                fetchDataFromService: true,
+                fetchOnLoad: true,
                 method: (startDate, endDate) => apiService.getProBidRoomServiceMetrics(startDate, endDate)
             }, {
                 name: "Promotion Domain Service",
                 needsDateRange: true,
                 isGrid: false,
-                fetchDataFromService: false,
+                fetchOnLoad: false,
                 method: (startDate, endDate) => apiService.getPromotionDomainServiceMetrics(startDate, endDate)
             }, {
                 name: "Sonar Code Coverage",
                 needsDateRange: false,
                 isGrid: false,
-                fetchDataFromService: true,
+                fetchOnLoad: true,
                 method: () => apiService.getSonarCodeCoverageMetrics()
         }
         ]
