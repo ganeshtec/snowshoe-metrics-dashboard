@@ -2,31 +2,34 @@
  * Created by sxa6859 on 5/9/18.
  */
 'use strict';
-var request = require('request');
-var monitoring = require('@google-cloud/monitoring');
-var BigQuery = require('@google-cloud/bigquery');
-var projectId = 'hd-pricing-dev';
-var percentile = require('percentile');
+let request = require('request');
+let monitoring = require('@google-cloud/monitoring');
+let BigQuery = require('@google-cloud/bigquery');
+let projectId = 'hd-pricing-dev';
+let percentile = require('percentile');
 
-var client = new monitoring.MetricServiceClient({
+const client = new monitoring.MetricServiceClient({
     keyFilename: 'config/hd-pricing-dev.json',
 });
 
-var bigQuery = new BigQuery({
+const bigQuery = new BigQuery({
     keyFilename: 'config/hd-pricing-dev.json',
     projectId: projectId
 });
 
 let fetchPromotionDomainServiceMetrics = (startDate, endDate) => {
     let totalCalls = getTotalNumberOfCalls(startDate, endDate);
+    let onlineCallsWithDiscountsReturned = getCountOfOnlineCallsWithDiscountReturned(startDate, endDate);
     let onlineCalls = getNumberOfOnlineCalls(startDate, endDate);
     let averageResponseTime = getAverageResponseTime(startDate, endDate);
     let shortestResponseTime = getShortestResponseTime(startDate, endDate);
     let p99ResponseTime = getP99ResponseTime(startDate, endDate);
     let percentageOfCallsMeetingSLA = getPercentageOfCallsMeetingSLA(startDate, endDate);
+    let percentageOfCallsWithOnlineDiscountsReturned = getPercentageOfOnlineCallsWithDiscountReturned(onlineCallsWithDiscountsReturned, onlineCalls);
 
     return new Promise(function (resolve, reject) {
-        return Promise.all([totalCalls, onlineCalls, averageResponseTime, shortestResponseTime, p99ResponseTime, percentageOfCallsMeetingSLA]).then(results => {
+        return Promise.all([totalCalls, onlineCallsWithDiscountsReturned, onlineCalls, averageResponseTime, shortestResponseTime,
+            p99ResponseTime, percentageOfCallsMeetingSLA, percentageOfCallsWithOnlineDiscountsReturned]).then(results => {
             resolve(results);
         }).catch(function (err) {
             reject(err);
@@ -83,6 +86,30 @@ function getNumberOfOnlineCalls(startDate, endDate) {
     };
     let description = "Online Calls";
     return getMetric(startDate, endDate, filter, aggregation, description, extractInt64Value);
+}
+
+function getCountOfOnlineCallsWithDiscountReturned(startDate, endDate) {
+    const filter = 'metric.type= "logging.googleapis.com/user/promotion-domain-service-online-cart-responses"';
+    let aggregation = {
+        alignmentPeriod: {seconds: (endDate - startDate) / 1000},
+        perSeriesAligner: 'ALIGN_SUM'
+    };
+    let description = "Online Calls with discounts returned";
+    return getMetric(startDate, endDate, filter, aggregation, description, extractInt64Value);
+}
+
+function getPercentageOfOnlineCallsWithDiscountReturned(onlineCallsWithDiscountsReturned, onlineCalls) {
+    return new Promise(function (resolve, reject) {
+        return Promise.all([onlineCallsWithDiscountsReturned, onlineCalls]).then(values => {
+            let result = {
+                "description": "% Of Online calls with with discount returned",
+                "count": values[1].count == '0 calls' ? '0 %' : (values[0].count / values[1].count) * 100 + ' %'
+            };
+            resolve(result);
+        }).catch(function (err) {
+            reject(err);
+        });
+    });
 }
 
 function getAverageResponseTime(startDate, endDate) {
@@ -204,7 +231,7 @@ function getP99ResponseTime(startDate, endDate) {
                 let options = {
                     configuration: {
                         query: {
-                            query: `SELECT FLOAT((NTH(99,QUANTILES(FLOAT(jsonPayload.response_time),100))))*1000 FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDateLocal.toISOString()}'`
+                            query: `SELECT FLOAT((NTH(98,QUANTILES(FLOAT(jsonPayload.response_time),100))))*1000 FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDateLocal.toISOString()}'`
                         }
                     }
                 };
@@ -314,7 +341,6 @@ let extractInt64Value = function (point) {
 };
 
 async function extractBigQueryDataForColumnWithF0(options, queryResults) {
-    console.log(options.configuration.query.query, '****OPTIONS CALLS****')
     let createJob = await bigQuery.createJob(options);
     let job = createJob[0];
     let rows = await job.getQueryResults();
@@ -325,7 +351,6 @@ async function extractBigQueryDataForColumnWithF0(options, queryResults) {
 }
 
 async function extractBigQueryDataForColumnWithResponseTime(options, queryResults) {
-    console.log(options.configuration.query.query, '****OPTIONS RESPONSE TIME****')
     let createJob = await bigQuery.createJob(options);
     let job = createJob[0];
     let rows = await job.getQueryResults();
