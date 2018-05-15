@@ -1,7 +1,7 @@
 /**
  * Created by sxa6859 on 5/9/18.
  */
-'use strict'
+'use strict';
 var request = require('request');
 var monitoring = require('@google-cloud/monitoring');
 var BigQuery = require('@google-cloud/bigquery');
@@ -16,7 +16,6 @@ var bigQuery = new BigQuery({
     keyFilename: 'config/hd-pricing-dev.json',
     projectId: projectId
 });
-
 
 var fetchPromotionDomainServiceMetrics = (startDate, endDate) => {
     var totalCalls = getTotalNumberOfCalls(startDate, endDate);
@@ -87,145 +86,198 @@ function getNumberOfOnlineCalls(startDate, endDate) {
 }
 
 function getAverageResponseTime(startDate, endDate) {
-    const options = {
-        configuration: {
-            query: {
-                query: `SELECT jsonPayload.response_time FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_20180510] WHERE timestamp>'2018-05-01T07:00:00.000Z' AND timestamp<'2018-05-11T06:59:59.000Z'`
-            }
-        }
-    };
+    var startDateLocal = new Date(startDate.getTime());
+
+    var queryResults = [];
+    var responseTimePromises = [];
 
     return new Promise((resolve, reject) => {
-        bigQuery.createJob(options).then(function (data) {
-            console.log(data, 'DATA');
-            var job = data[0];
-            job.getQueryResults().then(function (rows, error) {
+        var timeDiff = Math.abs(endDate.getTime() - startDateLocal.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-                if (error) {
-                    console.error(error);
-                    reject(error);
-                }
+        for (var i = 0; i < diffDays; ++i) {
+            try {
+                var subString = startDateLocal.toISOString().substring(0, 10);
+                var stringToQuery = subString.replace(/-/g, '');
 
-                var innerList = rows[0];
-                var sum = 0;
-                for (var i = 0; i < innerList.length; i++) {
-                    sum = sum + parseInt(innerList[i].jsonPayload_response_time);
-                }
-                resolve({"description": "Average Response Time", "count": Math.round(sum / innerList.length) + ' ms'});
+                var options = {
+                    configuration: {
+                        query: {
+                            query: `SELECT jsonPayload.response_time FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDateLocal.toISOString()}'`
+                        }
+                    }
+                };
+
+                var p99ResponseTime = extractBigQueryDataForResponseTime(options, queryResults);
+                responseTimePromises.push(p99ResponseTime);
+                startDateLocal.setDate(startDateLocal.getDate() + 1);
+            } catch (error) {
+                console.log(error, "error in getP99ResponseTime");
+            }
+        }
+
+        Promise.all(responseTimePromises).then(function (values) {
+
+            var allResponseTimes = values[0];
+
+
+            var sum = 0;
+            for (var i = 0; i < allResponseTimes.length; i++) {
+                sum = sum + parseInt(allResponseTimes[i]);
+            }
+            resolve({
+                "description": "Average Response Time",
+                "count": Math.round(sum / allResponseTimes.length) + ' ms'
             });
-        }).catch(err => {
-            console.error(err, 'ERROR');
-            reject(err);
-        });
+        }).catch(function (error) {
+            reject(error);
+        })
     })
 };
 
 
 function getShortestResponseTime(startDate, endDate) {
-    const options = {
-        configuration: {
-            query: {
-                query: `SELECT min(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_20180510] WHERE timestamp > '2018-05-01T07:00:00.000Z' AND timestamp < '2018-05-11T06:59:59.000Z'`
-            }
-        }
-    };
+    var startDateLocal = new Date(startDate.getTime());
+
+    var queryResults = [];
+    var responseTimePromises = [];
 
     return new Promise((resolve, reject) => {
-        bigQuery.createJob(options).then(function (data) {
-            var job = data[0];
-            job.getQueryResults().then(function (rows, error) {
-                if (error) {
-                    console.error(error);
-                    reject(error);
-                }
-                var innerList = rows[0];
-                resolve({"description": "Shortest Response Time", "count": innerList[0].f0_ + ' ms'});
+        var timeDiff = Math.abs(endDate.getTime() - startDateLocal.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        for (var i = 0; i < diffDays; ++i) {
+            try {
+                var subString = startDateLocal.toISOString().substring(0, 10);
+                var stringToQuery = subString.replace(/-/g, '');
+
+                var options = {
+                    configuration: {
+                        query: {
+                            query: `SELECT min(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDateLocal.toISOString()}'`
+                        }
+                    }
+                };
+
+                var shortestResponseTime = extractBigQueryDataForCalls(options, queryResults);
+                responseTimePromises.push(shortestResponseTime);
+                startDateLocal.setDate(startDateLocal.getDate() + 1);
+            } catch (error) {
+                console.log(error, "error in getShortestResponseTime");
+            }
+        }
+
+        Promise.all(responseTimePromises).then(function (values) {
+
+            var valuesInInt = [];
+            for (var i = 0; i < values.length; i++) {
+                valuesInInt.push(parseInt(values[i]));
+            }
+
+            resolve({
+                "description": "Shortest Response Time",
+                "count": Math.min(...valuesInInt) + ' ms'
             });
-        }).catch(err => {
-            console.error(err, 'ERROR calling Big Query');
-            reject(err);
-        });
+        }).catch(function (error) {
+            reject(error);
+        })
     })
 }
 
 function getP99ResponseTime(startDate, endDate) {
 
 
-    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    var startDateLocal = new Date(startDate.getTime());
 
-    const options = {
-        configuration: {
-            query: {
-                query: `SELECT jsonPayload.response_time FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_20180510] WHERE timestamp>'2018-05-01T07:00:00.000Z' AND timestamp<'2018-05-11T06:59:59.000Z' `
-            }
-        }
-    };
+    var queryResults = [];
+    var responseTimePromises = [];
 
     return new Promise((resolve, reject) => {
-        bigQuery.createJob(options).then(function (data) {
-            var job = data[0];
-            job.getQueryResults().then(function (rows, error) {
-                if (error) {
-                    console.error(error);
-                    reject(error);
-                }
-                var innerList = rows[0];
-                resolve({
-                    "description": "99 Percentile Response Time",
-                    "count": innerList[0].jsonPayload_response_time + " ms"
-                });
+        var timeDiff = Math.abs(endDate.getTime() - startDateLocal.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        for (var i = 0; i < diffDays; ++i) {
+            try {
+                var subString = startDateLocal.toISOString().substring(0, 10);
+                var stringToQuery = subString.replace(/-/g, '');
+
+                var options = {
+                    configuration: {
+                        query: {
+                            query: `SELECT FLOAT((NTH(99,QUANTILES(FLOAT(jsonPayload.response_time),100))))*1000 FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDateLocal.toISOString()}'`
+                        }
+                    }
+                };
+
+                var p99ResponseTime = extractBigQueryDataForCalls(options, queryResults);
+                responseTimePromises.push(p99ResponseTime);
+                startDateLocal.setDate(startDateLocal.getDate() + 1);
+            } catch (error) {
+                console.log(error, "error in getP99ResponseTime");
+            }
+        }
+
+        Promise.all(responseTimePromises).then(function (values) {
+
+            resolve({
+                "description": "p99 Response Time",
+                "count": values[0] + ' ms'
             });
-        }).catch(err => {
-            console.error(err, 'ERROR calling Big Query');
-            reject(err);
-        });
+        }).catch(function (error) {
+            reject(error);
+        })
     })
 }
 
 function getPercentageOfCallsMeetingSLA(startDate, endDate) {
 
-    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-    var queryResults = 0;
-    var queryResultsTwo = 0;
+    var startDateLocal = new Date(startDate.getTime());
+    let queryResults = 0;
+    let queryResultsTwo = 0;
 
-    var callsMeetingSLAPromises = [];
-    var allCallsPromises = [];
+    let callsMeetingSLAPromises = [];
+    let allCallsPromises = [];
 
-    var numberOfCallsMeetingSLA = 0;
-    var numberOfAllCalls = 0;
-
-    var subString = startDate.toISOString().substring(0, 10);
-    var stringToQuery = subString.replace(/-/g, '');
+    let numberOfCallsMeetingSLA = 0;
+    let numberOfAllCalls = 0;
 
     return new Promise((resolve, reject) => {
+        let timeDiff = Math.abs(endDate.getTime() - startDateLocal.getTime());
+        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
         for (var i = 0; i < diffDays; i++) {
+            try {
+                let subString = startDateLocal.toISOString().substring(0, 10);
+                let stringToQuery = subString.replace(/-/g, '');
 
-            const options = {
-                configuration: {
-                    query: {
-                        query: `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp > '${startDate.toISOString()}' AND jsonPayload.response_time < '200'`
+                const options = {
+                    configuration: {
+                        query: {
+                            query: `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp > '${startDateLocal.toISOString()}' AND jsonPayload.response_time < '200'`
+                        }
                     }
-                }
-            };
+                };
 
-            const optionsTwo = {
-                configuration: {
-                    query: {
-                        query: `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDate.toISOString()}'`
+                const optionsTwo = {
+                    configuration: {
+                        query: {
+                            query: `SELECT count(jsonPayload.response_time) FROM [hd-pricing-dev:exported_logs_v2.promotion_domain_svc_access_log_structured_${stringToQuery}] WHERE timestamp>'${startDateLocal.toISOString()}'`
+                        }
                     }
-                }
-            };
+                };
 
-            var callsMeetingSLA = extractBigQueryDataForCalls(options, queryResults);
-            callsMeetingSLAPromises.push(callsMeetingSLA);
+                let callsMeetingSLA = extractBigQueryDataForCalls(options, queryResults);
+                callsMeetingSLAPromises.push(callsMeetingSLA);
 
-            var totalNumberOfCalls = extractBigQueryDataForCalls(optionsTwo, queryResultsTwo);
-            allCallsPromises.push(totalNumberOfCalls);
+                let totalNumberOfCalls = extractBigQueryDataForCalls(optionsTwo, queryResultsTwo);
+                allCallsPromises.push(totalNumberOfCalls);
 
-            startDate.setDate(startDate.getDate() + 1);
+                startDateLocal.setDate(startDateLocal.getDate() + 1);
+            } catch (error) {
+                console.log(error, 'error in getPercentageOfCallsMeetingSLA');
+            }
+
         }
         var numberOfCallsMeetingSLAPromise = Promise.all(callsMeetingSLAPromises).then(function (values) {
             for (var i = 0; i < values.length; i++) {
@@ -266,13 +318,25 @@ var extractDoubleValue = function (point) {
 };
 
 async function extractBigQueryDataForCalls(options, queryResults) {
-    console.log(options.configuration.query.query, '****OPTIONS****')
+    console.log(options.configuration.query.query, '****OPTIONS CALLS****')
     var createJob = await bigQuery.createJob(options);
     var job = createJob[0];
     var rows = await job.getQueryResults();
     var innerList = rows[0];
     queryResults = queryResults + innerList[0].f0_;
 
+    return queryResults;
+}
+
+async function extractBigQueryDataForResponseTime(options, queryResults) {
+    console.log(options.configuration.query.query, '****OPTIONS RESPONSE TIME****')
+    var createJob = await bigQuery.createJob(options);
+    var job = createJob[0];
+    var rows = await job.getQueryResults();
+    var innerList = rows[0];
+    for (var i = 0; i < innerList.length; i++) {
+        queryResults.push(innerList[i].jsonPayload_response_time)
+    }
     return queryResults;
 }
 

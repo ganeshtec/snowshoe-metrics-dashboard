@@ -15,7 +15,7 @@ var client = new monitoring.MetricServiceClient({
 /* GET requests listing. */
 router.post('/fetchData/', function (req, res, next) {
     var startDate = new Date(`${req.body.startDate}T00:00:00.000-07:00`);
-    var endDate = new Date(`${req.body.endDate}T23:59:59.000-07:00`);
+    var endDate = new Date(`${req.body.endDate}T23:59:59.000-00:00`);
     fetchPromotionDomainServiceMetrics(startDate, endDate).then(function (data) {
         res.send(data);
     }, function (err) {
