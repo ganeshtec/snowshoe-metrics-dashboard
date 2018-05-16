@@ -19,17 +19,18 @@ const bigQuery = new BigQuery({
 
 let fetchPromotionDomainServiceMetrics = (startDate, endDate) => {
     let totalCalls = getTotalNumberOfCalls(startDate, endDate);
-    let onlineCallsWithDiscountsReturned = getCountOfOnlineCallsWithDiscountReturned(startDate, endDate);
     let onlineCalls = getNumberOfOnlineCalls(startDate, endDate);
+    let onlineCallsWithDiscountsReturned = getCountOfOnlineCallsWithDiscountReturned(startDate, endDate);
+    let percentageOfCallsWithOnlineDiscountsReturned = getPercentageOfOnlineCallsWithDiscountReturned(onlineCallsWithDiscountsReturned, onlineCalls);
     let averageResponseTime = getAverageResponseTime(startDate, endDate);
     let shortestResponseTime = getShortestResponseTime(startDate, endDate);
     let p99ResponseTime = getP99ResponseTime(startDate, endDate);
     let percentageOfCallsMeetingSLA = getPercentageOfCallsMeetingSLA(startDate, endDate);
-    let percentageOfCallsWithOnlineDiscountsReturned = getPercentageOfOnlineCallsWithDiscountReturned(onlineCallsWithDiscountsReturned, onlineCalls);
+
 
     return new Promise(function (resolve, reject) {
-        return Promise.all([totalCalls, onlineCallsWithDiscountsReturned, onlineCalls, averageResponseTime, shortestResponseTime,
-            p99ResponseTime, percentageOfCallsMeetingSLA, percentageOfCallsWithOnlineDiscountsReturned]).then(results => {
+        return Promise.all([totalCalls, onlineCalls, onlineCallsWithDiscountsReturned, percentageOfCallsWithOnlineDiscountsReturned, averageResponseTime, shortestResponseTime,
+            p99ResponseTime, percentageOfCallsMeetingSLA]).then(results => {
             resolve(results);
         }).catch(function (err) {
             reject(err);
@@ -250,7 +251,7 @@ function getP99ResponseTime(startDate, endDate) {
         Promise.all(responseTimePromises).then(function (values) {
 
             resolve({
-                "description": "p99 Response Time",
+                "description": "P99 Response Time",
                 "count": values[0] + ' ms'
             });
         }).catch(function (error) {
