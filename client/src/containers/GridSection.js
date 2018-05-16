@@ -65,23 +65,25 @@ class GridSection extends Component {
             sectionResults = this.state.data.metrics.map((metric, index) => {
                 return (
                     <tr key={index} className='row'>
-                        <td>{metric.description}</td>
-                        <td>{metric.count}</td>
-                        <td className="padding-horizontal-3">{metric.tomorrow}</td>
-                        <td className="padding-horizontal-3">{metric.future}</td>
+                        <td className="col col-1 ">{metric.description}</td>
+                        {metric.count.map(number => {
+                            return (<td className="grid-col">{number}</td>)
+                        })}
                     </tr>
                 )
             });
         }
+
+        var headers = this.props.source.subHeader.map((header, index) => {
+            return (<td key={index} className="sub-header">{header}</td>)
+        })
         return (
             <div className="MetricSection">
                 <table id="headerBack">
                     <tbody>
                         <tr>
-                            <td className="promotion-breakdown-header">{this.props.source.name}</td>
-                            <td className="sub-header">{this.props.source.subHeader.today}</td>
-                            <td className="sub-header">{this.props.source.subHeader.tomorrow}</td>
-                            <td className="sub-header">{this.props.source.subHeader.future}</td>
+                            <td className="grid-header col-1">{this.props.source.name}</td>
+                            {headers}
                         </tr>
                         {sectionResults}
                     </tbody>

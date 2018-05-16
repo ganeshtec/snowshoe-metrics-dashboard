@@ -193,20 +193,20 @@ function addResult(row,source) {
     var obj = data.find(o => o.code === row.CODE);
 
     if(undefined === obj){
-        obj = {'code' : row.CODE,  'description' : row.DESCRIPTION, 'count' : 0, 'tomorrow' : 0, 'future' : 0};
+        obj = {'code' : row.CODE,  'description' : row.DESCRIPTION, 'count': [0, 0, 0]};
         data.push(obj);
     }
 
     if(source === "current") {
-        obj.count = row.COUNT;
+        obj.count[0] = row.COUNT;
     }
 
     if(source === "tomorrow") {
-        obj.tomorrow = row.COUNT;
+        obj.count[1] = row.COUNT;
     }
 
     if(source === "future") {
-        obj.future = row.COUNT;
+        obj.count[2] = row.COUNT;
     }
 
 }

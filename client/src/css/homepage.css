@@ -7,6 +7,12 @@ h2{
     background-color:#F96302;color:#FFFFFF;
 }
 
+tbody {
+    float: left;
+    width: 100%;
+}
+
+
 #headerBack{
      background-color:#F96302;color:#FFFFFF;
      width: 100%;
@@ -31,12 +37,16 @@ h2{
 }
 
 .col{
-    padding: 0px 25px;
+    padding-left: 25px;
+}
+
+.grid-header {
+   padding-right: 25px;
 }
 
 .col-1{
     display: inline-block;
-    width: 550px;
+    width: 450px;
 }
 
 .col-2 {
