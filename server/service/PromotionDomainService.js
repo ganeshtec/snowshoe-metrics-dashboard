@@ -72,7 +72,8 @@ function getTotalNumberOfCalls(startDate, endDate) {
     const filter = 'metric.type= "logging.googleapis.com/user/enterprise-pricing-promotion-domain-service-calls"';
     let aggregation = {
         alignmentPeriod: {seconds: (endDate - startDate) / 1000},
-        perSeriesAligner: 'ALIGN_SUM'
+        perSeriesAligner: 'ALIGN_SUM',
+        crossSeriesReducer: 'REDUCE_SUM'
     };
     let description = "Total Number Of Calls";
     return getMetric(startDate, endDate, filter, aggregation, description, extractInt64Value);
@@ -82,7 +83,8 @@ function getNumberOfOnlineCalls(startDate, endDate) {
     const filter = 'metric.type= "logging.googleapis.com/user/promotion-domain-service-online-cart-requests"';
     let aggregation = {
         alignmentPeriod: {seconds: (endDate - startDate) / 1000},
-        perSeriesAligner: 'ALIGN_SUM'
+        perSeriesAligner: 'ALIGN_SUM',
+        crossSeriesReducer: 'REDUCE_SUM'
     };
     let description = "Online Calls";
     return getMetric(startDate, endDate, filter, aggregation, description, extractInt64Value);
@@ -92,7 +94,8 @@ function getCountOfOnlineCallsWithDiscountReturned(startDate, endDate) {
     const filter = 'metric.type= "logging.googleapis.com/user/promotion-domain-service-online-cart-responses"';
     let aggregation = {
         alignmentPeriod: {seconds: (endDate - startDate) / 1000},
-        perSeriesAligner: 'ALIGN_SUM'
+        perSeriesAligner: 'ALIGN_SUM',
+        crossSeriesReducer: 'REDUCE_SUM'
     };
     let description = "Online Calls with discounts returned";
     return getMetric(startDate, endDate, filter, aggregation, description, extractInt64Value);
