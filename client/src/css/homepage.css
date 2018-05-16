@@ -7,11 +7,26 @@ h2{
     background-color:#F96302;color:#FFFFFF;
 }
 
+table {
+    table-layout: fixed;
+}
+
 tbody {
-    float: left;
     width: 100%;
 }
 
+.grid-container{
+    display: flex;
+    justify-content: flex-start;
+}
+
+tr td.grid-item:last-child {
+    flex-grow: 1;
+}
+
+.grid-item {
+    width: 275px;
+}
 
 #headerBack{
      background-color:#F96302;color:#FFFFFF;
@@ -42,6 +57,10 @@ tbody {
 
 .grid-header {
    padding-right: 25px;
+}
+
+.grid-start {
+    width: 450px;
 }
 
 .col-1{
@@ -78,7 +97,6 @@ td.sub-header {
 td.promotion-breakdown-header {
     height: 60px;
 }
-
 
 table#headerBack {
     border-collapse: collapse;

@@ -64,10 +64,10 @@ class GridSection extends Component {
         } else {
             sectionResults = this.state.data.metrics.map((metric, index) => {
                 return (
-                    <tr key={index} className='row'>
-                        <td className="col col-1 ">{metric.description}</td>
+                    <tr key={index} className='grid-container row'>
+                        <td className="grid-start col">{metric.description}</td>
                         {metric.count.map(number => {
-                            return (<td className="grid-col">{number}</td>)
+                            return (<td className="grid-item ">{number}</td>)
                         })}
                     </tr>
                 )
@@ -75,14 +75,14 @@ class GridSection extends Component {
         }
 
         var headers = this.props.source.subHeader.map((header, index) => {
-            return (<td key={index} className="sub-header">{header}</td>)
+            return (<td key={index} className="grid-item">{header}</td>)
         })
         return (
             <div className="MetricSection">
                 <table id="headerBack">
                     <tbody>
-                        <tr>
-                            <td className="grid-header col-1">{this.props.source.name}</td>
+                        <tr  className='grid-container'>
+                            <td className='grid-start'>{this.props.source.name}</td>
                             {headers}
                         </tr>
                         {sectionResults}
