@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hd-pricing-dev",
+  "private_key_id": "43bed722c9d656de16460733882b450a17bd5cb0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCygNQPnC2rfcDq\nKxYCiAKAj4AP6SmfCTfJL8dF0N7lJzanYNJ9cHlr2wLonihul+bOIYprvE+BPcBp\n7TAxiyLXp4yxN/Ty43HstJC9z8/+8XzKfRY47WDaOaTY4DpnlVFXmEDL0/AayzK9\njoT0B1dI+ToP5Edj5XvifrcKw3C7vi3xwFgpbjemsxAqu/5nmRuz7L+WE7WEBv72\nlNsmQtsZiB8i4mFS4EBBO3957zANtgAWfh/arKYiJLMfl5UM3bH+kaxtS76wg93G\ngnsiYv3RKMfVN4pery4hsne8xcd0U6hq2y4vp+gUgBqpbUQ+sLj3dQP00RHNiWue\nh+dY2krvAgMBAAECggEAP28DrSZxnls6hpzYHf8qcHhOaJkRxuf2MKMvfBJ9W07D\nn9iLBLPHGnqCfprRwHdvuHn34FBTqpiAu8Pj1/9bWuq6VzIM9JG6JwWF2EY04qL7\nl1O7ZXCJ9hL9D2sjpjLMbMX45NZEoajrN6yhd7zyGkcjCIm1ivz+uN8R+hu5AKY9\nOp+MfuUnSjclRb/oEG4Zm74THvPwNmHI/nYh6+IopMXeenv1viNkPP5kObwCP4aY\ncXM6U59+RsaR15S50UFJN0a3qsIegWKNXJqui7DQk76P7Qk3XYO91r5bBRfM2T+T\nuqC4Qw5449HiG7RwIkhy+ZvJ3b2ORaFlB6+mLnb4qQKBgQDgxBYzQSdm+M1HQTCG\n6RywVMMtiTwBTiRQi4IYeijno0xSGS0u6ZaY3jr3IuHQbo6j0MTu0WyBvJtQ/Yvm\nb8t0r9IJGU7D21QlOMEe5JXWfG28qN0kZ8l93ePs8Mr3MS3GAWS3ISztAQ1j5brT\nNlzYrqnUhzrMqUfh4ilhSIGkKQKBgQDLTvkavYKjM3Uh9GtjcNqh0TVr5XfjwjoT\nQFnnB0TPD/UpvykDMDAZP9p9+R9S4xHtHU28RkDJS/y9B8NIrFlemhgyQLoYenUI\nxEaJ52ZR3qK+aLQceXAebuHzh6ZDWrRveJaidKvRtD4iVPqULWGKu3zVgc7KjOjl\nahM36heZVwKBgFq6DBQIWrVP/NykTchHVJNAw8Afwx7rwfDZP1xOAzDtU6NYEkr7\ncxSlr7uOUwRlfCJX5QZZdqkvzqn0joIn4kJpriiKFKcuY1ra++lSb8EyXMFokEtf\nsY+i/5vm3qbFLSrd6R+avp20bQlD9BPJv9SfPGJTa8KtGhztw7JHKD1xAoGBAKIf\nrsuhFdzYuu5Bv6UDqITjlOseiJVKHA+gAFEX3coU2pbYxnaxZZms7qoID++D/ZaN\nCKE7kIw1GS0QVKzOK1IiJWtlbED63fsIsYtkyJY+qJ6YVhBi0oKiP3J42J/bZAmE\nKvMPgLhwOCAejde9vIvp6KlFo0aoSUwwY3TyKrFvAoGBAN4uy7qY7/EFnfGXE1TA\nL0AcC1Wi1S5YbEkD1F0Tn3ZylEMHLwfRm9ndNRQzpRnMCMQlqxbk/bUe0GA9zfrl\ndsvP3FKI4Y6Jd/C44Uo68cNxblinKQQ0hb74M1fg5fafRmxFzSQF95QdnKEaWLNr\nNrgfwV2VLPoEvcMZ5YQw1FGa\n-----END PRIVATE KEY-----\n",
+  "client_email": "snowshoe-metrics-dashboard-sa@hd-pricing-dev.iam.gserviceaccount.com",
+  "client_id": "112528870373180181474",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/snowshoe-metrics-dashboard-sa%40hd-pricing-dev.iam.gserviceaccount.com"
+}
