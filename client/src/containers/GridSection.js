@@ -64,26 +64,28 @@ class GridSection extends Component {
         } else {
             sectionResults = this.state.data.metrics.map((metric, index) => {
                 return (
-                    <tr key={index} className='row'>
-                        <td>{metric.description}</td>
-                        <td>{metric.count}</td>
-                        <td className="padding-horizontal-3">{metric.tomorrow}</td>
-                        <td className="padding-horizontal-3">{metric.future}</td>
+                    <tr key={index} className='grid-container row'>
+                        <td className="grid-start col">{metric.description}</td>
+                        {metric.count.map(number => {
+                            return (<td className="grid-item ">{number}</td>)
+                        })}
                     </tr>
                 )
             });
         }
+
+        var headers = this.props.source.subHeader.map((header, index) => {
+            return (<td key={index} className="grid-item">{header}</td>)
+        })
         return (
             <div className="MetricSection">
                 <table id="headerBack">
                     <tbody>
-                    <tr>
-                        <td className="promotion-breakdown-header">{this.props.source.name}</td>
-                        <td className="sub-header">{this.props.source.subHeader.today}</td>
-                        <td className="sub-header">{this.props.source.subHeader.tomorrow}</td>
-                        <td className="sub-header">{this.props.source.subHeader.future}</td>
-                    </tr>
-                    {sectionResults}
+                        <tr  className='grid-container'>
+                            <td className='grid-start'>{this.props.source.name}</td>
+                            {headers}
+                        </tr>
+                        {sectionResults}
                     </tbody>
                 </table>
             </div>

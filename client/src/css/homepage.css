@@ -7,6 +7,27 @@ h2{
     background-color:#F96302;color:#FFFFFF;
 }
 
+table {
+    table-layout: fixed;
+}
+
+tbody {
+    width: 100%;
+}
+
+.grid-container{
+    display: flex;
+    justify-content: flex-start;
+}
+
+tr td.grid-item:last-child {
+    flex-grow: 1;
+}
+
+.grid-item {
+    width: 275px;
+}
+
 #headerBack{
      background-color:#F96302;color:#FFFFFF;
      width: 100%;
@@ -31,12 +52,20 @@ h2{
 }
 
 .col{
-    padding: 0px 25px;
+    padding-left: 25px;
+}
+
+.grid-header {
+   padding-right: 25px;
+}
+
+.grid-start {
+    width: 450px;
 }
 
 .col-1{
     display: inline-block;
-    width: 550px;
+    width: 450px;
 }
 
 .col-2 {
@@ -68,7 +97,6 @@ td.sub-header {
 td.promotion-breakdown-header {
     height: 60px;
 }
-
 
 table#headerBack {
     border-collapse: collapse;
