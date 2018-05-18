@@ -4,6 +4,7 @@ import * as apiService from '../service/apiService';
 import MetricSection from './MetricSection';
 import GridSection from './GridSection';
 
+
 class Homepage extends Component {
 
     state = {
@@ -13,43 +14,57 @@ class Homepage extends Component {
                 subHeader: ["Today", "Starting Tomorrow", "Future Promotions"],
                 isGrid: true,
                 needsDateRange: false,
+                fetchOnLoad: true,
                 method: () => apiService.getActivePromotions()
             }, {
                 name: "Qualifiers",
                 needsDateRange: false,
                 isGrid: false,
+                fetchOnLoad: true,
                 method: () => apiService.getQualifiersForActivePromotions()
             },
             {
                 name: "Rewards",
                 needsDateRange: false,
                 isGrid: false,
+                fetchOnLoad: true,
                 method: () => apiService.getRewardsForActivePromotions()
             },
             {
                 name: "Attributes",
                 needsDateRange: false,
                 isGrid: false,
+                fetchOnLoad: true,
                 method: () => apiService.getAttributesForActivePromotions()
             },{
                 name: "Circuit Breaker",
                 needsDateRange: true,
                 isGrid: false,
+                fetchOnLoad: true,
                 method: (startDate, endDate) => apiService.getCircuitBreakerServiceMetrics(startDate, endDate)
             }, {
                 name: "Markdown Service V2",
                 needsDateRange: true,
                 isGrid: false,
+                fetchOnLoad: true,
                 method: (startDate, endDate) => apiService.getMarkDownServiceMetrics(startDate, endDate)
             }, {
                 name: "Pro Bid Room",
                 needsDateRange: true,
                 isGrid: false,
+                fetchOnLoad: true,
                 method: (startDate, endDate) => apiService.getProBidRoomServiceMetrics(startDate, endDate)
+            }, {
+                name: "Promotion Domain Service",
+                needsDateRange: true,
+                isGrid: false,
+                fetchOnLoad: false,
+                method: (startDate, endDate) => apiService.getPromotionDomainServiceMetrics(startDate, endDate)
             }, {
                 name: "Sonar Code Coverage",
                 needsDateRange: false,
                 isGrid: false,
+                fetchOnLoad: true,
                 method: () => apiService.getSonarCodeCoverageMetrics()
         }
         ]

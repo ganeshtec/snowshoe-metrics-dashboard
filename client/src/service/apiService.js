@@ -24,7 +24,7 @@ export let getQualifiersForActivePromotions = async () => {
     } catch (err) {
         console.log("Error Fetching Results for Qualifiers")
         return "Error"
-    }    
+    }
 }
 
 export let getRewardsForActivePromotions = async () => {
@@ -37,7 +37,7 @@ export let getRewardsForActivePromotions = async () => {
     } catch (err) {
         console.log("Error Fetching Results for Qualifiers")
         return "Error"
-    }    
+    }
 }
 
 export let getAttributesForActivePromotions = async () => {
@@ -50,9 +50,9 @@ export let getAttributesForActivePromotions = async () => {
     } catch (err) {
         console.log("Error Fetching Results for Attributes")
         return "Error"
-    }    
+    }
 }
- 
+
 export let getMarkDownServiceMetrics = async (startDate, endDate) => {
     if (moment(endDate) < moment(startDate)) {
         return "Error"
@@ -73,6 +73,26 @@ export let getMarkDownServiceMetrics = async (startDate, endDate) => {
     }
 
 }
+
+export let getPromotionDomainServiceMetrics = async(startDate, endDate) => {
+    if (moment(endDate) < moment(startDate)) {
+        return "Error"
+    }
+    try {
+        var response = await axios.post('/api/promotion-domain-service/fetchData', {
+            startDate: startDate,
+            endDate: endDate
+        })
+        var data = response.data;
+        var returnObject = {
+            metrics: data
+        }
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Promotion Domain Service")
+        return "Error"
+    }
+};
 
 
 export let getCircuitBreakerServiceMetrics = async (startDate, endDate) => {
