@@ -53,6 +53,19 @@ export let getAttributesForActivePromotions = async () => {
     }
 }
 
+export let getCreatorsForActivePromotions = async () => {
+    try {
+        var response = await axios.get('/api/discount-maintenance/fetchPromoCreators');
+        var returnObject = {
+            metrics: response.data
+        };
+        return returnObject;
+    } catch (err) {
+        console.log("Error Fetching Results for Creators")
+        return "Error"
+    }
+}
+
 export let getMarkDownServiceMetrics = async (startDate, endDate) => {
     if (moment(endDate) < moment(startDate)) {
         return "Error"

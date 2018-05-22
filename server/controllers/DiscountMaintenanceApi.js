@@ -67,4 +67,17 @@ router.get('/fetchPromoAttributes/', function (req, res, next) {
 
 });
 
+router.get('/fetchPromoCreators/', function (req, res, next) {
+
+    var promise  = getCreatorsForActivePromotions();
+
+    promise.then(function(data) {
+        res.send(data);
+    },function(err) {
+        console.log(err);
+        res.status(500).send("Failed to retrieve Attributes stats");
+    });
+
+});
+
 module.exports = router;

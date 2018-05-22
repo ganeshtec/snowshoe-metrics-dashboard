@@ -36,7 +36,16 @@ class Homepage extends Component {
                 isGrid: false,
                 fetchOnLoad: true,
                 method: () => apiService.getAttributesForActivePromotions()
-            },{
+            },
+            {
+                name: "Creators",
+                needsDateRange: false,
+                subHeader: ["Role", "Count"],
+                isGrid: true,
+                fetchOnLoad: true,
+                method: () => apiService.getCreatorsForActivePromotions()
+            },
+            {
                 name: "Circuit Breaker",
                 needsDateRange: true,
                 isGrid: false,

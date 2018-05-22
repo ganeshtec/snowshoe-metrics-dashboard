@@ -53,11 +53,19 @@ var percentOffRewardQuery = " select 'Percent off Reward' AS DESCRIPTION, Count(
 var rewardsQuery = amountOffRewardQuery + " UNION " + percentOffRewardQuery
 
 
+
+
 // Queries for Attributes
 var labelsQuery = " select 'Promotions with labels' AS DESCRIPTION, Count(*) As COUNT from PRMO_SKU_CHG_RQST WHERE PRT_LBL_FLG = 'Y' " + andActive;
 var itemPromoQuery = " select 'Item level promotion' AS DESCRIPTION, Count(*) As COUNT from PRMO_SKU_CHG_RQST WHERE SKCHG_RQST_TYP_CD = 10 " + andActive;
 var orderPromoQuery = " select 'Order level promotion' AS DESCRIPTION, Count(*) As COUNT from PRMO_SKU_CHG_RQST WHERE SKCHG_RQST_TYP_CD = 20 " + andActive;
 var attributesQuery = labelsQuery + " UNION " + itemPromoQuery + " UNION " + orderPromoQuery;
+
+
+//Queries for Creators
+var MFAQuery = "  select a.CRT_SYSUSR_ID,count(distinct a.SKU_CHG_RQST_ID)  from PRMO_SKU_CHG_RQST a, PRMO_LOC b where a.SKU_CHG_RQST_ID = b.SKU_CHG_RQST_ID and a.SKCHG_RQST_STAT_CD = '61' and (b.str_nbr is null or b.STR_NBR  <> '8119') group by a.CRT_SYSUSR_ID with ur "
+var DCMQuery = "   select a.CRT_SYSUSR_ID,count(distinct a.SKU_CHG_RQST_ID)  from PRMO_SKU_CHG_RQST a, PRMO_LOC b where a.SKU_CHG_RQST_ID = b.SKU_CHG_RQST_ID and a.SKCHG_RQST_STAT_CD = '61' and b.STR_NBR  = '8119' group by a.CRT_SYSUSR_ID with ur "
+
 
 
 var wherePendingTomorrow = wherePending + startDateClause + "+ 1 " + daysClause + endDateClause + "+ 2 " + daysClause;
@@ -128,6 +136,50 @@ getQualifiersForActivePromotions = () => {
             }
         })}
     )
+}
+
+getCreatorsForActivePromotions = () => {
+
+    return new Promise(function (resolve, reject) {
+        ibmdb.open(config.db2ConnectInfo, function(err, conn)
+        {
+            if(err) {
+                reject(err.message);
+            } else {
+                var data = []   
+                var MFAResults = conn.query(MFAQuery);
+                var DCMResults = conn.query(DCMQuery);
+                       
+                return Promise.all([MFAResults, DCMResults]).then(results => { 
+                    //Loop through MFA Results
+                    results[0].forEach((creator) => {
+                        var obj = {'description': creator.CRT_SYSUSR_ID, 'count': ['MFA', creator['2']]}
+                        data.push(obj);
+                    })
+
+                    //Loop through DCM Results
+                    results[1].forEach((creator) => {
+                        var MFAPosition = data.findIndex((MFA) => {
+                            return creator.CRT_SYSUSR_ID == MFA['description']
+                        })
+                        var obj = {'description': creator.CRT_SYSUSR_ID, 'count': ['DCM', creator['2']]}
+
+                        if(MFAPosition > -1) {
+                            data.splice(MFAPosition, 0, obj)
+                        } else {
+                            data.push(obj);
+                        }
+                    })
+                    resolve(data);
+                    conn.close();
+
+                }).catch(function(err) {
+                    reject(err);
+                });
+            }
+        })}
+    )
+
 }
 
 getRewardsForActivePromotions = () => {
@@ -211,4 +263,4 @@ function addResult(row,source) {
 
 }
 
-module.exports = {getPromotionStatusReport, getQualifiersForActivePromotions, getRewardsForActivePromotions,getAttributesForActivePromotions}
+module.exports = {getPromotionStatusReport, getQualifiersForActivePromotions, getRewardsForActivePromotions,getAttributesForActivePromotions, getCreatorsForActivePromotions}
